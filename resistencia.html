@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resistencias - Profesor Eduardo</title>
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ENCABEZADO */
+        header {
+            background-color: #000000;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 3px solid #ffcc00;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #ffcc00;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            margin: 5px 0 0 0;
+            color: #aaaaaa;
+            font-size: 0.9rem;
+        }
+
+        /* CONTENEDOR DE CONTENIDO (MÁS ANCHO PARA LECTURA) */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #1e1e1e;
+            padding: 40px 40px;
+            border-radius: 12px;
+            border-top: 5px solid #ffcc00;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-top: 120px; 
+            margin-bottom: 80px;
+            line-height: 1.6;
+            text-align: left; /* Alineado a la izquierda para texto largo */
+        }
+
+        .container h2, .container h3, .container h4 {
+            color: #ffcc00;
+            margin-top: 30px;
+        }
+
+        .container h2 {
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        ul {
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .cite-text {
+            color: #777;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+
+        /* BOTÓN INFERIOR IZQUIERDO */
+        .btn-volver {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: inline-block;
+            background-color: #1e1e1e;
+            border: 2px solid #ffcc00;
+            color: #ffcc00;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.2s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            z-index: 9999; 
+        }
+
+        .btn-volver:hover {
+            background-color: #ffcc00;
+            color: #000000;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENCABEZADO -->
+    <header>
+        <h1>Material de Estudio: Resistencias</h1>
+        <p>Profesor Eduardo • IPCHILE</p>
+    </header>
+
+    <!-- CONTENIDO DEL DOCUMENTO -->
+    <main class="container">
+        
+        <h2>1. Resistencias</h2>
+        <p>También denominadas resistores, son componentes que permiten disipar energía eléctrica en forma de calor. En electrónica, se utilizan para limitar la corriente y polarizar otros componentes como los diodos o los transistores. Las principales características que se deben conocer de las resistencias son su valor óhmico y su potencia de disipación.</p>
+        
+        <h3>1.1. El valor óhmico</h3>
+        <p>Se expresa en ohmios y en sus múltiplos y sus submúltiplos. Dicho valor suele estar impreso en el mismo cuerpo de las resistencias, y puede estar codificado de dos formas:</p>
+        <ul>
+            <li>Por código de colores.</li>
+            <li>Por código alfanumérico.</li>
+        </ul>
+
+        <h4>1.1.1. Identificación por código de colores</h4>
+        <p>Consiste en codificar el valor de la resistencia mediante un código de colores estandarizado. Dichos colores se aplican mediante bandas en el propio cuerpo de las resistencias. Así, es posible encontrar resistencias de cuatro, cinco e, incluso, seis bandas, siendo las dos primeras las más utilizadas y las que a continuación se van a estudiar.</p>
+
+        <h4>1.1.2. Identificación por código alfanumérico</h4>
+        <p>En muchas ocasiones, especialmente en las resistencias de gran tamaño, el valor óhmico se encuentra estampado por un código alfanumérico. En este caso, se utilizan los siguientes símbolos literales para los múltiplos de ohmios:</p>
+        <ul>
+            <li>R: para unidades de ohmio.</li>
+            <li>K: para kiloohmios.</li>
+            <li>M: para megaohmio.</li>
+        </ul>
+        <p>Para valores enteros, el símbolo se pone al final de la cantidad. Para valores con decimales, el símbolo se utiliza a modo de separador entre la parte entera y la parte decimal.</p>
+
+        <h3>1.2. La potencia de disipación</h3>
+        <p>La potencia que las resistencias son capaces de disipar viene expresada en vatios (W). Así, a mayor número de vatios, mayor tamaño de la resistencia. Las resistencias de carbón suelen tener potencias normalizadas muy bajas de 1/8, 1/4, 1/2, 1 y 2 W, sin embargo, las resistencias bobinadas se fabrican a partir de 2 W, siendo habituales potencias de 5, 7, 10 y 50 W.</p>
+
+        <h3>1.3. Tipos de resistencias</h3>
+        <p>Las resistencias se pueden clasificar en función de su forma constructiva y composición, o según la forma de variar su valor o modo de funcionamiento.</p>
+
+        <h4>1.3.1. Tipos de resistencias según su construcción</h4>
+        <p>Así, según su construcción o composición, las resistencias se clasifican principalmente en:</p>
+        <ul>
+            <li>Bobinadas.</li>
+            <li>De carbón.</li>
+            <li>Metálicas.</li>
+        </ul>
+
+        <p><strong>Resistencias bobinadas:</strong> Su construcción se basa en un hilo resistivo bobinado sobre un núcleo cerámico. Son resistencias diseñadas para disipar grandes potencias. Se fabrican a partir de 2 W y se pueden encontrar hasta de 100 W. El valor óhmico de este tipo de resistencias no suele ser muy elevado (como máximo 1 o 2 kΩ), pudiéndose fabricar en valores inferiores al ohmio (desde 0,1 Ω). Dependiendo del material que cubre el hilo bobinado, pueden ser cerámicas o de cubierta de metálica. Estas últimas facilitan la disipación del calor generado a través de su envoltura.</p>
+
+        <p><strong>Resistencias de carbón:</strong> En ellas la parte resistiva se compone principalmente de grafito o carbón mezclado con otros compuestos hasta conseguir el valor que se desea en ohmios. Las hay de dos tipos principalmente:</p>
+        <ul>
+            <li>De carbón aglomerado, que están formadas por una masa de grafito mezclada con sílice y resina.</li>
+            <li>De película de carbón, en el que la parte resistiva está basada en una fina película de grafito enrollada en espiral sobre un fino núcleo cerámico.</li>
+        </ul>
+        <p>De estos dos tipos, las más empleadas, debido a su estabilidad y precisión, son las de película de carbón. En ambos casos, la conexión con el circuito exterior se hace mediante dos cazoletas o casquillos metálicos, que deben estar en contacto de forma permanente con el grafito, que a su vez lo está con unos terminales de hilo rígido.</p>
+
+        <p><strong>Resistencias metálicas:</strong> Son resistencias en las que el elemento resistivo se basa en una aleación de varios elementos metálicos en lugar de grafito o carbón. Pueden ser de película metálica o de óxido metálico, siendo las primeras las más utilizadas en la actualidad. Las de película metálica presentan grandes ventajas frente a las de carbón, debido a su gran precisión y a su estabilidad térmica y óhmica cuando están en funcionamiento. Su composición interna tiene una estructura similar a las de película de carbón, siendo, en este caso, el material resistivo de una aleación metálica basada en cromo, níquel, titanio, etc. La conexión con el circuito exterior se hace también mediante unos casquillos metálicos que unen los terminales con el interior de la resistencia, aunque en ocasiones se comercializan sin terminales, para su soldadura sobre las pistas de la placa de circuito impreso. Se fabrican en potencias de hasta 2 W y son mucho más duraderas que sus equivalentes de carbón. Con ellas se consiguen mejores tolerancias y, por tanto, mayor precisión.</p>
+
+        <h4>1.3.2. Tipos de resistencia según su modo de funcionamiento</h4>
+        <p>Según su modo de funcionamiento, las resistencias pueden ser fijas y variables.</p>
+
+        <p><strong>Resistencias de valor fijo:</strong> Son aquellas que se fabrican con un valor fijo, el cual no se pude variar en condiciones de funcionamiento normales. Dentro de este grupo están incluidas las que se han estudiado anteriormente: resistencias bobinadas, de carbón, de película metálica, etc., pero existen otros tipos, como los que se nombran a continuación.</p>
+
+        <p><strong>Redes de resistencias:</strong> son conjuntos de resistencias de valor fijo que se encuentran encapsuladas en el mismo componente. También son conocidas como arrays de resistencias, y disponen de una o más patillas comunes para facilitar su conexión. La instalación de este tipo de componentes requiere consultar la hoja de características del fabricante para conocer cómo están conectadas internamente las resistencias.</p>
+
+        <p><strong>Resistencias SMD:</strong> son resistencias miniaturizadas para instalar directamente en la placa de circuito impreso por la técnica de soldadura en superficie. El componente resistivo se consigue por una composición de sustrato de alúmina, y no disponen de patillas de conexión en forma de hilo, ya que la soldadura se realiza directamente sobre los casquillos del cuerpo de la resistencia. Existen todo tipo de componentes, pasivos y activos, con el formato SMD. Esta tecnología ha permitido reducir enormemente todo tipo de dispositivos electrónicos respecto a los que se fabricaban hace décadas.</p>
+
+    </main>
+
+    <!-- BOTÓN INFERIOR IZQUIERDO PARA VOLVER AL INDEX -->
+    <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
+
+</body>
+</html>
