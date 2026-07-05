@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Estudios - Profesor Eduardo</title>
+    <style>
+        /* --- ESTILOS LIMPIOS Y DIRECTOS --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212; /* Fondo negro sólido garantizado */
+            color: #ffffff; /* Letras blancas */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Centra el contenido verticalmente */
+        }
+
+        /* ENCABEZADO FIJO ARRIBA */
+        header {
+            background-color: #000000;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 3px solid #ffcc00; /* Detalle amarillo */
+            position: absolute;
+            top: 0;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #ffcc00;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            margin: 5px 0 0 0;
+            color: #aaaaaa;
+            font-size: 0.9rem;
+        }
+
+        /* CONTENEDOR PRINCIPAL DE LOS BOTONES */
+        .container {
+            width: 90%;
+            max-width: 450px;
+            background-color: #1e1e1e; /* Gris muy oscuro para resaltar sobre el fondo negro */
+            padding: 40px 30px;
+            border-radius: 12px;
+            border-top: 5px solid #ffcc00;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-top: 100px; /* Evita que el header lo tape */
+            margin-bottom: 40px; /* Espacio inferior por si la pantalla es muy pequeña */
+        }
+
+        .container h2 {
+            margin-top: 0;
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* BOTONES DE OPCIONES */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Espacio un poco más reducido para que quepan bien los 4 */
+        }
+
+        .btn {
+            display: block;
+            background-color: transparent;
+            border: 2px solid #ffcc00;
+            color: #ffcc00;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: 0.2s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #ffcc00;
+            color: #000000;
+            transform: scale(1.02); /* Pequeño efecto de zoom al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENCABEZADO -->
+    <header>
+        <h1>Plataforma de Estudios 2026</h1>
+        <p>Profesor Eduardo • IPCHILE</p>
+    </header>
+
+    <!-- SECCIÓN DE INGRESO (4 OPCIONES) -->
+    <main class="container">
+        <h2>Selecciona un tema</h2>
+        
+        <div class="options">
+            <!-- Solo debes cambiar el "#" por los enlaces a tus evaluaciones o guías -->
+            <a href="#" class="btn">〰️ Resistencias</a>
+            <a href="#" class="btn">🔋 Condensadores</a>
+            <a href="#" class="btn">🧲 Bobinas</a>
+            <a href="#" class="btn">📟 Semiconductores</a>
+        </div>
+    </main>
+
+</body>
+</html>
