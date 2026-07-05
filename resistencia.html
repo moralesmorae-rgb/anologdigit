@@ -70,37 +70,97 @@
         ul { margin-bottom: 20px; }
         li { margin-bottom: 8px; }
 
-        /* --- ESTILOS DEL SIMULADOR INTERACTIVO --- */
-        .simulador {
+        /* --- ESTILOS DE INTERACTIVOS --- */
+        .herramienta-interactiva {
             background-color: #2a2a2a;
             border: 2px dashed #ffcc00;
             border-radius: 10px;
             padding: 25px;
-            margin-top: 40px;
+            margin: 20px 0;
             text-align: center;
             box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
         }
 
-        .simulador h3 {
+        .herramienta-interactiva h4 {
             margin-top: 0;
             color: #ffffff;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border: none;
         }
 
-        .controles {
+        /* Gráfico de la Resistencia */
+        .resistencia-grafico {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin: 20px 0;
-            text-align: left;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            position: relative;
+            width: 250px;
+            height: 60px;
+            background-color: #e5c39c; /* Color cuerpo resistencia */
+            border-radius: 30px;
+            border: 2px solid #8c6a45;
         }
 
+        /* Terminales metálicos */
+        .resistencia-grafico::before, .resistencia-grafico::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 8px;
+            background-color: #999;
+            z-index: -1;
+        }
+        .resistencia-grafico::before { left: -60px; }
+        .resistencia-grafico::after { right: -60px; }
+
+        /* Bandas de colores */
+        .banda {
+            width: 15px;
+            height: 100%;
+            margin: 0 10px;
+        }
+
+        .controles-flex {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        select, input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ffcc00;
+            background-color: #121212;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .resultado-destacado {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: monospace;
+            background: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #00ff00;
+            border: 1px solid #333;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        /* Laboratorio de Ohm */
         .control-group {
             background-color: #1e1e1e;
             padding: 15px;
             border-radius: 8px;
             border-left: 4px solid #ffcc00;
+            margin-bottom: 15px;
+            text-align: left;
         }
 
         .control-group label {
@@ -110,9 +170,7 @@
             margin-bottom: 10px;
         }
 
-        .control-group span {
-            color: #ffcc00;
-        }
+        .control-group span { color: #ffcc00; }
 
         input[type="range"] {
             width: 100%;
@@ -137,18 +195,7 @@
             border-radius: 50%;
             margin-bottom: 15px;
             transition: box-shadow 0.1s, opacity 0.1s;
-            opacity: 0.1; /* Apagado por defecto */
-        }
-
-        .datos-ley-ohm {
-            font-size: 1.2rem;
-            font-weight: bold;
-            font-family: monospace;
-            background: #000;
-            padding: 10px 20px;
-            border-radius: 5px;
-            color: #00ff00;
-            border: 1px solid #333;
+            opacity: 0.1;
         }
 
         /* BOTÓN INFERIOR IZQUIERDO */
@@ -193,102 +240,213 @@
         
         <h3>1.1. El valor óhmico</h3>
         <p>Se expresa en ohmios y en sus múltiplos y sus submúltiplos. Dicho valor suele estar impreso en el mismo cuerpo de las resistencias, y puede estar codificado de dos formas:</p>
-        <ul>
-            <li>Por código de colores.</li>
-            <li>Por código alfanumérico.</li>
-        </ul>
 
         <h4>1.1.1. Identificación por código de colores</h4>
-        <p>Consiste en codificar el valor de la resistencia mediante un código de colores estandarizado. Dichos colores se aplican mediante bandas en el propio cuerpo de las resistencias. Así, es posible encontrar resistencias de cuatro, cinco e, incluso, seis bandas, siendo las dos primeras las más utilizadas y las que a continuación se van a estudiar.</p>
+        <p>Consiste en codificar el valor de la resistencia mediante un código de colores estandarizado. Dichos colores se aplican mediante bandas en el propio cuerpo de las resistencias.</p>
+
+        <!-- INTERACTIVO: CÓDIGO DE COLORES -->
+        <div class="herramienta-interactiva">
+            <h4>🎨 Calculadora de Código de Colores (4 Bandas)</h4>
+            
+            <div class="resistencia-grafico">
+                <div class="banda" id="visual-b1" style="background-color: #8B4513;"></div>
+                <div class="banda" id="visual-b2" style="background-color: black;"></div>
+                <div class="banda" id="visual-b3" style="background-color: red;"></div>
+                <div class="banda" id="visual-b4" style="background-color: gold; margin-left: 30px;"></div>
+            </div>
+
+            <div class="controles-flex">
+                <select id="sel-b1" onchange="calcularColores()">
+                    <option value="1" data-color="#8B4513" selected>Marrón (1)</option>
+                    <option value="2" data-color="red">Rojo (2)</option>
+                    <option value="3" data-color="orange">Naranja (3)</option>
+                    <option value="4" data-color="yellow">Amarillo (4)</option>
+                    <option value="5" data-color="green">Verde (5)</option>
+                    <option value="6" data-color="blue">Azul (6)</option>
+                    <option value="7" data-color="violet">Violeta (7)</option>
+                    <option value="8" data-color="gray">Gris (8)</option>
+                    <option value="9" data-color="white">Blanco (9)</option>
+                </select>
+
+                <select id="sel-b2" onchange="calcularColores()">
+                    <option value="0" data-color="black" selected>Negro (0)</option>
+                    <option value="1" data-color="#8B4513">Marrón (1)</option>
+                    <option value="2" data-color="red">Rojo (2)</option>
+                    <option value="3" data-color="orange">Naranja (3)</option>
+                    <option value="4" data-color="yellow">Amarillo (4)</option>
+                    <option value="5" data-color="green">Verde (5)</option>
+                    <option value="6" data-color="blue">Azul (6)</option>
+                    <option value="7" data-color="violet">Violeta (7)</option>
+                    <option value="8" data-color="gray">Gris (8)</option>
+                    <option value="9" data-color="white">Blanco (9)</option>
+                </select>
+
+                <select id="sel-b3" onchange="calcularColores()">
+                    <option value="1" data-color="black">Negro (x1)</option>
+                    <option value="10" data-color="#8B4513">Marrón (x10)</option>
+                    <option value="100" data-color="red" selected>Rojo (x100)</option>
+                    <option value="1000" data-color="orange">Naranja (x1k)</option>
+                    <option value="10000" data-color="yellow">Amarillo (x10k)</option>
+                    <option value="100000" data-color="green">Verde (x100k)</option>
+                    <option value="1000000" data-color="blue">Azul (x1M)</option>
+                    <option value="0.1" data-color="gold">Oro (x0.1)</option>
+                    <option value="0.01" data-color="silver">Plata (x0.01)</option>
+                </select>
+
+                <select id="sel-b4" onchange="calcularColores()">
+                    <option value="± 5%" data-color="gold" selected>Oro (±5%)</option>
+                    <option value="± 10%" data-color="silver">Plata (±10%)</option>
+                    <option value="± 1%" data-color="#8B4513">Marrón (±1%)</option>
+                    <option value="± 2%" data-color="red">Rojo (±2%)</option>
+                </select>
+            </div>
+            <div class="resultado-destacado" id="res-colores">1000 Ω ± 5%</div>
+        </div>
 
         <h4>1.1.2. Identificación por código alfanumérico</h4>
-        <p>En muchas ocasiones, especialmente en las resistencias de gran tamaño, el valor óhmico se encuentra estampado por un código alfanumérico. En este caso, se utilizan los siguientes símbolos literales para los múltiplos de ohmios:</p>
-        <ul>
-            <li>R: para unidades de ohmio.</li>
-            <li>K: para kiloohmios.</li>
-            <li>M: para megaohmio.</li>
-        </ul>
+        <p>Especialmente en las resistencias de gran tamaño o de montaje superficial (SMD), el valor óhmico se encuentra estampado por un código alfanumérico. Se utilizan las letras R (Ohmios), K (Kiloohmios) y M (Megaohmios).</p>
 
-        <h3>1.2. La potencia de disipación</h3>
-        <p>La potencia que las resistencias son capaces de disipar viene expresada en vatios (W). Así, a mayor número de vatios, mayor tamaño de la resistencia. Las resistencias de carbón suelen tener potencias normalizadas muy bajas de 1/8, 1/4, 1/2, 1 y 2 W, sin embargo, las resistencias bobinadas se fabrican a partir de 2 W, siendo habituales potencias de 5, 7, 10 y 50 W.</p>
+        <!-- INTERACTIVO: CÓDIGO ALFANUMÉRICO -->
+        <div class="herramienta-interactiva">
+            <h4>🔤 Traductor Alfanumérico</h4>
+            <p>Escribe un código (Ej: 4R7, 10K, 2M2, 0R47) y presiona "Calcular".</p>
+            <div class="controles-flex">
+                <input type="text" id="input-alfa" placeholder="Ej: 4R7" style="text-transform: uppercase;">
+                <button onclick="calcularAlfanumerico()" style="padding: 10px 20px; background-color:#ffcc00; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Calcular</button>
+            </div>
+            <div class="resultado-destacado" id="res-alfa">--- Ω</div>
+        </div>
 
-        <h3>1.3. Tipos de resistencias</h3>
-        <p>Las resistencias se pueden clasificar en función de su forma constructiva y composición, o según la forma de variar su valor o modo de funcionamiento.</p>
 
-        <h4>1.3.1. Tipos de resistencias según su construcción</h4>
+        <h3>1.2. La potencia de disipación y Tipos de resistencias</h3>
+        <p>La potencia que las resistencias son capaces de disipar viene expresada en vatios (W). Según su construcción, las resistencias se clasifican principalmente en:</p>
         <ul>
             <li><strong>Bobinadas:</strong> Diseñadas para disipar grandes potencias (2 W hasta 100 W). El valor óhmico no suele ser muy elevado.</li>
             <li><strong>De carbón:</strong> Compuestas de grafito o carbón. Son las más comunes para bajas potencias.</li>
             <li><strong>Metálicas:</strong> Se basan en una aleación de varios elementos metálicos. Presentan gran precisión y estabilidad térmica.</li>
         </ul>
 
-        <!-- ========================================== -->
-        <!-- INICIO DEL SIMULADOR INTERACTIVO (NUEVO)   -->
-        <!-- ========================================== -->
-        <div class="simulador">
-            <h3>🔬 Laboratorio Virtual: Comportamiento</h3>
-            <p>Ajusta el valor de la resistencia para ver cómo afecta el paso de la corriente y el brillo del indicador LED (Ley de Ohm: I = V/R).</p>
+        <!-- SIMULADOR INTERACTIVO DE COMPORTAMIENTO -->
+        <div class="herramienta-interactiva">
+            <h4>🔬 Laboratorio Virtual: Ley de Ohm</h4>
+            <p>Ajusta el valor de la resistencia para ver cómo afecta el paso de la corriente y el brillo del indicador LED (I = V/R).</p>
             
-            <div class="controles">
-                <div class="control-group">
-                    <label>Fuente de Voltaje (V): <span id="val-v">9 V</span></label>
-                    <input type="range" id="input-v" min="1" max="24" value="9" oninput="calcularCircuito()">
-                </div>
-                
-                <div class="control-group">
-                    <label>Resistencia Eléctrica (R): <span id="val-r">500 Ω</span></label>
-                    <input type="range" id="input-r" min="50" max="2000" value="500" step="10" oninput="calcularCircuito()">
-                </div>
+            <div class="control-group">
+                <label>Fuente de Voltaje (V): <span id="val-v">9 V</span></label>
+                <input type="range" id="input-v" min="1" max="24" value="9" oninput="calcularCircuito()">
+            </div>
+            
+            <div class="control-group">
+                <label>Resistencia Eléctrica (R): <span id="val-r">500 Ω</span></label>
+                <input type="range" id="input-r" min="50" max="2000" value="500" step="10" oninput="calcularCircuito()">
             </div>
 
             <div class="circuito-visual">
                 <div class="led" id="led-visual"></div>
-                <div class="datos-ley-ohm">
+                <div class="resultado-destacado" style="margin-top: 0;">
                     Corriente (I): <span id="val-i">0.0 mA</span>
                 </div>
             </div>
         </div>
-        <!-- ========================================== -->
-        <!-- FIN DEL SIMULADOR                          -->
-        <!-- ========================================== -->
 
     </main>
 
     <!-- BOTÓN INFERIOR IZQUIERDO -->
     <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
 
-    <!-- SCRIPT DEL SIMULADOR -->
+    <!-- SCRIPTS LÓGICOS -->
     <script>
+        // Función para formatear números grandes a formato legible (ej. 1000 a 1 kΩ)
+        function formatearOhmios(valor) {
+            if (valor >= 1000000) {
+                return (valor / 1000000) + " MΩ";
+            } else if (valor >= 1000) {
+                return (valor / 1000) + " kΩ";
+            } else {
+                return valor + " Ω";
+            }
+        }
+
+        // --- 1. LÓGICA CÓDIGO DE COLORES ---
+        function calcularColores() {
+            const selB1 = document.getElementById('sel-b1');
+            const selB2 = document.getElementById('sel-b2');
+            const selB3 = document.getElementById('sel-b3');
+            const selB4 = document.getElementById('sel-b4');
+
+            // Actualizar colores visuales de la resistencia gráfica
+            document.getElementById('visual-b1').style.backgroundColor = selB1.options[selB1.selectedIndex].dataset.color;
+            document.getElementById('visual-b2').style.backgroundColor = selB2.options[selB2.selectedIndex].dataset.color;
+            document.getElementById('visual-b3').style.backgroundColor = selB3.options[selB3.selectedIndex].dataset.color;
+            document.getElementById('visual-b4').style.backgroundColor = selB4.options[selB4.selectedIndex].dataset.color;
+
+            // Calcular valor matemático
+            const digito1 = selB1.value;
+            const digito2 = selB2.value;
+            const multiplicador = parseFloat(selB3.value);
+            const tolerancia = selB4.value;
+
+            // Une los dos primeros dígitos y multiplica
+            const valorTotal = parseInt(digito1 + digito2) * multiplicador;
+
+            document.getElementById('res-colores').innerText = formatearOhmios(valorTotal) + " " + tolerancia;
+        }
+
+        // --- 2. LÓGICA CÓDIGO ALFANUMÉRICO ---
+        function calcularAlfanumerico() {
+            let input = document.getElementById('input-alfa').value.toUpperCase().trim();
+            // Busca números, luego R/K/M, luego más números (Ej: 4R7, 10K)
+            const regex = /^(\d*)([RKM])(\d*)$/;
+            const match = input.match(regex);
+
+            if(match) {
+                let izquierda = match[1] || "0"; // Si no hay nada antes de la letra, es 0
+                let letra = match[2];
+                let derecha = match[3] || "0"; // Si no hay nada después de la letra, es 0
+
+                // La letra actúa como punto decimal
+                let numeroBase = parseFloat(izquierda + "." + derecha);
+                let multiplicador = 1;
+
+                if(letra === 'K') multiplicador = 1000;
+                if(letra === 'M') multiplicador = 1000000;
+
+                let total = numeroBase * multiplicador;
+                document.getElementById('res-alfa').innerText = formatearOhmios(total);
+            } else {
+                document.getElementById('res-alfa').innerText = "Formato no válido";
+            }
+        }
+
+        // --- 3. LÓGICA SIMULADOR LEY DE OHM ---
         function calcularCircuito() {
-            // Obtener valores de los deslizadores
             const voltaje = document.getElementById('input-v').value;
             const resistencia = document.getElementById('input-r').value;
             
-            // Mostrar los valores en pantalla
             document.getElementById('val-v').innerText = voltaje + " V";
             document.getElementById('val-r').innerText = resistencia + " Ω";
 
-            // Calcular corriente en Amperios y pasar a miliamperios (mA)
+            // Calcular corriente
             const corrienteAmperios = voltaje / resistencia;
             const corriente_mA = (corrienteAmperios * 1000).toFixed(1);
             
             document.getElementById('val-i').innerText = corriente_mA + " mA";
 
-            // Efecto visual del LED basado en la corriente
-            // Asumimos que un LED rojo estándar brilla bien con ~20mA
+            // Efecto LED
             const led = document.getElementById('led-visual');
-            let brillo = corriente_mA / 25; // Normalizamos respecto a 25mA
-            
-            if (brillo > 1) brillo = 1; // Tope máximo de brillo
-            if (brillo < 0.05) brillo = 0.05; // Que no se apague completamente
+            let brillo = corriente_mA / 25; 
+            if (brillo > 1) brillo = 1; 
+            if (brillo < 0.05) brillo = 0.05; 
 
-            // Aplicar opacidad y sombra para simular luz
             led.style.opacity = brillo;
             led.style.boxShadow = `0 0 ${brillo * 40}px ${brillo * 15}px rgba(255, 0, 0, 0.8)`;
         }
 
-        // Ejecutar una vez al cargar la página para mostrar el estado inicial
-        window.onload = calcularCircuito;
+        // Inicializar los interactivos al cargar la página
+        window.onload = function() {
+            calcularColores();
+            calcularCircuito();
+        };
     </script>
 </body>
 </html>
