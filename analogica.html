@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluaciones 2026 - Profesor Eduardo</title>
+    <title>Electrónica Analógica - Profesor Eduardo</title>
     <style>
         /* --- ESTILOS LIMPIOS Y DIRECTOS --- */
         body {
@@ -16,7 +16,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         /* ENCABEZADO */
@@ -28,6 +28,7 @@
             border-bottom: 3px solid #ffcc00;
             position: absolute;
             top: 0;
+            left: 0;
         }
 
         header h1 {
@@ -52,7 +53,8 @@
             border-top: 5px solid #ffcc00;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-top: 80px;
+            margin-top: 100px; /* Espacio para el header */
+            margin-bottom: 80px; /* Espacio para que no choque con el botón de volver */
         }
 
         .container h2 {
@@ -65,7 +67,7 @@
         .options {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px; /* Separación un poco menor para que quepan bien los 4 */
         }
 
         .btn {
@@ -73,9 +75,9 @@
             background-color: transparent;
             border: 2px solid #ffcc00;
             color: #ffcc00;
-            padding: 18px;
+            padding: 15px;
             border-radius: 8px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             text-decoration: none;
             text-transform: uppercase;
@@ -88,11 +90,12 @@
             transform: scale(1.02);
         }
 
-        /* --- NUEVO: BOTÓN INFERIOR IZQUIERDO --- */
+        /* BOTÓN INFERIOR IZQUIERDO */
         .btn-volver {
             position: fixed;
             bottom: 20px;
             left: 20px;
+            display: inline-block;
             background-color: #1e1e1e;
             border: 2px solid #ffcc00;
             color: #ffcc00;
@@ -103,7 +106,7 @@
             text-decoration: none;
             transition: 0.2s ease-in-out;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            z-index: 1000; /* Asegura que siempre esté por encima de todo */
+            z-index: 9999; /* Garantiza que siempre se vea */
         }
 
         .btn-volver:hover {
@@ -117,21 +120,23 @@
 
     <!-- ENCABEZADO -->
     <header>
-        <h1>Plataforma de Estudios 2026</h1>
+        <h1>Electrónica Analógica</h1>
         <p>Profesor Eduardo • IPCHILE</p>
     </header>
 
-    <!-- SECCIÓN DE INGRESO -->
+    <!-- SECCIÓN DE INGRESO (4 OPCIONES) -->
     <main class="container">
-        <h2>Selecciona tu módulo</h2>
+        <h2>Selecciona un componente</h2>
         
         <div class="options">
-            <a href="analogica.html" class="btn">⚡ Electrónica Analógica</a>
-            <a href="digital.html" class="btn">💻 Electrónica Digital</a>
+            <a href="resistencia.html" class="btn">⚡ Resistencia</a>
+            <a href="condensador.html" class="btn">🔋 Condensador</a>
+            <a href="bobina.html" class="btn">🧲 Bobina</a>
+            <a href="semiconductores.html" class="btn">🔌 Semiconductores</a>
         </div>
     </main>
 
-    <!-- NUEVO: BOTÓN INFERIOR IZQUIERDO -->
+    <!-- BOTÓN INFERIOR IZQUIERDO PARA VOLVER -->
     <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
 
 </body>
