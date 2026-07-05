@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluaciones 2026 - Profesor Eduardo</title>
+    <title>Plataforma de Estudios - Profesor Eduardo</title>
     <style>
         /* --- ESTILOS LIMPIOS Y DIRECTOS --- */
         body {
@@ -16,7 +16,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh; /* Centra el contenido verticalmente en la pantalla */
+            min-height: 100vh; /* Centra el contenido verticalmente */
         }
 
         /* ENCABEZADO FIJO ARRIBA */
@@ -52,7 +52,8 @@
             border-top: 5px solid #ffcc00;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-top: 80px; /* Evita que el header lo tape en celulares */
+            margin-top: 100px; /* Evita que el header lo tape */
+            margin-bottom: 40px; /* Espacio inferior por si la pantalla es muy pequeña */
         }
 
         .container h2 {
@@ -66,7 +67,7 @@
         .options {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px; /* Espacio un poco más reducido para que quepan bien */
         }
 
         .btn {
@@ -74,9 +75,9 @@
             background-color: transparent;
             border: 2px solid #ffcc00;
             color: #ffcc00;
-            padding: 18px;
+            padding: 16px;
             border-radius: 8px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             text-decoration: none;
             text-transform: uppercase;
@@ -98,14 +99,18 @@
         <p>Profesor Eduardo • IPCHILE</p>
     </header>
 
-    <!-- SECCIÓN DE INGRESO (2 OPCIONES) -->
+    <!-- SECCIÓN DE INGRESO -->
     <main class="container">
-        <h2>Selecciona tu módulo</h2>
+        <h2>Selecciona un tema</h2>
         
         <div class="options">
-            <!-- Coloca los enlaces reales donde dice "#" -->
-            <a href="#" class="btn">⚡ Electrónica Analógica</a>
-            <a href="#" class="btn">💻 Electrónica Digital</a>
+            <!-- Al presionar este botón, abrirá el archivo analogica.html -->
+            <a href="analogica.html" class="btn">⚡ Electrónica Analógica</a>
+            
+            <a href="#" class="btn">〰️ Resistencias</a>
+            <a href="#" class="btn">🔋 Condensadores</a>
+            <a href="#" class="btn">🧲 Bobinas</a>
+            <a href="#" class="btn">📟 Semiconductores</a>
         </div>
     </main>
 
