@@ -133,7 +133,7 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
             margin-bottom: 15px;
         }
 
@@ -187,10 +187,23 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        /* --- ESTILOS VISUALIZACIÓN EN SERIE --- */
+        /* --- ESTILOS VISUALIZACIÓN EN SERIE Y PARALELO --- */
         .circuito-serie-visual {
             display: flex;
             align-items: center;
+            justify-content: center;
+            margin: 30px auto;
+            width: 100%;
+            max-width: 500px;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .circuito-paralelo-visual {
+            display: flex;
+            align-items: stretch;
             justify-content: center;
             margin: 30px auto;
             width: 100%;
@@ -205,6 +218,7 @@
             flex-grow: 1;
             height: 4px;
             background-color: #666;
+            align-self: center;
         }
 
         .resistor-bloque {
@@ -226,6 +240,30 @@
             font-size: 0.7rem;
             color: #555;
             margin-bottom: -2px;
+        }
+
+        .nodo-split {
+            width: 4px;
+            background-color: #666;
+            align-self: stretch;
+        }
+
+        .ramas-contenedor {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 0;
+        }
+
+        .rama-paralela {
+            display: flex;
+            align-items: center;
+        }
+
+        .cable-rama {
+            width: 30px;
+            height: 4px;
+            background-color: #666;
         }
 
         .formula-destacada {
@@ -532,6 +570,61 @@
             <div class="resultado-destacado" id="res-serie">Rt = 650 Ω</div>
         </div>
 
+        <!-- ASOCIACIÓN EN PARALELO -->
+        <h4>1.4.2. Resistencias en paralelo</h4>
+        <p>De igual forma, cuando se asocian resistencias en paralelo, se puede decir que la resistencia equivalente de un circuito paralelo es la inversa de la suma de las inversas de las demás resistencias.</p>
+        
+        <div class="formula-destacada">
+            1/Re = 1/R1 + 1/R2 + 1/R3
+        </div>
+
+        <!-- INTERACTIVO CIRCUITO EN PARALELO -->
+        <div class="herramienta-interactiva" id="interactivo-paralelo">
+            <h4>⚡ Simulador de Asociación en Paralelo</h4>
+            <p style="font-size: 0.9rem; color: #aaa; margin-top: -5px;">Modifica los valores para observar cómo la resistencia equivalente total disminuye</p>
+            
+            <div class="circuito-paralelo-visual">
+                <div class="cable" style="width: 30px; flex-grow: 0;"></div>
+                <div class="nodo-split"></div>
+                <div class="ramas-contenedor">
+                    <div class="rama-paralela">
+                        <div class="cable-rama"></div>
+                        <div class="resistor-bloque" id="vp-r1"><div class="label-id">R1</div><span>100 Ω</span></div>
+                        <div class="cable-rama"></div>
+                    </div>
+                    <div class="rama-paralela">
+                        <div class="cable-rama"></div>
+                        <div class="resistor-bloque" id="vp-r2"><div class="label-id">R2</div><span>200 Ω</span></div>
+                        <div class="cable-rama"></div>
+                    </div>
+                    <div class="rama-paralela">
+                        <div class="cable-rama"></div>
+                        <div class="resistor-bloque" id="vp-r3"><div class="label-id">R3</div><span>300 Ω</span></div>
+                        <div class="cable-rama"></div>
+                    </div>
+                </div>
+                <div class="nodo-split"></div>
+                <div class="cable" style="width: 30px; flex-grow: 0;"></div>
+            </div>
+
+            <div class="controles-flex">
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R1 (Ω)</label>
+                    <input type="number" id="num-p-r1" value="100" min="0" max="999999">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R2 (Ω)</label>
+                    <input type="number" id="num-p-r2" value="200" min="0" max="999999">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R3 (Ω)</label>
+                    <input type="number" id="num-p-r3" value="300" min="0" max="999999">
+                </div>
+            </div>
+            
+            <div class="resultado-destacado" id="res-paralelo">Re = 54.55 Ω</div>
+        </div>
+
     </main>
 
     <!-- BOTÓN INFERIOR IZQUIERDO -->
@@ -627,5 +720,88 @@
                 container.addEventListener('input', calcularSerie);
             }
             calcularSerie();
+        })();
+
+        // Lógica de Asociación en Paralelo
+        (function() {
+            var r1Input = document.getElementById('num-p-r1');
+            var r2Input = document.getElementById('num-p-r2');
+            var r3Input = document.getElementById('num-p-r3');
+            var resParalelo = document.getElementById('res-paralelo');
+            
+            var vpr1 = document.getElementById('vp-r1').getElementsByTagName('span')[0];
+            var vpr2 = document.getElementById('vp-r2').getElementsByTagName('span')[0];
+            var vpr3 = document.getElementById('vp-r3').getElementsByTagName('span')[0];
+
+            function calcularParalelo() {
+                if(!r1Input || !r2Input || !r3Input || !resParalelo) return;
+                
+                var val1 = parseFloat(r1Input.value);
+                var val2 = parseFloat(r2Input.value);
+                var val3 = parseFloat(r3Input.value);
+                
+                var sumaInversas = 0;
+                var numR = 0;
+
+                // Forzar valores no negativos
+                if (r1Input.value < 0) r1Input.value = 0;
+                if (r2Input.value < 0) r2Input.value = 0;
+                if (r3Input.value < 0) r3Input.value = 0;
+
+                // Comprobación de cortocircuito (Resistencia = 0)
+                if (val1 === 0 || val2 === 0 || val3 === 0) {
+                    resParalelo.innerText = "Re = 0 Ω (Cortocircuito)";
+                    if (val1 === 0 && vpr1) vpr1.innerText = "0 Ω";
+                    if (val2 === 0 && vpr2) vpr2.innerText = "0 Ω";
+                    if (val3 === 0 && vpr3) vpr3.innerText = "0 Ω";
+                    return;
+                }
+
+                if (!isNaN(val1) && val1 > 0) {
+                    sumaInversas += 1 / val1;
+                    numR++;
+                    if(vpr1) vpr1.innerText = val1 + " Ω";
+                } else {
+                    if(vpr1) vpr1.innerText = "∞ Ω";
+                }
+
+                if (!isNaN(val2) && val2 > 0) {
+                    sumaInversas += 1 / val2;
+                    numR++;
+                    if(vpr2) vpr2.innerText = val2 + " Ω";
+                } else {
+                    if(vpr2) vpr2.innerText = "∞ Ω";
+                }
+
+                if (!isNaN(val3) && val3 > 0) {
+                    sumaInversas += 1 / val3;
+                    numR++;
+                    if(vpr3) vpr3.innerText = val3 + " Ω";
+                } else {
+                    if(vpr3) vpr3.innerText = "∞ Ω";
+                }
+
+                var texto = "";
+                if (sumaInversas === 0) {
+                    texto = "Re = ∞ Ω (Circuito Abierto)";
+                } else {
+                    var re = 1 / sumaInversas;
+                    if (re >= 1000000) {
+                        texto = "Re = " + (re / 1000000).toFixed(2) + " MΩ";
+                    } else if (re >= 1000) {
+                        texto = "Re = " + (re / 1000).toFixed(2) + " kΩ";
+                    } else {
+                        texto = "Re = " + re.toFixed(2) + " Ω";
+                    }
+                }
+                
+                resParalelo.innerText = texto;
+            }
+
+            var container = document.getElementById('interactivo-paralelo');
+            if(container) {
+                container.addEventListener('input', calcularParalelo);
+            }
+            calcularParalelo();
         })();
     </script></body></html>
