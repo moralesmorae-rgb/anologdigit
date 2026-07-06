@@ -81,30 +81,21 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        /* --- ESTILOS DEL INTERACTIVO --- */
-        .herramienta-interactiva {
+        /* MUESTRA VISUAL DE LA RESISTENCIA (ESTÁTICA, SIN JS) */
+        .resistencia-muestra {
             background-color: #2a2a2a;
-            border: 2px dashed #ffcc00;
+            border: 1px solid #333;
             border-radius: 10px;
-            padding: 25px;
+            padding: 20px;
             margin: 25px 0;
             text-align: center;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
         }
 
-        .herramienta-interactiva h4 {
-            margin-top: 0;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Gráfico de la Resistencia */
         .resistencia-grafico {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 20px auto;
+            margin: 10px auto;
             position: relative;
             width: 250px;
             height: 60px;
@@ -128,37 +119,6 @@
             width: 15px;
             height: 100%;
             margin: 0 10px;
-        }
-
-        .controles-flex {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        select {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ffcc00;
-            background-color: #121212;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: bold;
-        }
-
-        .resultado-destacado {
-            font-size: 1.5rem;
-            font-weight: bold;
-            font-family: monospace;
-            background: #000;
-            padding: 10px 20px;
-            border-radius: 5px;
-            color: #00ff00;
-            border: 1px solid #333;
-            display: inline-block;
-            margin-top: 15px;
         }
 
         /* BOTÓN DE RETORNO */
@@ -212,69 +172,21 @@
         <h3>1.1.1. Identificación por código de colores</h3>
         <p>Consiste en codificar el valor de la resistencia mediante un código de colores estandarizado. Dichos colores se aplican mediante bandas en el propio cuerpo de las resistencias. Así, es posible encontrar resistencias de cuatro, cinco e, incluso, seis bandas, siendo las dos primeras las más utilizadas y las que a continuación se van a estudiar.</p>
 
+        <!-- GRÁFICO VISUAL FIJO (EJEMPLO 1K) -->
+        <div class="resistencia-muestra">
+            <p style="margin: 0 0 10px 0; font-size: 0.9rem; color: #aaa;">Ejemplo de lectura: Resistencia de 1000 Ω (1 kΩ) ± 5%</p>
+            <div class="resistencia-grafico">
+                <div class="banda" style="background-color: #8B4513;" title="Marrón (1)"></div>
+                <div class="banda" style="background-color: black;" title="Negro (0)"></div>
+                <div class="banda" style="background-color: red;" title="Rojo (x100)"></div>
+                <div class="banda" style="background-color: gold; margin-left: 30px;" title="Oro (±5%)"></div>
+            </div>
+        </div>
+
         <!-- IMAGEN ADJUNTADA -->
         <img src="codigo_de_colores.png" alt="Tabla de Código de Colores" class="imagen-tabla">
 
-        <!-- INTERACTIVO: CÓDIGO DE COLORES (BLINDADO SIN EVENTOS INLINE) -->
-        <div class="herramienta-interactiva">
-            <h4>🎨 Calculadora Interactiva de Código de Colores (4 Bandas)</h4>
-            
-            <div class="resistencia-grafico">
-                <div class="banda" id="visual-b1" style="background-color: #8B4513;"></div>
-                <div class="banda" id="visual-b2" style="background-color: black;"></div>
-                <div class="banda" id="visual-b3" style="background-color: red;"></div>
-                <div class="banda" id="visual-b4" style="background-color: gold; margin-left: 30px;"></div>
-            </div>
-
-            <div class="controles-flex">
-                <select id="sel-b1">
-                    <option value="1" data-color="#8B4513" selected>Marrón (1)</option>
-                    <option value="2" data-color="red">Rojo (2)</option>
-                    <option value="3" data-color="orange">Naranja (3)</option>
-                    <option value="4" data-color="yellow">Amarillo (4)</option>
-                    <option value="5" data-color="green">Verde (5)</option>
-                    <option value="6" data-color="blue">Azul (6)</option>
-                    <option value="7" data-color="violet">Violeta (7)</option>
-                    <option value="8" data-color="gray">Gris (8)</option>
-                    <option value="9" data-color="white">Blanco (9)</option>
-                </select>
-
-                <select id="sel-b2">
-                    <option value="0" data-color="black" selected>Negro (0)</option>
-                    <option value="1" data-color="#8B4513">Marrón (1)</option>
-                    <option value="2" data-color="red">Rojo (2)</option>
-                    <option value="3" data-color="orange">Naranja (3)</option>
-                    <option value="4" data-color="yellow">Amarillo (4)</option>
-                    <option value="5" data-color="green">Verde (5)</option>
-                    <option value="6" data-color="blue">Azul (6)</option>
-                    <option value="7" data-color="violet">Violeta (7)</option>
-                    <option value="8" data-color="gray">Gris (8)</option>
-                    <option value="9" data-color="white">Blanco (9)</option>
-                </select>
-
-                <select id="sel-b3">
-                    <option value="1" data-color="black">Negro (x1)</option>
-                    <option value="10" data-color="#8B4513">Marrón (x10)</option>
-                    <option value="100" data-color="red" selected>Rojo (x100)</option>
-                    <option value="1000" data-color="orange">Naranja (x1k)</option>
-                    <option value="10000" data-color="yellow">Amarillo (x10k)</option>
-                    <option value="100000" data-color="green">Verde (x100k)</option>
-                    <option value="1000000" data-color="blue">Azul (x1M)</option>
-                    <option value="0.1" data-color="gold">Oro (x0.1)</option>
-                    <option value="0.01" data-color="silver">Plata (x0.01)</option>
-                </select>
-
-                <select id="sel-b4">
-                    <option value="± 5%" data-color="gold" selected>Oro (±5%)</option>
-                    <option value="± 10%" data-color="silver">Plata (±10%)</option>
-                    <option value="± 1%" data-color="#8B4513">Marrón (±1%)</option>
-                    <option value="± 2%" data-color="red">Rojo (±2%)</option>
-                </select>
-            </div>
-            <div class="resultado-destacado" id="res-colores">1000 Ω ± 5%</div>
-        </div>
-
-        <!-- INFORMACIÓN EXPLICATIVA ADICIONADA -->
+        <!-- INFORMACIÓN ALFANUMÉRICA SOLICITADA -->
         <h3>1.1.2. Identificación por código alfanumérico</h3>
         <p>En muchas ocasiones, especialmente en las resistencias de gran tamaño, el valor óhmico se encuentra estampado por un código alfanumérico. En este caso, se utilizan los siguientes símbolos literales para los múltiplos de ohmios.</p>
         <ul>
@@ -297,51 +209,5 @@
     <!-- BOTÓN INFERIOR IZQUIERDO -->
     <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
 
-    <!-- SCRIPT DE CÁLCULO SEGURO -->
-    <script>
-        function formatearOhmios(valor) {
-            if (valor >= 1000000) {
-                return (valor / 1000000) + " MΩ";
-            } else if (valor >= 1000) {
-                return (valor / 1000) + " kΩ";
-            } else {
-                return valor + " Ω";
-            }
-        }
-
-        function calcularColores() {
-            const selB1 = document.getElementById('sel-b1');
-            const selB2 = document.getElementById('sel-b2');
-            const selB3 = document.getElementById('sel-b3');
-            const selB4 = document.getElementById('sel-b4');
-
-            if(!selB1 || !selB2 || !selB3 || !selB4) return;
-
-            // Actualizar colores visuales de forma interna
-            document.getElementById('visual-b1').style.backgroundColor = selB1.options[selB1.selectedIndex].dataset.color;
-            document.getElementById('visual-b2').style.backgroundColor = selB2.options[selB2.selectedIndex].dataset.color;
-            document.getElementById('visual-b3').style.backgroundColor = selB3.options[selB3.selectedIndex].dataset.color;
-            document.getElementById('visual-b4').style.backgroundColor = selB4.options[selB4.selectedIndex].dataset.color;
-
-            const digito1 = selB1.value;
-            const digito2 = selB2.value;
-            const multiplicador = parseFloat(selB3.value);
-            const tolerancia = selB4.value;
-
-            const valorTotal = parseInt(digito1 + digito2) * multiplicador;
-            document.getElementById('res-colores').innerText = formatearOhmios(valorTotal) + " " + tolerancia;
-        }
-
-        // Asignación segura de eventos tras la carga del DOM (Previene bloqueos de servidores escolares)
-        window.onload = function() {
-            document.getElementById('sel-b1').addEventListener('change', calcularColores);
-            document.getElementById('sel-b2').addEventListener('change', calcularColores);
-            document.getElementById('sel-b3').addEventListener('change', calcularColores);
-            document.getElementById('sel-b4').addEventListener('change', calcularColores);
-            
-            // Render inicial
-            calcularColores();
-        };
-    </script>
 </body>
 </html>
