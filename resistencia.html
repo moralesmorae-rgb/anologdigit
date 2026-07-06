@@ -240,6 +240,71 @@
             text-align: center;
         }
 
+        /* --- ESTILOS VISUALIZACIÓN EN PARALELO --- */
+        .circuito-paralelo-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            max-width: 420px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .circuito-paralelo-visual::before {
+            content: '';
+            position: absolute;
+            top: 35px;
+            bottom: 35px;
+            left: 50px;
+            width: 4px;
+            background-color: #666;
+        }
+
+        .circuito-paralelo-visual::after {
+            content: '';
+            position: absolute;
+            top: 35px;
+            bottom: 35px;
+            right: 50px;
+            width: 4px;
+            background-color: #666;
+        }
+
+        .paralelo-rama {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 30px;
+            box-sizing: border-box;
+        }
+
+        .cable-p-left {
+            flex-grow: 1;
+            height: 4px;
+            background-color: #666;
+            margin-right: 10px;
+        }
+
+        .cable-p-right {
+            flex-grow: 1;
+            height: 4px;
+            background-color: #666;
+            margin-left: 10px;
+        }
+
+        .nodo-conexion {
+            width: 12px;
+            height: 12px;
+            background-color: #ffcc00;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
         /* BOTÓN DE RETORNO */
         .btn-volver {
             position: fixed;
@@ -437,7 +502,7 @@
 
         <!-- TEXTO SOBRE RESISTENCIAS SMD -->
         <p><strong>Resistencias SMD:</strong> son resistencias miniaturizadas para instalar directamente en la placa de circuito impreso por la técnica de soldadura en superficie. El componente resistivo se consigue por una composición de sustrato de alúmina, y no disponen de patillas de conexión en forma de hilo, ya que la soldadura se realiza directamente sobre los casquillos del cuerpo de la resistencia.</p>
-        <p>Existen todo tipo de componentes, pasivos y activos, con el formato SMD. Esta tecnología ha permitido reducir enormemente todo tipo de dispositivos electrónicos respecto a los que se fabricaban hace décadas.</p>
+        <p>Existen todo tipo de componentes, pasivos and activos, con el formato SMD. Esta tecnología ha permitido reducir enormemente todo tipo de dispositivos electrónicos respecto a los que se fabricaban hace décadas.</p>
 
         <!-- IMAGEN RESISTENCIAS SMD -->
         <img src="SMD.png" alt="Componentes y resistencias con tecnología de montaje superficial (SMD)" class="imagen-tabla">
@@ -530,6 +595,61 @@
             </div>
             
             <div class="resultado-destacado" id="res-serie">Rt = 650 Ω</div>
+        </div>
+
+        <!-- RESISTENCIAS EN PARALELO -->
+        <h4>1.4.2. Resistencias en paralelo</h4>
+        <p>De igual forma, cuando se asocian resistencias en paralelo, se puede decir que la resistencia equivalente de un circuito paralelo es la inversa de la suma de las inversas de las demás resistencias.</p>
+        
+        <div class="formula-destacada">
+            1/Re = 1/R1 + 1/R2 + 1/R3
+        </div>
+
+        <!-- INTERACTIVO CIRCUITO EN PARALELO -->
+        <div class="herramienta-interactiva" id="interactivo-paralelo">
+            <h4>🔌 Simulador de Asociación en Paralelo</h4>
+            <p style="font-size: 0.9rem; color: #aaa; margin-top: -5px;">Modifica los valores de las ramas (ingresa 0 para simular una rama desconectada o circuito abierto)</p>
+            
+            <div class="circuito-paralelo-visual">
+                <div class="paralelo-rama">
+                    <div class="nodo-conexion"></div>
+                    <div class="cable-p-left"></div>
+                    <div class="resistor-bloque" id="vp-r1"><div class="label-id">R1</div><span>100 Ω</span></div>
+                    <div class="cable-p-right"></div>
+                    <div class="nodo-conexion"></div>
+                </div>
+                <div class="paralelo-rama">
+                    <div class="nodo-conexion"></div>
+                    <div class="cable-p-left"></div>
+                    <div class="resistor-bloque" id="vp-r2"><div class="label-id">R2</div><span>220 Ω</span></div>
+                    <div class="cable-p-right"></div>
+                    <div class="nodo-conexion"></div>
+                </div>
+                <div class="paralelo-rama">
+                    <div class="nodo-conexion"></div>
+                    <div class="cable-p-left"></div>
+                    <div class="resistor-bloque" id="vp-r3"><div class="label-id">R3</div><span>330 Ω</span></div>
+                    <div class="cable-p-right"></div>
+                    <div class="nodo-conexion"></div>
+                </div>
+            </div>
+
+            <div class="controles-flex">
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R1 (Ω)</label>
+                    <input type="number" id="num-p1" value="100" min="0" max="999999">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R2 (Ω)</label>
+                    <input type="number" id="num-p2" value="220" min="0" max="999999">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R3 (Ω)</label>
+                    <input type="number" id="num-p3" value="330" min="0" max="999999">
+                </div>
+            </div>
+            
+            <div class="resultado-destacado" id="res-paralelo">Rt = 61.11 Ω</div>
         </div>
 
     </main>
@@ -628,4 +748,60 @@
             }
             calcularSerie();
         })();
-    </script></body></html>
+
+        // Lógica de Asociación en Paralelo
+        (function() {
+            var r1Input = document.getElementById('num-p1');
+            var r2Input = document.getElementById('num-p2');
+            var r3Input = document.getElementById('num-p3');
+            var resParalelo = document.getElementById('res-paralelo');
+            
+            var vr1 = document.getElementById('vp-r1').getElementsByTagName('span')[0];
+            var vr2 = document.getElementById('vp-r2').getElementsByTagName('span')[0];
+            var vr3 = document.getElementById('vp-r3').getElementsByTagName('span')[0];
+
+            function calcularParalelo() {
+                if(!r1Input || !r2Input || !r3Input || !resParalelo) return;
+                
+                var val1 = Math.max(0, parseFloat(r1Input.value) || 0);
+                var val2 = Math.max(0, parseFloat(r2Input.value) || 0);
+                var val3 = Math.max(0, parseFloat(r3Input.value) || 0);
+                
+                r1Input.value = val1;
+                r2Input.value = val2;
+                r3Input.value = val3;
+
+                if(vr1) vr1.innerText = val1 > 0 ? val1 + " Ω" : "Abierto";
+                if(vr2) vr2.innerText = val2 > 0 ? val2 + " Ω" : "Abierto";
+                if(vr3) vr3.innerText = val3 > 0 ? val3 + " Ω" : "Abierto";
+                
+                var invSum = 0;
+                if (val1 > 0) invSum += 1 / val1;
+                if (val2 > 0) invSum += 1 / val2;
+                if (val3 > 0) invSum += 1 / val3;
+                
+                var total = invSum > 0 ? (1 / invSum) : 0;
+                var texto;
+                
+                if (invSum === 0) {
+                    texto = "∞ Ω (Abierto)";
+                } else if (total >= 1000000) {
+                    texto = (total / 1000000).toFixed(2) + " MΩ";
+                } else if (total >= 1000) {
+                    texto = (total / 1000).toFixed(2) + " kΩ";
+                } else {
+                    texto = total.toFixed(2) + " Ω";
+                }
+                
+                resParalelo.innerText = "Rt = " + texto;
+            }
+
+            var container = document.getElementById('interactivo-paralelo');
+            if(container) {
+                container.addEventListener('input', calcularParalelo);
+            }
+            calcularParalelo();
+        })();
+    </script>
+</body>
+</html>
