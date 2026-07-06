@@ -17,7 +17,6 @@
             align-items: center;
         }
 
-        /* ENCABEZADO */
         header {
             background-color: #000000;
             width: 100%;
@@ -42,12 +41,11 @@
             font-size: 0.9rem;
         }
 
-        /* CONTENEDOR DE CONTENIDO */
         .container {
             width: 90%;
             max-width: 800px;
             background-color: #1e1e1e;
-            padding: 40px 40px;
+            padding: 40px;
             border-radius: 12px;
             border-top: 5px solid #ffcc00;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -70,7 +68,7 @@
         ul { margin-bottom: 20px; }
         li { margin-bottom: 8px; }
 
-        /* --- ESTILOS DE INTERACTIVOS --- */
+        /* --- INTERACTIVOS --- */
         .herramienta-interactiva {
             background-color: #2a2a2a;
             border: 2px dashed #ffcc00;
@@ -86,10 +84,8 @@
             color: #ffffff;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border: none;
         }
 
-        /* Gráfico de la Resistencia */
         .resistencia-grafico {
             display: flex;
             align-items: center;
@@ -195,7 +191,6 @@
             opacity: 0.1;
         }
 
-        /* ESTILO PARA LA IMAGEN ADJUNTADA */
         .imagen-tabla {
             display: block;
             max-width: 100%;
@@ -206,7 +201,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        /* BOTÓN INFERIOR IZQUIERDO */
         .btn-volver {
             position: fixed;
             bottom: 20px;
@@ -234,13 +228,11 @@
 </head>
 <body>
 
-    <!-- ENCABEZADO -->
     <header>
         <h1>Material de Estudio: Resistencias</h1>
         <p>Profesor Eduardo • IPCHILE</p>
     </header>
 
-    <!-- CONTENIDO DEL DOCUMENTO -->
     <main class="container">
         
         <h2>1. Resistencias</h2>
@@ -257,8 +249,8 @@
         <h3>1.1.1. Identificación por código de colores</h3>
         <p>Consiste en codificar el valor de la resistencia mediante un código de colores estandarizado. Dichos colores se aplican mediante bandas en el propio cuerpo de las resistencias. Así, es posible encontrar resistencias de cuatro, cinco e, incluso, seis bandas, siendo las dos primeras las más utilizadas y las que a continuación se van a estudiar.</p>
 
-        <!-- IMAGEN ADJUNTADA SOLICITADA -->
-        <img src="codigo de colores.png" alt="Tabla de Código de Colores" class="imagen-tabla">
+        <!-- IMAGEN ACTUALIZADA SIN ESPACIOS EN EL NOMBRE -->
+        <img src="codigo_de_colores.png" alt="Tabla de Código de Colores" class="imagen-tabla">
 
         <!-- INTERACTIVO: CÓDIGO DE COLORES -->
         <div class="herramienta-interactiva">
@@ -366,10 +358,8 @@
 
     </main>
 
-    <!-- BOTÓN INFERIOR IZQUIERDO -->
     <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
 
-    <!-- SCRIPTS LÓGICOS -->
     <script>
         function formatearOhmios(valor) {
             if (valor >= 1000000) {
@@ -381,7 +371,6 @@
             }
         }
 
-        // --- 1. LÓGICA CÓDIGO DE COLORES ---
         function calcularColores() {
             const selB1 = document.getElementById('sel-b1');
             const selB2 = document.getElementById('sel-b2');
@@ -402,7 +391,6 @@
             document.getElementById('res-colores').innerText = formatearOhmios(valorTotal) + " " + tolerancia;
         }
 
-        // --- 2. LÓGICA CÓDIGO ALFANUMÉRICO ---
         function calcularAlfanumerico() {
             let input = document.getElementById('input-alfa').value.toUpperCase().trim();
             const regex = /^(\d*)([RKM])(\d*)$/;
@@ -426,7 +414,6 @@
             }
         }
 
-        // --- 3. LÓGICA SIMULADOR LEY DE OHM ---
         function calcularCircuito() {
             const voltaje = document.getElementById('input-v').value;
             const resistencia = document.getElementById('input-r').value;
