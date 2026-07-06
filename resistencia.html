@@ -98,12 +98,11 @@
             position: relative;
             width: 250px;
             height: 60px;
-            background-color: #e5c39c; /* Color cuerpo resistencia */
+            background-color: #e5c39c; 
             border-radius: 30px;
             border: 2px solid #8c6a45;
         }
 
-        /* Terminales metálicos */
         .resistencia-grafico::before, .resistencia-grafico::after {
             content: '';
             position: absolute;
@@ -115,7 +114,6 @@
         .resistencia-grafico::before { left: -60px; }
         .resistencia-grafico::after { right: -60px; }
 
-        /* Bandas de colores */
         .banda {
             width: 15px;
             height: 100%;
@@ -153,7 +151,6 @@
             margin-top: 15px;
         }
 
-        /* Laboratorio de Ohm */
         .control-group {
             background-color: #1e1e1e;
             padding: 15px;
@@ -198,6 +195,17 @@
             opacity: 0.1;
         }
 
+        /* ESTILO PARA LA IMAGEN ADJUNTADA */
+        .imagen-tabla {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto;
+            border: 2px solid #ffcc00;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
         /* BOTÓN INFERIOR IZQUIERDO */
         .btn-volver {
             position: fixed;
@@ -236,13 +244,21 @@
     <main class="container">
         
         <h2>1. Resistencias</h2>
-        <p>También denominadas resistores, son componentes que permiten disipar energía eléctrica en forma de calor. En electrónica, se utilizan para limitar la corriente y polarizar otros componentes como los diodos o los transistores. Las principales características que se deben conocer de las resistencias son su valor óhmico y su potencia de disipación.</p>
+        <p>También denominadas resistores, son componentes que permiten disipar energía eléctrica en forma de calor. En electrónica, se utilizan para limitar la corriente y polarizar otros componentes como los diodos o los transistores.</p>
+        <p>Las principales características que se deben conocer de las resistencias son su valor óhmico y su potencia de disipación.</p>
         
         <h3>1.1. El valor óhmico</h3>
         <p>Se expresa en ohmios y en sus múltiplos y sus submúltiplos. Dicho valor suele estar impreso en el mismo cuerpo de las resistencias, y puede estar codificado de dos formas:</p>
+        <ul>
+            <li>Por código de colores.</li>
+            <li>Por código alfanumérico.</li>
+        </ul>
 
-        <h4>1.1.1. Identificación por código de colores</h4>
-        <p>Consiste en codificar el valor de la resistencia mediante un código de colores estandarizado. Dichos colores se aplican mediante bandas en el propio cuerpo de las resistencias.</p>
+        <h3>1.1.1. Identificación por código de colores</h3>
+        <p>Consiste en codificar el valor de la resistencia mediante un código de colores estandarizado. Dichos colores se aplican mediante bandas en el propio cuerpo de las resistencias. Así, es posible encontrar resistencias de cuatro, cinco e, incluso, seis bandas, siendo las dos primeras las más utilizadas y las que a continuación se van a estudiar.</p>
+
+        <!-- IMAGEN ADJUNTADA SOLICITADA -->
+        <img src="codigo de colores.png" alt="Tabla de Código de Colores" class="imagen-tabla">
 
         <!-- INTERACTIVO: CÓDIGO DE COLORES -->
         <div class="herramienta-interactiva">
@@ -317,7 +333,6 @@
             <div class="resultado-destacado" id="res-alfa">--- Ω</div>
         </div>
 
-
         <h3>1.2. La potencia de disipación y Tipos de resistencias</h3>
         <p>La potencia que las resistencias son capaces de disipar viene expresada en vatios (W). Según su construcción, las resistencias se clasifican principalmente en:</p>
         <ul>
@@ -356,7 +371,6 @@
 
     <!-- SCRIPTS LÓGICOS -->
     <script>
-        // Función para formatear números grandes a formato legible (ej. 1000 a 1 kΩ)
         function formatearOhmios(valor) {
             if (valor >= 1000000) {
                 return (valor / 1000000) + " MΩ";
@@ -374,37 +388,31 @@
             const selB3 = document.getElementById('sel-b3');
             const selB4 = document.getElementById('sel-b4');
 
-            // Actualizar colores visuales de la resistencia gráfica
             document.getElementById('visual-b1').style.backgroundColor = selB1.options[selB1.selectedIndex].dataset.color;
             document.getElementById('visual-b2').style.backgroundColor = selB2.options[selB2.selectedIndex].dataset.color;
             document.getElementById('visual-b3').style.backgroundColor = selB3.options[selB3.selectedIndex].dataset.color;
             document.getElementById('visual-b4').style.backgroundColor = selB4.options[selB4.selectedIndex].dataset.color;
 
-            // Calcular valor matemático
             const digito1 = selB1.value;
             const digito2 = selB2.value;
             const multiplicador = parseFloat(selB3.value);
             const tolerancia = selB4.value;
 
-            // Une los dos primeros dígitos y multiplica
             const valorTotal = parseInt(digito1 + digito2) * multiplicador;
-
             document.getElementById('res-colores').innerText = formatearOhmios(valorTotal) + " " + tolerancia;
         }
 
         // --- 2. LÓGICA CÓDIGO ALFANUMÉRICO ---
         function calcularAlfanumerico() {
             let input = document.getElementById('input-alfa').value.toUpperCase().trim();
-            // Busca números, luego R/K/M, luego más números (Ej: 4R7, 10K)
             const regex = /^(\d*)([RKM])(\d*)$/;
             const match = input.match(regex);
 
             if(match) {
-                let izquierda = match[1] || "0"; // Si no hay nada antes de la letra, es 0
+                let izquierda = match[1] || "0"; 
                 let letra = match[2];
-                let derecha = match[3] || "0"; // Si no hay nada después de la letra, es 0
+                let derecha = match[3] || "0"; 
 
-                // La letra actúa como punto decimal
                 let numeroBase = parseFloat(izquierda + "." + derecha);
                 let multiplicador = 1;
 
@@ -426,13 +434,11 @@
             document.getElementById('val-v').innerText = voltaje + " V";
             document.getElementById('val-r').innerText = resistencia + " Ω";
 
-            // Calcular corriente
             const corrienteAmperios = voltaje / resistencia;
             const corriente_mA = (corrienteAmperios * 1000).toFixed(1);
             
             document.getElementById('val-i').innerText = corriente_mA + " mA";
 
-            // Efecto LED
             const led = document.getElementById('led-visual');
             let brillo = corriente_mA / 25; 
             if (brillo > 1) brillo = 1; 
@@ -442,7 +448,6 @@
             led.style.boxShadow = `0 0 ${brillo * 40}px ${brillo * 15}px rgba(255, 0, 0, 0.8)`;
         }
 
-        // Inicializar los interactivos al cargar la página
         window.onload = function() {
             calcularColores();
             calcularCircuito();
