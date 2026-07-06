@@ -215,7 +215,7 @@
         <!-- IMAGEN ADJUNTADA -->
         <img src="codigo_de_colores.png" alt="Tabla de Código de Colores" class="imagen-tabla">
 
-        <!-- INTERACTIVO: CÓDIGO DE COLORES -->
+        <!-- INTERACTIVO: CÓDIGO DE COLORES (BLINDADO SIN EVENTOS INLINE) -->
         <div class="herramienta-interactiva">
             <h4>🎨 Calculadora Interactiva de Código de Colores (4 Bandas)</h4>
             
@@ -227,7 +227,7 @@
             </div>
 
             <div class="controles-flex">
-                <select id="sel-b1" onchange="calcularColores()">
+                <select id="sel-b1">
                     <option value="1" data-color="#8B4513" selected>Marrón (1)</option>
                     <option value="2" data-color="red">Rojo (2)</option>
                     <option value="3" data-color="orange">Naranja (3)</option>
@@ -239,7 +239,7 @@
                     <option value="9" data-color="white">Blanco (9)</option>
                 </select>
 
-                <select id="sel-b2" onchange="calcularColores()">
+                <select id="sel-b2">
                     <option value="0" data-color="black" selected>Negro (0)</option>
                     <option value="1" data-color="#8B4513">Marrón (1)</option>
                     <option value="2" data-color="red">Rojo (2)</option>
@@ -252,7 +252,7 @@
                     <option value="9" data-color="white">Blanco (9)</option>
                 </select>
 
-                <select id="sel-b3" onchange="calcularColores()">
+                <select id="sel-b3">
                     <option value="1" data-color="black">Negro (x1)</option>
                     <option value="10" data-color="#8B4513">Marrón (x10)</option>
                     <option value="100" data-color="red" selected>Rojo (x100)</option>
@@ -264,7 +264,7 @@
                     <option value="0.01" data-color="silver">Plata (x0.01)</option>
                 </select>
 
-                <select id="sel-b4" onchange="calcularColores()">
+                <select id="sel-b4">
                     <option value="± 5%" data-color="gold" selected>Oro (±5%)</option>
                     <option value="± 10%" data-color="silver">Plata (±10%)</option>
                     <option value="± 1%" data-color="#8B4513">Marrón (±1%)</option>
@@ -274,9 +274,9 @@
             <div class="resultado-destacado" id="res-colores">1000 Ω ± 5%</div>
         </div>
 
-        <!-- INFORMACIÓN ADICIONADA/ACTUALIZADA -->
+        <!-- INFORMACIÓN EXPLICATIVA ADICIONADA -->
         <h3>1.1.2. Identificación por código alfanumérico</h3>
-        <p>En muchas ocasiones, especialmente en las resistencias de gran tamaño, el valor óhmico se encuentra estampado por un código alfanumérico. En este caso, se utilizan los siguientes símbolos literales para los múltiplos de ohmios:</p>
+        <p>En muchas ocasiones, especialmente en las resistencias de gran tamaño, el valor óhmico se encuentra estampado por un código alfanumérico. En este caso, se utilizan los siguientes símbolos literales para los múltiplos de ohmios.</p>
         <ul>
             <li><strong>R:</strong> para unidades de ohmio.</li>
             <li><strong>K:</strong> para kiloohmios.</li>
@@ -297,7 +297,7 @@
     <!-- BOTÓN INFERIOR IZQUIERDO -->
     <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
 
-    <!-- SCRIPT DE CÁLCULO DE COLORES -->
+    <!-- SCRIPT DE CÁLCULO SEGURO -->
     <script>
         function formatearOhmios(valor) {
             if (valor >= 1000000) {
@@ -315,25 +315,31 @@
             const selB3 = document.getElementById('sel-b3');
             const selB4 = document.getElementById('sel-b4');
 
-            // Actualizar colores de las bandas de la resistencia gráfica
+            if(!selB1 || !selB2 || !selB3 || !selB4) return;
+
+            // Actualizar colores visuales de forma interna
             document.getElementById('visual-b1').style.backgroundColor = selB1.options[selB1.selectedIndex].dataset.color;
             document.getElementById('visual-b2').style.backgroundColor = selB2.options[selB2.selectedIndex].dataset.color;
             document.getElementById('visual-b3').style.backgroundColor = selB3.options[selB3.selectedIndex].dataset.color;
             document.getElementById('visual-b4').style.backgroundColor = selB4.options[selB4.selectedIndex].dataset.color;
 
-            // Obtener valores matemáticos
             const digito1 = selB1.value;
             const digito2 = selB2.value;
             const multiplicador = parseFloat(selB3.value);
             const tolerancia = selB4.value;
 
-            // Calcular y formatear el valor óhmico total
             const valorTotal = parseInt(digito1 + digito2) * multiplicador;
             document.getElementById('res-colores').innerText = formatearOhmios(valorTotal) + " " + tolerancia;
         }
 
-        // Ejecutar al cargar para sincronizar el estado inicial de la resistencia
+        // Asignación segura de eventos tras la carga del DOM (Previene bloqueos de servidores escolares)
         window.onload = function() {
+            document.getElementById('sel-b1').addEventListener('change', calcularColores);
+            document.getElementById('sel-b2').addEventListener('change', calcularColores);
+            document.getElementById('sel-b3').addEventListener('change', calcularColores);
+            document.getElementById('sel-b4').addEventListener('change', calcularColores);
+            
+            // Render inicial
             calcularColores();
         };
     </script>
