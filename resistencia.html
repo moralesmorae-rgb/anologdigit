@@ -67,7 +67,7 @@
             padding-bottom: 10px;
         }
 
-        ul { margin-bottom: 20px; }
+        ul { margin-bottom: 20px; padding-left: 20px; }
         li { margin-bottom: 8px; }
 
         /* ESTILO DE LA IMAGEN INDIVIDUAL */
@@ -237,7 +237,7 @@
 
         <!-- CALCULADORA INTERACTIVA COMPLETA -->
         <div class="herramienta-interactiva" id="calculadora-colores">
-            <h4>🎨 Calculadora Interactiva de Código de Colores (4 Bandas)</h4>
+            <h4>🎨 Calculadora Interactive de Código de Colores (4 Bandas)</h4>
             
             <div class="resistencia-grafico">
                 <div class="banda" id="visual-b1"></div>
@@ -307,27 +307,38 @@
         </ul>
         <p>Para valores enteros, el símbolo se pone al final de la cantidad. Para valores con decimales, el símbolo se utiliza a modo de separador entre la parte entera y la parte decimal.</p>
 
-        <!-- SECCIÓN 1.2 -->
-        <h3>1.2. La potencia de disipación y Tipos de resistencias</h3>
-        <p>La potencia que las resistencias son capaces de disipar viene expresada en vatios (W). Según su construcción, las resistencias se clasifican principalmente en:</p>
-        <ul>
-            <li><strong>Bobinadas:</strong> Diseñadas para disipar grandes potencias (2 W hasta 100 W). El valor óhmico no suele ser muy elevado.</li>
-            <li><strong>De carbón:</strong> Compuestas de grafito o carbón. Son las más comunes para bajas potencias.</li>
-            <li><strong>Metálicas:</strong> Se basan en una aleación de varios elementos metálicos. Presentan gran precisión y estabilidad térmica.</li>
-        </ul>
-
         <!-- IMÁGENES COMPLEMENTARIAS ALINEADAS LADO A LADO -->
         <div class="galeria-duo">
             <img src="codigo de numerico .png" alt="Código Numérico" class="imagen-duo">
             <img src="tolerancia alfanumerica.png" alt="Tolerancia Alfanumérica" class="imagen-duo">
         </div>
 
+        <!-- NUEVA INFORMACIÓN AGREGADA DESPUÉS DE LAS IMÁGENES -->
+        <h3>1.2. La potencia de disipación</h3>
+        <p>La potencia que las resistencias son capaces de disipar viene expresada en vatios (W). Así, a mayor número de vatios, mayor tamaño de la resistencia.</p>
+        <p>Las resistencias de carbón suelen tener potencias normalizadas muy bajas de 1/8, 1/4, 1/2, 1 y 2 W, sin embargo, las resistencias bobinadas se fabrican a partir de 2 W, siendo habituales potencias de 5, 7, 10 y 50 W.</p>
+
+        <h3>1.3. Tipos de resistencias</h3>
+        <p>Las resistencias se pueden clasificar en función de su forma constructiva y composición, o según la forma de variar su valor o modo de funcionamiento.</p>
+
+        <h4>1.3.1. Tipos de resistencias según su construcción</h4>
+        <p>Así, según su construcción o composición, las resistencias se clasifican principalmente en:</p>
+        <ul>
+            <li>Bobinadas.</li>
+            <li>De carbón.</li>
+            <li>Metálicas.</li>
+        </ul>
+
+        <h4>Resistencias bobinadas</h4>
+        <p>Su construcción se basa en un hilo resistivo bobinado sobre un núcleo cerámico. Son resistencias diseñadas para disipar grandes potencias. Se fabrican a partir de 2 W y se pueden encontrar hasta de 100 W. El valor óhmico de este tipo de resistencias no suele ser muy elevado (como máximo 1 o 2 kΩ), pudiéndose fabricar en valores inferiores al ohmio (desde 0,1 Ω).</p>
+        <p>Dependiendo del material que cubre el hilo bobinado, pueden ser cerámicas o de cubierta metálica. Estas últimas facilitan la disipación del calor generado a través de su envoltura.</p>
+
     </main>
 
     <!-- BOTÓN INFERIOR IZQUIERDO -->
     <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
 
-    <!-- LÓGICA DE PROGRAMACIÓN SEGURA (DELEGACIÓN DE EVENTOS) -->
+    <!-- LÓGICA DE PROGRAMACIÓN CALCULADORA -->
     <script>
         (function() {
             function calcular() {
@@ -338,7 +349,6 @@
                 
                 if(!b1 || !b2 || !b3 || !b4) return;
                 
-                // Actualizar colores de las bandas de la resistencia gráfica
                 document.getElementById('visual-b1').style.backgroundColor = b1.options[b1.selectedIndex].getAttribute('data-color');
                 document.getElementById('visual-b2').style.backgroundColor = b2.options[b2.selectedIndex].getAttribute('data-color');
                 document.getElementById('visual-b3').style.backgroundColor = b3.options[b3.selectedIndex].getAttribute('data-color');
@@ -363,13 +373,10 @@
                 document.getElementById('res-colores').innerText = texto + " " + t;
             }
 
-            // Escuchar cambios de forma global en el contenedor para evitar conflictos de carga
             var calc = document.getElementById('calculadora-colores');
             if(calc) {
                 calc.addEventListener('change', calcular);
             }
-            
-            // Ejecución inicial para pintar la resistencia por defecto
             calcular();
         })();
     </script>
