@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
+<!DOCTYPE html><html lang="es"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electrónica Analógica - Profesor Eduardo</title>
+    <title>Resistencias - Profesor Eduardo</title>
     <style>
-        /* --- ESTILOS LIMPIOS Y DIRECTOS --- */
+        /* --- ESTILOS GENERALES --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #121212;
-            color: #ffffff;
+            color: #e0e0e0;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
         }
 
         /* ENCABEZADO */
@@ -26,9 +22,10 @@
             padding: 20px 0;
             text-align: center;
             border-bottom: 3px solid #ffcc00;
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
+            z-index: 1000;
         }
 
         header h1 {
@@ -46,51 +43,269 @@
         /* CONTENEDOR PRINCIPAL */
         .container {
             width: 90%;
-            max-width: 450px;
+            max-width: 800px;
             background-color: #1e1e1e;
-            padding: 40px 30px;
+            padding: 40px;
             border-radius: 12px;
             border-top: 5px solid #ffcc00;
-            text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-top: 100px;
-            margin-bottom: 80px; 
+            margin-top: 120px; 
+            margin-bottom: 80px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .container h2, .container h3, .container h4 {
+            color: #ffcc00;
+            margin-top: 30px;
         }
 
         .container h2 {
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        ul { margin-bottom: 20px; padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        /* ESTILO DE LA IMAGEN INDIVIDUAL */
+        .imagen-tabla {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 25px auto;
+            border: 2px solid #ffcc00;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        /* --- ESTILOS DEL INTERACTIVO --- */
+        .herramienta-interactiva {
+            background-color: #2a2a2a;
+            border: 2px dashed #ffcc00;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .herramienta-interactiva h4 {
             margin-top: 0;
             color: #ffffff;
-            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* BOTONES DE OPCIONES */
-        .options {
+        /* Gráfico de la Resistencia */
+        .resistencia-grafico {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            position: relative;
+            width: 250px;
+            height: 60px;
+            background-color: #e5c39c; 
+            border-radius: 30px;
+            border: 2px solid #8c6a45;
+        }
+
+        .resistencia-grafico::before, .resistencia-grafico::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 8px;
+            background-color: #999;
+            z-index: -1;
+        }
+        .resistencia-grafico::before { left: -60px; }
+        .resistencia-grafico::after { right: -60px; }
+
+        .banda {
+            width: 15px;
+            height: 100%;
+            margin: 0 10px;
+            transition: background-color 0.2s ease;
+        }
+
+        .controles-flex {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        select, input[type="number"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ffcc00;
+            background-color: #121212;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        input[type="number"] {
+            width: 100px;
+            text-align: center;
+        }
+
+        .resultado-destacado {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: monospace;
+            background: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #00ff00;
+            border: 1px solid #333;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        /* --- ESTILOS PARA IMÁGENES ALINEADAS EN PAR --- */
+        .galeria-duo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .imagen-duo {
+            display: block;
+            max-width: 47%;
+            min-width: 280px;
+            height: auto;
+            border: 2px solid #ffcc00;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        /* --- ESTILOS VISUALIZACIÓN EN SERIE --- */
+        .circuito-serie-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px auto;
+            width: 100%;
+            max-width: 500px;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .cable {
+            flex-grow: 1;
+            height: 4px;
+            background-color: #666;
+        }
+
+        .resistor-bloque {
+            width: 80px;
+            height: 35px;
+            background-color: #e5c39c;
+            border: 2px solid #8c6a45;
+            border-radius: 6px;
             display: flex;
             flex-direction: column;
-            gap: 15px; 
-        }
-
-        .btn {
-            display: block;
-            background-color: transparent;
-            border: 2px solid #ffcc00;
-            color: #ffcc00;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            align-items: center;
+            justify-content: center;
+            color: #000;
             font-weight: bold;
-            text-decoration: none;
-            text-transform: uppercase;
-            transition: 0.2s ease-in-out;
+            font-size: 0.85rem;
         }
 
-        .btn:hover {
+        .resistor-bloque .label-id {
+            font-size: 0.7rem;
+            color: #555;
+            margin-bottom: -2px;
+        }
+
+        .formula-destacada {
+            background-color: #141414;
+            padding: 15px;
+            border-left: 4px solid #ffcc00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #ffcc00;
+            text-align: center;
+        }
+
+        /* --- ESTILOS VISUALIZACIÓN EN PARALELO --- */
+        .circuito-paralelo-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            max-width: 420px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .circuito-paralelo-visual::before {
+            content: '';
+            position: absolute;
+            top: 35px;
+            bottom: 35px;
+            left: 50px;
+            width: 4px;
+            background-color: #666;
+        }
+
+        .circuito-paralelo-visual::after {
+            content: '';
+            position: absolute;
+            top: 35px;
+            bottom: 35px;
+            right: 50px;
+            width: 4px;
+            background-color: #666;
+        }
+
+        .paralelo-rama {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 30px;
+            box-sizing: border-box;
+        }
+
+        .cable-p-left {
+            flex-grow: 1;
+            height: 4px;
+            background-color: #666;
+            margin-right: 10px;
+        }
+
+        .cable-p-right {
+            flex-grow: 1;
+            height: 4px;
+            background-color: #666;
+            margin-left: 10px;
+        }
+
+        .nodo-conexion {
+            width: 12px;
+            height: 12px;
             background-color: #ffcc00;
-            color: #000000;
-            transform: scale(1.02);
+            border-radius: 50%;
+            z-index: 2;
         }
 
-        /* BOTÓN INFERIOR IZQUIERDO */
+        /* BOTÓN DE RETORNO */
         .btn-volver {
             position: fixed;
             bottom: 20px;
@@ -114,30 +329,480 @@
             color: #000000;
             transform: scale(1.05);
         }
-    </style>
-</head>
-<body>
+    </style></head><body>
 
     <!-- ENCABEZADO -->
     <header>
-        <h1>Electrónica Analógica</h1>
+        <h1>Material de Estudio: Resistencias</h1>
         <p>Profesor Eduardo • IPCHILE</p>
     </header>
 
-    <!-- SECCIÓN DE INGRESO (4 OPCIONES) -->
+    <!-- CONTENIDO INFORMATIVO -->
     <main class="container">
-        <h2>Selecciona un componente</h2>
         
-        <div class="options">
-            <a href="resistencia.html" class="btn">⚡ Resistencia</a>
-            <a href="condensador.html" class="btn">🔋 Condensador</a>
-            <a href="bobina.html" class="btn">🧲 Bobina</a>
-            <a href="semiconductores.html" class="btn">🔌 Semiconductores</a>
+        <h2>1. Resistencias</h2>
+        <p>También denominadas resistores, son componentes que permiten disipar energía eléctrica en forma de calor. En electrónica, se utilizan para limitar la corriente y polarizar otros componentes como los diodos o los transistores.</p>
+        <p>Las principales características que se deben conocer de las resistencias son su valor óhmico y su potencia de disipación.</p>
+        
+        <h3>1.1. El valor óhmico</h3>
+        <p>Se expresa en ohmios y en sus múltiplos y sus submúltiplos. Dicho valor suele estar impreso en el mismo cuerpo de las resistencias, y puede estar codificado de dos formas:</p>
+        <ul>
+            <li>Por código de colores.</li>
+            <li>Por código alfanumérico.</li>
+        </ul>
+
+        <h3>1.1.1. Identificación por código de colores</h3>
+        <p>Consiste en codificar el valor de la resistencia mediante un código de colores estandarizado. Dichos colores se aplican mediante bandas en el propio cuerpo de las resistencias. Así, es posible encontrar resistencias de cuatro, cinco e, incluso, seis bandas, siendo las dos primeras las más utilizadas y las que a continuación se van a estudiar.</p>
+
+        <!-- CALCULADORA INTERACTIVA COMPLETA -->
+        <div class="herramienta-interactiva" id="calculadora-colores">
+            <h4>🎨 Calculadora Interactive de Código de Colores (4 Bandas)</h4>
+            
+            <div class="resistencia-grafico">
+                <div class="banda" id="visual-b1"></div>
+                <div class="banda" id="visual-b2"></div>
+                <div class="banda" id="visual-b3"></div>
+                <div class="banda" id="visual-b4" style="margin-left: 30px;"></div>
+            </div>
+
+            <div class="controles-flex">
+                <select id="sel-b1">
+                    <option value="1" data-color="#8B4513" selected>Marrón (1)</option>
+                    <option value="2" data-color="red">Rojo (2)</option>
+                    <option value="3" data-color="orange">Naranja (3)</option>
+                    <option value="4" data-color="yellow">Amarillo (4)</option>
+                    <option value="5" data-color="green">Verde (5)</option>
+                    <option value="6" data-color="blue">Azul (6)</option>
+                    <option value="7" data-color="violet">Violeta (7)</option>
+                    <option value="8" data-color="gray">Gris (8)</option>
+                    <option value="9" data-color="white">Blanco (9)</option>
+                </select>
+
+                <select id="sel-b2">
+                    <option value="0" data-color="black" selected>Negro (0)</option>
+                    <option value="1" data-color="#8B4513">Marrón (1)</option>
+                    <option value="2" data-color="red">Rojo (2)</option>
+                    <option value="3" data-color="orange">Naranja (3)</option>
+                    <option value="4" data-color="yellow">Amarillo (4)</option>
+                    <option value="5" data-color="green">Verde (5)</option>
+                    <option value="6" data-color="blue">Azul (6)</option>
+                    <option value="7" data-color="violet">Violeta (7)</option>
+                    <option value="8" data-color="gray">Gris (8)</option>
+                    <option value="9" data-color="white">Blanco (9)</option>
+                </select>
+
+                <select id="sel-b3">
+                    <option value="1" data-color="black">Negro (x1)</option>
+                    <option value="10" data-color="#8B4513">Marrón (x10)</option>
+                    <option value="100" data-color="red" selected>Rojo (x100)</option>
+                    <option value="1000" data-color="orange">Naranja (x1k)</option>
+                    <option value="10000" data-color="yellow">Amarillo (x10k)</option>
+                    <option value="100000" data-color="green">Verde (x100k)</option>
+                    <option value="1000000" data-color="blue">Azul (x1M)</option>
+                    <option value="0.1" data-color="gold">Oro (x0.1)</option>
+                    <option value="0.01" data-color="silver">Plata (x0.01)</option>
+                </select>
+
+                <select id="sel-b4">
+                    <option value="± 5%" data-color="gold" selected>Oro (±5%)</option>
+                    <option value="± 10%" data-color="silver">Plata (±10%)</option>
+                    <option value="± 1%" data-color="#8B4513">Marrón (±1%)</option>
+                    <option value="± 2%" data-color="red">Rojo (±2%)</option>
+                </select>
+            </div>
+            <div class="resultado-destacado" id="res-colores">1000 Ω ± 5%</div>
         </div>
+
+        <!-- IMAGEN TABLA DE COLORES -->
+        <img src="codigo%20de%20colores.png" alt="Tabla de Código de Colores" class="imagen-tabla">
+
+        <!-- INFORMACIÓN ALFANUMÉRICA -->
+        <h3>1.1.2. Identificación por código alfanumérico</h3>
+        <p>En muchas ocasiones, especialmente en las resistencias de gran tamaño, el valor óhmico se encuentra estampado por un código alfanumérico. En este caso, se utilizan los siguientes símbolos literales para los múltiplos de ohmios.</p>
+        <ul>
+            <li><strong>R:</strong> para unidades de ohmio.</li>
+            <li><strong>K:</strong> para kiloohmios.</li>
+            <li><strong>M:</strong> para megaohmio.</li>
+        </ul>
+        <p>Para valores enteros, el símbolo se pone al final de la cantidad. Para valores con decimales, el símbolo se utiliza a modo de separador entre la parte entera y la parte decimal.</p>
+
+        <!-- IMÁGENES COMPLEMENTARIAS ALINEADAS LADO A LADO -->
+        <div class="galeria-duo">
+            <img src="codigo%20de%20numerico%20.png" alt="Código Numérico" class="imagen-duo">
+            <img src="tolerancia%20alfanumerica.png" alt="Tolerancia Alfanumérica" class="imagen-duo">
+        </div>
+
+        <!-- POTENCIA DE DISIPACIÓN -->
+        <h3>1.2. La potencia de disipación</h3>
+        <p>La potencia que las resistencias son capaces de disipar viene expresada en vatios (W). Así, a mayor número de vatios, mayor tamaño de la resistencia.</p>
+        <p>Las resistencias de carbón suelen tener potencias normalizadas muy bajas de 1/8, 1/4, 1/2, 1 y 2 W, sin embargo, las resistencias bobinadas se fabrican a partir de 2 W, siendo habituales potencias de 5, 7, 10 y 50 W.</p>
+
+        <!-- TIPOS DE RESISTENCIAS -->
+        <h3>1.3. Tipos de resistencias</h3>
+        <p>Las resistencias se pueden clasificar en función de su forma constructiva y composición, o según la forma de variar su valor o modo de funcionamiento.</p>
+
+        <h4>1.3.1. Tipos de resistencias según su construcción</h4>
+        <p>Así, según su construcción o composición, las resistencias se clasifican principalmente en:</p>
+        <ul>
+            <li>Bobinadas.</li>
+            <li>De carbón.</li>
+            <li>Metálicas.</li>
+        </ul>
+
+        <h4>Resistencias bobinadas</h4>
+        <p>Su construcción se basa en un hilo resistivo bobinado sobre un núcleo cerámico. Son resistencias diseñadas para disipar grandes potencias. Se fabrican a partir de 2 W y se pueden encontrar hasta de 100 W. El valor óhmico de este tipo de resistencias no suele ser muy elevado (como máximo 1 o 2 kΩ), pudiéndose fabricar en valores inferiores al ohmio (desde 0,1 Ω).</p>
+        <p>Dependiendo del material que cubre el hilo bobinado, pueden ser cerámicas o de cubierta metálica. Estas últimas facilitan la disipación del calor generado a través de su envoltura.</p>
+        <p>El paso de corriente a través de ellas genera calor y, además, al estar constituidas por un hilo en forma de bobina, pueden presentar efectos inductivos que podrían resultar perjudiciales en los circuitos en los que se instalan, sensibles a este tipo de interferencias.</p>
+        <p>Muchos electrodomésticos utilizan resistencias de caldeo o calefactoras, que son de tipo bobinado. Estas no suelen tener valores óhmicos demasiado altos y se conectan directamente a la red eléctrica de 230 VAC, para conseguir el efecto deseado.</p>
+
+        <!-- IMAGEN RESISTENCIA BOBINADA -->
+        <img src="resistencia%20bobina.png" alt="Estructura e interferencia de una resistencia bobina" class="imagen-tabla">
+
+        <!-- RESISTENCIAS DE CARBÓN -->
+        <h4>Resistencias de carbón</h4>
+        <p>En ellas la parte resistiva se compone principalmente de grafito o carbón mezclado con otros compuestos hasta conseguir el valor que se desea en ohmios.</p>
+        <p>Las hay de dos tipos principalmente:</p>
+        <ul>
+            <li><strong>De carbón aglomerado:</strong> están formadas por una masa de grafito mezclada con sílice y resina.</li>
+            <li><strong>De película de carbón:</strong> en el que la parte resistiva está basada en una fina película de grafito enrollada en espiral sobre un fino núcleo cerámico.</li>
+        </ul>
+        <p>De estos dos tipos, las más empleadas, debido a su estabilidad y precisión, son las de película de carbón.</p>
+        <p>En ambos casos, la conexión con el circuito exterior se hace mediante dos cazoletas o casquillos metálicos, que deben estar en contacto de forma permanente con el grafito, que a su vez lo está con unos terminales de hilo rígido.</p>
+
+        <!-- IMAGEN RESISTENCIA DE CARBÓN -->
+        <img src="resistencia%20de%20carbon.png" alt="Estructura y tipos de una resistencia de carbón" class="imagen-tabla">
+
+        <!-- RESISTENCIAS METÁLICAS -->
+        <h4>Resistencias metálicas</h4>
+        <p>Son resistencias en las que el elemento resistivo se basa en una aleación de varios elementos metálicos en lugar de grafito o carbón.</p>
+        <p>Pueden ser de película metálica o de óxido metálico, siendo las primeras las más utilizadas en la actualidad. Las de película metálica presentan grandes ventajas frente a las de carbón, debido a su gran precisión y a su estabilidad térmica y óhmica cuando están en funcionamiento. Su composición interna tiene una estructura similar a las de película de carbón, siendo, en este caso, el material resistivo de una aleación metálica basada en cromo, níquel, titanio, etc.</p>
+        <p>La conexión con el circuito exterior se hace también mediante unos casquillos metálicos que unen los terminales con el interior de la resistencia, aunque en ocasiones se comercializan sin terminales, para su soldadura sobre las pistas de la placa de circuito impreso.</p>
+        <p>Se fabrican en potencias de hasta 2 W y son mucho más duraderas que sus equivalentes de carbón. Con ellas se consiguen mejores tolerancias y, por tanto, mayor precisión.</p>
+
+        <!-- MODO DE FUNCIONAMIENTO -->
+        <h3>1.3.2. Tipos de resistencia según su modo de funcionamiento</h3>
+        <p>Según su modo de funcionamiento, las resistencias pueden ser fijas y variables.</p>
+        
+        <h4>Resistencias de valor fijo</h4>
+        <p>Son aquellas que se fabrican con un valor fijo, el cual no se puede variar en condiciones de funcionamiento normales.</p>
+        <p>Su símbolo es el siguiente:</p>
+
+        <!-- IMAGEN DE LA SIMBOLOGÍA DE LA RESISTENCIA -->
+        <img src="simbologia%20resistencia.png" alt="Simbología eléctrica de las resistencias fijas y variables" class="imagen-tabla">
+
+        <!-- TEXTO SOBRE OTROS TIPOS -->
+        <p>Dentro de este grupo están incluidas las que se han estudiado anteriormente: resistencias bobinadas, de carbón, de película metálica, etc., pero existen otros tipos, como los que se nombran a continuación.</p>
+        
+        <p><strong>Redes de resistencias:</strong> son conjuntos de resistencias de valor fijo que se encuentran encapsuladas en el mismo componente. También son conocidas como arrays de resistencias, y disponen de una o más patillas comunes para facilitar su conexión.</p>
+        
+        <p>La instalación de este tipo de componentes requiere consultar la hoja de características del fabricante para conocer cómo están conectadas internamente las resistencias.</p>
+
+        <!-- IMAGEN ARRAY DE RESISTENCIAS -->
+        <img src="array%20de%20resistencias.png" alt="Vista física de una red o array de resistencias encapsuladas" class="imagen-tabla">
+
+        <!-- TEXTO SOBRE RESISTENCIAS SMD -->
+        <p><strong>Resistencias SMD:</strong> son resistencias miniaturizadas para instalar directamente en la placa de circuito impreso por la técnica de soldadura en superficie. El componente resistivo se consigue por una composición de sustrato de alúmina, y no disponen de patillas de conexión en forma de hilo, ya que la soldadura se realiza directamente sobre los casquillos del cuerpo de la resistencia.</p>
+        <p>Existen todo tipo de componentes, pasivos y activos, con el formato SMD. Esta tecnología ha permitido reducir enormemente todo tipo de dispositivos electrónicos respecto a los que se fabricaban hace décadas.</p>
+
+        <!-- IMAGEN RESISTENCIAS SMD -->
+        <img src="SMD.png" alt="Componentes y resistencias con tecnología de montaje superficial (SMD)" class="imagen-tabla">
+
+        <!-- RESISTENCIAS VARIABLES -->
+        <h4>Resistencias variables</h4>
+        <p>Son aquellas que permiten ajustar su valor, bien de forma manual o por algún parámetro o magnitud física externa (luz, temperatura, etc.).</p>
+        <p><strong>Potenciómetros:</strong> disponen de un mando de ajuste manual, que permite variar su valor entre un mínimo y un máximo. Pueden ser giratorios, lineales-deslizantes, miniatura, múltiples, etc.</p>
+
+        <!-- IMAGEN POTENCIÓMETRO -->
+        <img src="potenciometro.png" alt="Diferentes tipos y encapsulados de potenciómetros" class="imagen-tabla">
+
+        <!-- PROPIEDADES DE POTENCIÓMETROS Y TRIMMERS -->
+        <p>El valor de los potenciómetros se da en ohmios y corresponde al valor máximo que se puede ajustar.</p>
+        
+        <p>La escala de los potenciómetros puede ser lineal o logarítmica. En el primer caso, el cambio de valor es constante en todo el recorrido del cursor. Sin embargo, en los potenciómetros de tipo logarítmico, el cambio de valor no es lineal, ya que el valor en ohmios avanzado por cursor, para un mismo ángulo de desplazamiento, no es el mismo si este se produce al principio o al final del recorrido. Los potenciómetros con escala logarítmica se suelen utilizar en aplicaciones de audio y sonorización.</p>
+        
+        <p><strong>Resistencias ajustables:</strong> también conocidas por su denominación en inglés <em>trimmers</em>, son resistencias variables cuyo funcionamiento es idéntico al de los potenciómetros, pero, en este caso, el ajuste se hace mediante una herramienta, como puede ser un destornillador.</p>
+        
+        <p>Las hay de diferentes tipos y formas, pero la mayoría están diseñadas para su montaje en una placa de circuito impreso, mediante la técnica de soldadura.</p>
+
+        <!-- IMAGEN RESISTENCIA AJUSTABLE -->
+        <img src="resistencia%20ajustable.png" alt="Resistencias ajustables tipo Trimmers" class="imagen-tabla">
+
+        <!-- RESISTENCIAS DEPENDIENTES (LUZ Y TENSIÓN) -->
+        <p><strong>Resistencias dependientes de la luz:</strong> también conocidas por fotorresistencias, o por su abreviatura <strong>LDR</strong> (del inglés <em>light dependent resistor</em>), son resistencias que varían su valor óhmico en función de la luz que reciben. Cuando la luz aumenta, disminuye el valor de la resistencia.</p>
+        
+        <p><strong>Resistencias dependientes de la tensión:</strong> también conocidas como <strong>varistores</strong>, son resistencias que cambian su valor si se sobrepasa un valor de tensión de umbral. Se instalan en paralelo con el circuito de alimentación. En condiciones normales, dichas resistencias tienen un valor óhmico muy elevado, permitiendo así el paso de la corriente, pero cuando se someten a los valores de tensión de umbral, se cortocircuitan, impidiendo la alimentación del circuito en el que se encuentran instaladas.</p>
+
+        <!-- IMAGEN LDR Y COMPONENTES DEPENDIENTES -->
+        <img src="LDR.png" alt="Resistencias dependientes de la luz (LDR)" class="imagen-tabla">
+
+        <!-- RESISTENCIAS DEPENDIENTES DE LA TEMPERATURA -->
+        <p><strong>Resistencias dependientes de la temperatura:</strong> también conocidas como <strong>termistores</strong>, son resistencias que varían su valor óhmico en función de la temperatura de su entorno, y las hay de dos tipos:</p>
+        <ul>
+            <li><strong>NTC:</strong> disminuye la resistencia cuando aumenta la temperatura. Se dice que tiene coeficiente térmico negativo.</li>
+            <li><strong>PTC:</strong> aumenta la resistencia cuando aumenta la temperatura. Se dice que tiene coeficiente térmico positivo.</li>
+        </ul>
+        <p>Son muy utilizadas para fabricar todo tipo de dispositivos electrónicos que requieren controlar la temperatura.</p>
+
+        <!-- IMAGEN TERMISTORES -->
+        <img src="termistor.png" alt="Resistencias dependientes de la temperatura (Termistores NTC y PTC)" class="imagen-tabla">
+
+        <!-- SÍMBOLS DE RESISTENCIAS VARIABLES -->
+        <p>Los símbolos de las resistencias variables son:</p>
+
+        <!-- IMAGEN DE LA SIMBOLOGÍA DE RESISTENCIA AJUSTABLE -->
+        <img src="simbologia%20resitencia%20ajustable.png" alt="Símbolos de las resistencias variables y ajustables" class="imagen-tabla">
+
+        <!-- ASOCIACIÓN DE RESISTENCIAS -->
+        <h3>1.4. Asociación de resistencias</h3>
+        <p>Las resistencias, al igual que otro tipo de receptores eléctricos, se pueden conectar de dos formas: en serie y en paralelo. Así, el valor del circuito equivalente de dicha asociación es el que se muestra a continuación.</p>
+        
+        <h4>1.4.1. Resistencias en serie</h4>
+        <p>La resistencia equivalente del circuito es el resultado de sumar cada uno de los valores de las resistencias.</p>
+        <p>El valor de un grupo de resistencias en serie es equivalente a sustituir dicho grupo por una única resistencia que coincide con el resultado de la suma del valor óhmico de todas ellas.</p>
+        
+        <div class="formula-destacada">
+            Rt = R1 + R2 + R3
+        </div>
+
+        <!-- INTERACTIVO CIRCUITO EN SERIE -->
+        <div class="herramienta-interactiva" id="interactivo-serie">
+            <h4>⚡ Simulador de Asociación en Serie</h4>
+            <p style="font-size: 0.9rem; color: #aaa; margin-top: -5px;">Modifica los valores para observar el comportamiento equivalente lineal</p>
+            
+            <div class="circuito-serie-visual">
+                <div class="cable"></div>
+                <div class="resistor-bloque" id="v-r1"><div class="label-id">R1</div><span>100 Ω</span></div>
+                <div class="cable"></div>
+                <div class="resistor-bloque" id="v-r2"><div class="label-id">R2</div><span>220 Ω</span></div>
+                <div class="cable"></div>
+                <div class="resistor-bloque" id="v-r3"><div class="label-id">R3</div><span>330 Ω</span></div>
+                <div class="cable"></div>
+            </div>
+
+            <div class="controles-flex">
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R1 (Ω)</label>
+                    <input type="number" id="num-r1" value="100" min="0" max="999999">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R2 (Ω)</label>
+                    <input type="number" id="num-r2" value="220" min="0" max="999999">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R3 (Ω)</label>
+                    <input type="number" id="num-r3" value="330" min="0" max="999999">
+                </div>
+            </div>
+            
+            <div class="resultado-destacado" id="res-serie">Rt = 650 Ω</div>
+        </div>
+
+        <!-- RESISTENCIAS EN PARALELO -->
+        <h4>1.4.2. Resistencias en paralelo</h4>
+        <p>De igual forma, cuando se asocian resistencias en paralelo, se puede decir que la resistencia equivalente de un circuito paralelo es la inversa de la suma de las inversas de las demás resistencias.</p>
+        
+        <div class="formula-destacada">
+            1/Re = 1/R1 + 1/R2 + 1/R3
+        </div>
+
+        <!-- INTERACTIVO CIRCUITO EN PARALELO -->
+        <div class="herramienta-interactiva" id="interactivo-paralelo">
+            <h4>🔌 Simulador de Asociación en Paralelo</h4>
+            <p style="font-size: 0.9rem; color: #aaa; margin-top: -5px;">Modifica los valores de las ramas (ingresa 0 para simular una rama desconectada o circuito abierto)</p>
+            
+            <div class="circuito-paralelo-visual">
+                <div class="paralelo-rama">
+                    <div class="nodo-conexion"></div>
+                    <div class="cable-p-left"></div>
+                    <div class="resistor-bloque" id="vp-r1"><div class="label-id">R1</div><span>100 Ω</span></div>
+                    <div class="cable-p-right"></div>
+                    <div class="nodo-conexion"></div>
+                </div>
+                <div class="paralelo-rama">
+                    <div class="nodo-conexion"></div>
+                    <div class="cable-p-left"></div>
+                    <div class="resistor-bloque" id="vp-r2"><div class="label-id">R2</div><span>220 Ω</span></div>
+                    <div class="cable-p-right"></div>
+                    <div class="nodo-conexion"></div>
+                </div>
+                <div class="paralelo-rama">
+                    <div class="nodo-conexion"></div>
+                    <div class="cable-p-left"></div>
+                    <div class="resistor-bloque" id="vp-r3"><div class="label-id">R3</div><span>330 Ω</span></div>
+                    <div class="cable-p-right"></div>
+                    <div class="nodo-conexion"></div>
+                </div>
+            </div>
+
+            <div class="controles-flex">
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R1 (Ω)</label>
+                    <input type="number" id="num-p1" value="100" min="0" max="999999">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R2 (Ω)</label>
+                    <input type="number" id="num-p2" value="220" min="0" max="999999">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R3 (Ω)</label>
+                    <input type="number" id="num-p3" value="330" min="0" max="999999">
+                </div>
+            </div>
+            
+            <div class="resultado-destacado" id="res-paralelo">Rt = 61.11 Ω</div>
+        </div>
+
+        <!-- IMAGEN RESISTENCIA AJUSTABLE -->
+        <img src="resistencia%20ajustable.png" alt="Resistencia Ajustable" class="imagen-tabla">
+
     </main>
 
-    <!-- BOTÓN INFERIOR IZQUIERDO PARA VOLVER -->
+    <!-- BOTÓN INFERIOR IZQUIERDO -->
     <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
 
+    <!-- LÓGICA DE PROGRAMACIÓN CALCULADORA -->
+    <script>
+        // Lógica del Código de Colores
+        (function() {
+            function calcular() {
+                var b1 = document.getElementById('sel-b1');
+                var b2 = document.getElementById('sel-b2');
+                var b3 = document.getElementById('sel-b3');
+                var b4 = document.getElementById('sel-b4');
+                
+                if(!b1 || !b2 || !b3 || !b4) return;
+                
+                document.getElementById('visual-b1').style.backgroundColor = b1.options[b1.selectedIndex].getAttribute('data-color');
+                document.getElementById('visual-b2').style.backgroundColor = b2.options[b2.selectedIndex].getAttribute('data-color');
+                document.getElementById('visual-b3').style.backgroundColor = b3.options[b3.selectedIndex].getAttribute('data-color');
+                document.getElementById('visual-b4').style.backgroundColor = b4.options[b4.selectedIndex].getAttribute('data-color');
+                
+                var v1 = b1.value;
+                var v2 = b2.value;
+                var m = parseFloat(b3.value);
+                var t = b4.value;
+                
+                var total = parseInt(v1 + v2, 10) * m;
+                var texto;
+                
+                if (total >= 1000000) {
+                    texto = (total / 1000000) + " MΩ";
+                } else if (total >= 1000) {
+                    texto = (total / 1000) + " kΩ";
+                } else {
+                    texto = total.toFixed(total % 1 === 0 ? 0 : 2) + " Ω";
+                }
+                
+                document.getElementById('res-colores').innerText = texto + " " + t;
+            }
+
+            var calc = document.getElementById('calculadora-colores');
+            if(calc) {
+                calc.addEventListener('change', calcular);
+            }
+            calcular();
+        })();
+
+        // Lógica de Asociación en Serie
+        (function() {
+            var r1Input = document.getElementById('num-r1');
+            var r2Input = document.getElementById('num-r2');
+            var r3Input = document.getElementById('num-r3');
+            var resSerie = document.getElementById('res-serie');
+            
+            var vr1 = document.getElementById('v-r1').getElementsByTagName('span')[0];
+            var vr2 = document.getElementById('v-r2').getElementsByTagName('span')[0];
+            var vr3 = document.getElementById('v-r3').getElementsByTagName('span')[0];
+
+            function calcularSerie() {
+                if(!r1Input || !r2Input || !r3Input || !resSerie) return;
+                
+                var val1 = Math.max(0, parseFloat(r1Input.value) || 0);
+                var val2 = Math.max(0, parseFloat(r2Input.value) || 0);
+                var val3 = Math.max(0, parseFloat(r3Input.value) || 0);
+                
+                r1Input.value = val1;
+                r2Input.value = val2;
+                r3Input.value = val3;
+
+                if(vr1) vr1.innerText = val1 + " Ω";
+                if(vr2) vr2.innerText = val2 + " Ω";
+                if(vr3) vr3.innerText = val3 + " Ω";
+                
+                var total = val1 + val2 + val3;
+                var texto;
+                
+                if (total >= 1000000) {
+                    texto = (total / 1000000).toFixed(2) + " MΩ";
+                } else if (total >= 1000) {
+                    texto = (total / 1000).toFixed(2) + " kΩ";
+                } else {
+                    texto = total.toFixed(0) + " Ω";
+                }
+                
+                resSerie.innerText = "Rt = " + texto;
+            }
+
+            var container = document.getElementById('interactivo-serie');
+            if(container) {
+                container.addEventListener('input', calcularSerie);
+            }
+            calcularSerie();
+        })();
+
+        // Lógica de Asociación en Paralelo
+        (function() {
+            var r1Input = document.getElementById('num-p1');
+            var r2Input = document.getElementById('num-p2');
+            var r3Input = document.getElementById('num-p3');
+            var resParalelo = document.getElementById('res-paralelo');
+            
+            var vr1 = document.getElementById('vp-r1').getElementsByTagName('span')[0];
+            var vr2 = document.getElementById('vp-r2').getElementsByTagName('span')[0];
+            var vr3 = document.getElementById('vp-r3').getElementsByTagName('span')[0];
+
+            function calcularParalelo() {
+                if(!r1Input || !r2Input || !r3Input || !resParalelo) return;
+                
+                var val1 = Math.max(0, parseFloat(r1Input.value) || 0);
+                var val2 = Math.max(0, parseFloat(r2Input.value) || 0);
+                var val3 = Math.max(0, parseFloat(r3Input.value) || 0);
+                
+                r1Input.value = val1;
+                r2Input.value = val2;
+                r3Input.value = val3;
+
+                if(vr1) vr1.innerText = val1 > 0 ? val1 + " Ω" : "Abierto";
+                if(vr2) vr2.innerText = val2 > 0 ? val2 + " Ω" : "Abierto";
+                if(vr3) vr3.innerText = val3 > 0 ? val3 + " Ω" : "Abierto";
+                
+                var invSum = 0;
+                if (val1 > 0) invSum += 1 / val1;
+                if (val2 > 0) invSum += 1 / val2;
+                if (val3 > 0) invSum += 1 / val3;
+                
+                var total = invSum > 0 ? (1 / invSum) : 0;
+                var texto;
+                
+                if (invSum === 0) {
+                    texto = "∞ Ω (Abierto)";
+                } else if (total >= 1000000) {
+                    texto = (total / 1000000).toFixed(2) + " MΩ";
+                } else if (total >= 1000) {
+                    texto = (total / 1000).toFixed(2) + " kΩ";
+                } else {
+                    texto = total.toFixed(2) + " Ω";
+                }
+                
+                resParalelo.innerText = "Rt = " + texto;
+            }
+
+            var container = document.getElementById('interactivo-paralelo');
+            if(container) {
+                container.addEventListener('input', calcularParalelo);
+            }
+            calcularParalelo();
+        })();
+    </script>
 </body>
 </html>
