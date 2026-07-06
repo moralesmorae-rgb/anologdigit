@@ -137,7 +137,7 @@
             margin-bottom: 15px;
         }
 
-        select {
+        select, input[type="number"] {
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ffcc00;
@@ -146,6 +146,11 @@
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
+        }
+
+        input[type="number"] {
+            width: 100px;
+            text-align: center;
         }
 
         .resultado-destacado {
@@ -180,6 +185,59 @@
             border: 2px solid #ffcc00;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        /* --- ESTILOS VISUALIZACIÓN EN SERIE --- */
+        .circuito-serie-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px auto;
+            width: 100%;
+            max-width: 500px;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .cable {
+            flex-grow: 1;
+            height: 4px;
+            background-color: #666;
+        }
+
+        .resistor-bloque {
+            width: 80px;
+            height: 35px;
+            background-color: #e5c39c;
+            border: 2px solid #8c6a45;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .resistor-bloque .label-id {
+            font-size: 0.7rem;
+            color: #555;
+            margin-bottom: -2px;
+        }
+
+        .formula-destacada {
+            background-color: #141414;
+            padding: 15px;
+            border-left: 4px solid #ffcc00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #ffcc00;
+            text-align: center;
         }
 
         /* BOTÓN DE RETORNO */
@@ -379,7 +437,7 @@
 
         <!-- TEXTO SOBRE RESISTENCIAS SMD -->
         <p><strong>Resistencias SMD:</strong> son resistencias miniaturizadas para instalar directamente en la placa de circuito impreso por la técnica de soldadura en superficie. El componente resistivo se consigue por una composición de sustrato de alúmina, y no disponen de patillas de conexión en forma de hilo, ya que la soldadura se realiza directamente sobre los casquillos del cuerpo de la resistencia.</p>
-        <p>Existen todo tipo de componentes, pasivos and activos, con el formato SMD. Esta tecnología ha permitido reducir enormemente todo tipo de dispositivos electrónicos respecto a los que se fabricaban hace décadas.</p>
+        <p>Existen todo tipo de componentes, pasivos y activos, con el formato SMD. Esta tecnología ha permitido reducir enormemente todo tipo de dispositivos electrónicos respecto a los que se fabricaban hace décadas.</p>
 
         <!-- IMAGEN RESISTENCIAS SMD -->
         <img src="SMD.png" alt="Componentes y resistencias con tecnología de montaje superficial (SMD)" class="imagen-tabla">
@@ -423,11 +481,56 @@
         <!-- IMAGEN TERMISTORES -->
         <img src="termistor.png" alt="Resistencias dependientes de la temperatura (Termistores NTC y PTC)" class="imagen-tabla">
 
-        <!-- NUEVA SECCIÓN: SÍMBOLOS DE RESISTENCIAS VARIABLES -->
+        <!-- SÍMBOLS DE RESISTENCIAS VARIABLES -->
         <p>Los símbolos de las resistencias variables son:</p>
 
         <!-- IMAGEN DE LA SIMBOLOGÍA DE RESISTENCIA AJUSTABLE -->
         <img src="simbologia%20resitencia%20ajustable.png" alt="Símbolos de las resistencias variables y ajustables" class="imagen-tabla">
+
+        <!-- ASOCIACIÓN DE RESISTENCIAS -->
+        <h3>1.4. Asociación de resistencias</h3>
+        <p>Las resistencias, al igual que otro tipo de receptores eléctricos, se pueden conectar de dos formas: en serie y en paralelo. Así, el valor del circuito equivalente de dicha asociación es el que se muestra a continuación.</p>
+        
+        <h4>1.4.1. Resistencias en serie</h4>
+        <p>La resistencia equivalente del circuito es el resultado de sumar cada uno de los valores de las resistencias.</p>
+        <p>El valor de un grupo de resistencias en serie es equivalente a sustituir dicho grupo por una única resistencia que coincide con el resultado de la suma del valor óhmico de todas ellas.</p>
+        
+        <div class="formula-destacada">
+            Rt = R1 + R2 + R3
+        </div>
+
+        <!-- INTERACTIVO CIRCUITO EN SERIE -->
+        <div class="herramienta-interactiva" id="interactivo-serie">
+            <h4>⚡ Simulador de Asociación en Serie</h4>
+            <p style="font-size: 0.9rem; color: #aaa; margin-top: -5px;">Modifica los valores para observar el comportamiento equivalente lineal</p>
+            
+            <div class="circuito-serie-visual">
+                <div class="cable"></div>
+                <div class="resistor-bloque" id="v-r1"><div class="label-id">R1</div><span>100 Ω</span></div>
+                <div class="cable"></div>
+                <div class="resistor-bloque" id="v-r2"><div class="label-id">R2</div><span>220 Ω</span></div>
+                <div class="cable"></div>
+                <div class="resistor-bloque" id="v-r3"><div class="label-id">R3</div><span>330 Ω</span></div>
+                <div class="cable"></div>
+            </div>
+
+            <div class="controles-flex">
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R1 (Ω)</label>
+                    <input type="number" id="num-r1" value="100" min="0" max="999999">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R2 (Ω)</label>
+                    <input type="number" id="num-r2" value="220" min="0" max="999999">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R3 (Ω)</label>
+                    <input type="number" id="num-r3" value="330" min="0" max="999999">
+                </div>
+            </div>
+            
+            <div class="resultado-destacado" id="res-serie">Rt = 650 Ω</div>
+        </div>
 
     </main>
 
@@ -436,6 +539,7 @@
 
     <!-- LÓGICA DE PROGRAMACIÓN CALCULADORA -->
     <script>
+        // Lógica del Código de Colores
         (function() {
             function calcular() {
                 var b1 = document.getElementById('sel-b1');
@@ -474,5 +578,54 @@
                 calc.addEventListener('change', calcular);
             }
             calcular();
+        })();
+
+        // Lógica de Asociación en Serie
+        (function() {
+            var r1Input = document.getElementById('num-r1');
+            var r2Input = document.getElementById('num-r2');
+            var r3Input = document.getElementById('num-r3');
+            var resSerie = document.getElementById('res-serie');
+            
+            var vr1 = document.getElementById('v-r1').getElementsByTagName('span')[0];
+            var vr2 = document.getElementById('v-r2').getElementsByTagName('span')[0];
+            var vr3 = document.getElementById('v-r3').getElementsByTagName('span')[0];
+
+            function calcularSerie() {
+                if(!r1Input || !r2Input || !r3Input || !resSerie) return;
+                
+                var val1 = Math.max(0, parseFloat(r1Input.value) || 0);
+                var val2 = Math.max(0, parseFloat(r2Input.value) || 0);
+                var val3 = Math.max(0, parseFloat(r3Input.value) || 0);
+                
+                // Forzar valores no negativos en la interfaz visual
+                r1Input.value = val1;
+                r2Input.value = val2;
+                r3Input.value = val3;
+
+                // Actualizar etiquetas en el diagrama
+                if(vr1) vr1.innerText = val1 + " Ω";
+                if(vr2) vr2.innerText = val2 + " Ω";
+                if(vr3) vr3.innerText = val3 + " Ω";
+                
+                var total = val1 + val2 + val3;
+                var texto;
+                
+                if (total >= 1000000) {
+                    texto = (total / 1000000).toFixed(2) + " MΩ";
+                } else if (total >= 1000) {
+                    texto = (total / 1000).toFixed(2) + " kΩ";
+                } else {
+                    texto = total.toFixed(0) + " Ω";
+                }
+                
+                resSerie.innerText = "Rt = " + texto;
+            }
+
+            var container = document.getElementById('interactivo-serie');
+            if(container) {
+                container.addEventListener('input', calcularSerie);
+            }
+            calcularSerie();
         })();
     </script></body></html>
