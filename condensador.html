@@ -58,21 +58,23 @@
             padding-bottom: 10px;
         }
 
-        /* BOTÓN DE RETORNO */
+        /* BOTÓN DE RETORNO EXACTO A LA IMAGEN */
         .btn-volver {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background-color: #1e1e1e;
             border: 2px solid #ffcc00;
             color: #ffcc00;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 1.1rem;
             font-weight: bold;
             text-decoration: none;
-            transition: 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             z-index: 9999;
         }
@@ -80,7 +82,7 @@
         .btn-volver:hover {
             background-color: #ffcc00;
             color: #000000;
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
     </style>
 </head>
@@ -97,7 +99,7 @@
     </main>
 
     <!-- BOTÓN DE RETORNO -->
-    <a href="index.html" class="btn-volver"> Volver al Inicio</a>
+    <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
 
 </body>
 </html>
