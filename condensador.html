@@ -51,14 +51,18 @@
             text-align: left;
         }
 
-        .container h2 {
+        .container h2, .container h3, .container h4 {
             color: #ffcc00;
-            margin-top: 0;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
+            margin-top: 30px;
         }
 
-        /* ESTILO DE LA IMAGEN */
+        .container h2 {
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* ESTILO DE LAS IMÁGENES */
         .imagen-tabla {
             display: block;
             max-width: 100%;
@@ -114,6 +118,16 @@
         <img src="partes%20condensador.png" alt="Partes del condensador" class="imagen-tabla">
 
         <p>Las principales características eléctricas de los condensadores son su capacidad y su tensión de trabajo.</p>
+
+        <!-- NUEVA SECCIÓN DE TEXTO -->
+        <h3>2.1. El valor de los condensadores</h3>
+        <p>La capacidad del condensador se mide en faradios (F), no obstante, al ser una unidad muy grande, el valor de los condensadores siempre se da en submúltiplos del faradio como el microfaradio (μF), el nanofaradio (nF) y el picofaradio (pF). Dicho valor suele estar impreso en el mismo cuerpo de los condensadores, e igual que en las resistencias, puede estar codificado por un código de colores (casi en desuso) o por un código alfanumérico.</p>
+
+        <h4>2.1.1. Identificación por código de colores</h4>
+        <p>Se utilizan en condensadores con cinco bandas de colores. Las tres primeras se aplican de la misma forma que en las resistencias. Los dos primeros colores son los dos primeros dígitos, y el tercer color es el multiplicador. El valor de estos condensadores se obtiene en picofaradios (pF).</p>
+
+        <!-- IMAGEN CÓDIGO CONDENSADOR -->
+        <img src="codigo%20condensador.png" alt="Código de colores en condensadores" class="imagen-tabla">
     </main>
 
     <!-- BOTÓN DE RETORNO -->
