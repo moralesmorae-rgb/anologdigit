@@ -168,6 +168,16 @@
             margin-top: 25px;
         }
 
+        /* LISTAS CON VIÑETAS PERSONALIZADAS */
+        .lista-ejemplos {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .lista-ejemplos li {
+            margin-bottom: 8px;
+        }
+
         /* BOTÓN DE RETORNO */
         .btn-volver {
             position: fixed;
@@ -297,6 +307,34 @@
             <!-- Cuadro de resultado -->
             <div class="resultado-destacado" id="res-condensador">10 nF ± 5% - 250V</div>
         </div>
+
+        <!-- NUEVA SECCIÓN AGREGADA -->
+        <h4>2.1.2. Identificación por código alfanumérico</h4>
+        <p>En este caso, el valor del condensador, expresado en picofaradios, se muestra mediante tres cifras y una letra. Las dos primeras corresponden a las unidades y las decenas, el tercer número indica la cantidad de ceros que hay detrás de las dos primeras unidades, y la letra es la tolerancia. Véanse los siguientes ejemplos:</p>
+        
+        <ul class="lista-ejemplos">
+            <li>■ <strong>473F</strong> = 47 000 pF +/– 1 %</li>
+            <li>■ <strong>101K</strong> = 100 pF +/– 10 %</li>
+            <li>■ <strong>224J</strong> = 220 000 pF +/– 5 %</li>
+            <li>■ <strong>102M</strong> = 1 000 pF +/– 20 %</li>
+        </ul>
+
+        <p>También existen otras formas de expresar el valor de la capacidad del condensador:</p>
+        
+        <p><strong>Ejemplo 1.</strong> En ocasiones no se expresan las unidades, simplemente se muestra un número decimal, cuyo valor viene dado en nanofaradios.</p>
+        <ul class="lista-ejemplos">
+            <li>■ <strong>0,047</strong> = 47 nF &nbsp;&nbsp;&nbsp;&nbsp; ■ <strong>0,68</strong> = 68 nF</li>
+        </ul>
+
+        <p><strong>Ejemplo 2.</strong> Otras veces, el valor viene expresado mediante la letra k (de kilo). En este caso, k equivale a nF (nanofaradios).</p>
+        <ul class="lista-ejemplos">
+            <li>■ <strong>10 k</strong> = 10 nF &nbsp;&nbsp;&nbsp;&nbsp; ■ <strong>22 k</strong> = 22 nF</li>
+        </ul>
+
+        <p><strong>Ejemplo 3.</strong> En otras ocasiones, la letra de las unidades se utiliza como separador de la parte entera y decimal.</p>
+        <ul class="lista-ejemplos">
+            <li>■ <strong>μ1</strong> = 100 nF &nbsp;&nbsp;&nbsp;&nbsp; ■ <strong>4n7</strong> = <strong>4k7</strong> = 4 700 pF</li>
+        </ul>
     </main>
 
     <!-- BOTÓN DE RETORNO -->
