@@ -336,8 +336,13 @@
             <li>■ <strong>μ1</strong> = 100 nF &nbsp;&nbsp;&nbsp;&nbsp; ■ <strong>4n7</strong> = <strong>4k7</strong> = 4 700 pF</li>
         </ul>
 
-        <!-- IMAGEN DE TOLERANCIA AGREGADA AL FINAL -->
+        <!-- IMAGEN DE TOLERANCIA -->
         <img src="tolerancia.png" alt="Tabla de tolerancias en condensadores" class="imagen-tabla">
+
+        <!-- NUEVA SECCIÓN: TIPOS DE CONDENSADORES -->
+        <h3>2.2. Tipos de condensadores</h3>
+        <p>De igual forma que las resistencias, pueden tener valor fijo o variable. Así, los condensadores de valor fijo más utilizados son los que se enumeran a continuación:</p>
+        <p><strong>De poliéster:</strong> no están polarizados y reciben su nombre por el tipo de material dieléctrico que se encuentra entre sus armaduras. Tienen forma plana o cilíndrica y su valor de capacidad suele ser inferior a 1 μF, aunque en aplicaciones especiales, como en los filtros de altavoces, etc., se pueden encontrar de mayor valor.</p>
     </main>
 
     <!-- BOTÓN DE RETORNO -->
@@ -391,4 +396,18 @@
 
                 // Formatear unidades y mostrar resultado
                 const capacidadFormateada = formatearCapacidad(capacidadPf);
-                resultado.textContent = `${capacidadFormateada}${tol
+                resultado.textContent = `${capacidadFormateada} ${tol} - ${tension}`;
+            }
+
+            // Escuchar cambios en los selectores
+            [selC1, selC2, selC3, selC4, selC5].forEach(select => {
+                select.addEventListener('change', calcularCondensador);
+            });
+
+            // Inicializar al cargar
+            calcularCondensador();
+        });
+    </script>
+</body>
+
+</html>
