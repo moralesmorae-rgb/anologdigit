@@ -308,7 +308,7 @@
             <div class="resultado-destacado" id="res-condensador">10 nF ± 5% - 250V</div>
         </div>
 
-        <!-- NUEVA SECCIÓN AGREGADA -->
+        <!-- SECCIÓN DE IDENTIFICACIÓN POR CÓDIGO ALFANUMÉRICO -->
         <h4>2.1.2. Identificación por código alfanumérico</h4>
         <p>En este caso, el valor del condensador, expresado en picofaradios, se muestra mediante tres cifras y una letra. Las dos primeras corresponden a las unidades y las decenas, el tercer número indica la cantidad de ceros que hay detrás de las dos primeras unidades, y la letra es la tolerancia. Véanse los siguientes ejemplos:</p>
         
@@ -335,6 +335,9 @@
         <ul class="lista-ejemplos">
             <li>■ <strong>μ1</strong> = 100 nF &nbsp;&nbsp;&nbsp;&nbsp; ■ <strong>4n7</strong> = <strong>4k7</strong> = 4 700 pF</li>
         </ul>
+
+        <!-- IMAGEN DE TOLERANCIA AGREGADA AL FINAL -->
+        <img src="tolerancia.png" alt="Tabla de tolerancias en condensadores" class="imagen-tabla">
     </main>
 
     <!-- BOTÓN DE RETORNO -->
@@ -388,18 +391,4 @@
 
                 // Formatear unidades y mostrar resultado
                 const capacidadFormateada = formatearCapacidad(capacidadPf);
-                resultado.textContent = `${capacidadFormateada} ${tol} - ${tension}`;
-            }
-
-            // Escuchar cambios en los selectores
-            [selC1, selC2, selC3, selC4, selC5].forEach(select => {
-                select.addEventListener('change', calcularCondensador);
-            });
-
-            // Inicializar al cargar
-            calcularCondensador();
-        });
-    </script>
-</body>
-
-</html>
+                resultado.textContent = `${capacidadFormateada}${tol
