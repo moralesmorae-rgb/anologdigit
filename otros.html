@@ -72,18 +72,15 @@
             margin-bottom: 15px;
         }
 
-        /* ESTILOS PARA LA IMAGEN */
-        .imagen-container {
-            text-align: center;
-            margin-top: 25px;
-        }
-
-        .imagen-container img {
+        /* ESTILO DE LA IMAGEN AGREGADA */
+        .img-trafo {
+            width: 100%;
             max-width: 100%;
             height: auto;
+            display: block;
+            margin: 20px auto 0 auto;
             border-radius: 8px;
-            border: 2px solid #ffcc00;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
         /* BOTÓN INFERIOR IZQUIERDO */
@@ -125,11 +122,9 @@
         <h2>4. El transformador</h2>
         
         <p>Un transformador es una máquina eléctrica estática que funciona por el efecto de inducción magnética. Está formado por dos bobinas, denominadas devanados. Uno es el devanado primario, al que se le aplica tensión de entrada, y por el que circula una corriente que induce un campo magnético en el núcleo. Y otro es el secundario, en el que el campo magnético producido por el primero induce una corriente en la bobina, de forma que en sus bornes se genera una tensión proporcional a la del primario, en función del número de espiras de un devanado respecto al otro.</p>
-
-        <!-- IMAGEN AGREGADA AL FINAL -->
-        <div class="imagen-container">
-            <img src="trafo.png" alt="Esquema del Transformador">
-        </div>
+        
+        <!-- IMAGEN AL FINAL DEL TEXTO -->
+        <img src="trafo.png" alt="Transformador eléctrico" class="img-trafo">
     </main>
 
     <!-- BOTÓN INFERIOR IZQUIERDO PARA VOLVER -->
