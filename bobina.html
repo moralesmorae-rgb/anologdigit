@@ -92,6 +92,90 @@
             box-sizing: border-box;
         }
 
+        /* --- CALCULADORA DE CÓDIGO DE COLORES --- */
+        .calc-container {
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+            border: 1px solid #333;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .calc-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-group label {
+            font-size: 0.85rem;
+            color: #ffcc00;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .calc-select {
+            background-color: #121212;
+            color: #ffffff;
+            border: 1px solid #444;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .calc-select:focus {
+            border-color: #ffcc00;
+        }
+
+        /* Vista gráfica de la bobina */
+        .inductor-graphic {
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(to bottom, #888 0%, #aaa 50%, #666 100%);
+            border-radius: 25px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin: 20px 0;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .band {
+            width: 12px;
+            height: 100%;
+            border-radius: 2px;
+            box-shadow: 0 0 3px rgba(0,0,0,0.5);
+        }
+
+        /* Resultado */
+        .result-box {
+            background-color: #121212;
+            border: 2px solid #ffcc00;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .result-box span {
+            display: block;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .result-box strong {
+            font-size: 1.6rem;
+            color: #ffcc00;
+        }
+
         /* BOTÓN INFERIOR IZQUIERDO */
         .btn-volver {
             position: fixed;
@@ -149,10 +233,143 @@
 
         <!-- IMAGEN CÓDIGO BOBINA -->
         <img src="codigo bobina.png" alt="Código de Bobina" class="img-simbologia">
+
+        <!-- SECCIÓN INTERACTIVA: CALCULADORA CÓDIGO DE COLORES -->
+        <h3>3.2. Calculadora interactiva de Código de Colores</h3>
+        <p>Selecciona el color de cada banda para calcular el valor de la inductancia en microhenrios (µH):</p>
+
+        <div class="calc-container">
+            <div class="calc-grid">
+                <div class="calc-group">
+                    <label for="banda1">Banda 1 (1º Cifra)</label>
+                    <select id="banda1" class="calc-select" onchange="calcularBobina()">
+                        <option value="0" style="background:#000; color:#fff;">Negro (0)</option>
+                        <option value="1" style="background:#a52a2a; color:#fff;" selected>Marrón (1)</option>
+                        <option value="2" style="background:#f00; color:#fff;">Rojo (2)</option>
+                        <option value="3" style="background:#ffa500; color:#000;">Naranja (3)</option>
+                        <option value="4" style="background:#ffff00; color:#000;">Amarillo (4)</option>
+                        <option value="5" style="background:#008000; color:#fff;">Verde (5)</option>
+                        <option value="6" style="background:#0000ff; color:#fff;">Azul (6)</option>
+                        <option value="7" style="background:#ee82ee; color:#000;">Violeta (7)</option>
+                        <option value="8" style="background:#808080; color:#fff;">Gris (8)</option>
+                        <option value="9" style="background:#fff; color:#000;">Blanco (9)</option>
+                    </select>
+                </div>
+
+                <div class="calc-group">
+                    <label for="banda2">Banda 2 (2º Cifra)</label>
+                    <select id="banda2" class="calc-select" onchange="calcularBobina()">
+                        <option value="0" style="background:#000; color:#fff;" selected>Negro (0)</option>
+                        <option value="1" style="background:#a52a2a; color:#fff;">Marrón (1)</option>
+                        <option value="2" style="background:#f00; color:#fff;">Rojo (2)</option>
+                        <option value="3" style="background:#ffa500; color:#000;">Naranja (3)</option>
+                        <option value="4" style="background:#ffff00; color:#000;">Amarillo (4)</option>
+                        <option value="5" style="background:#008000; color:#fff;">Verde (5)</option>
+                        <option value="6" style="background:#0000ff; color:#fff;">Azul (6)</option>
+                        <option value="7" style="background:#ee82ee; color:#000;">Violeta (7)</option>
+                        <option value="8" style="background:#808080; color:#fff;">Gris (8)</option>
+                        <option value="9" style="background:#fff; color:#000;">Blanco (9)</option>
+                    </select>
+                </div>
+
+                <div class="calc-group">
+                    <label for="multiplicador">Multiplicador</label>
+                    <select id="multiplicador" class="calc-select" onchange="calcularBobina()">
+                        <option value="1" style="background:#000; color:#fff;" selected>Negro (x1)</option>
+                        <option value="10" style="background:#a52a2a; color:#fff;">Marrón (x10)</option>
+                        <option value="100" style="background:#f00; color:#fff;">Rojo (x100)</option>
+                        <option value="1000" style="background:#ffa500; color:#000;">Naranja (x1.000)</option>
+                        <option value="10000" style="background:#ffff00; color:#000;">Amarillo (x10.000)</option>
+                        <option value="0.1" style="background:#ffd700; color:#000;">Dorado (x0.1)</option>
+                        <option value="0.01" style="background:#c0c0c0; color:#000;">Plateado (x0.01)</option>
+                    </select>
+                </div>
+
+                <div class="calc-group">
+                    <label for="tolerancia">Tolerancia</label>
+                    <select id="tolerancia" class="calc-select" onchange="calcularBobina()">
+                        <option value="20%" style="background:#000; color:#fff;">Ninguna (±20%)</option>
+                        <option value="10%" style="background:#c0c0c0; color:#000;" selected>Plateado (±10%)</option>
+                        <option value="5%" style="background:#ffd700; color:#000;">Dorado (±5%)</option>
+                        <option value="1%" style="background:#a52a2a; color:#fff;">Marrón (±1%)</option>
+                        <option value="2%" style="background:#f00; color:#fff;">Rojo (±2%)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Representación visual rápida -->
+            <div class="inductor-graphic">
+                <div id="b1-view" class="band" style="background-color: brown;"></div>
+                <div id="b2-view" class="band" style="background-color: black;"></div>
+                <div id="mult-view" class="band" style="background-color: black;"></div>
+                <div id="tol-view" class="band" style="background-color: silver;"></div>
+            </div>
+
+            <div class="result-box">
+                <span>Valor de Inductancia:</span>
+                <strong id="resultado">10 µH ±10%</strong>
+            </div>
+        </div>
     </main>
 
     <!-- BOTÓN INFERIOR IZQUIERDO PARA VOLVER -->
     <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
+
+    <!-- SCRIPT DE CÁLCULO INTERACTIVO -->
+    <script>
+        const colorMap = {
+            "0": "black",
+            "1": "brown",
+            "2": "red",
+            "3": "orange",
+            "4": "yellow",
+            "5": "green",
+            "6": "blue",
+            "7": "violet",
+            "8": "gray",
+            "9": "white",
+            "10": "brown",
+            "100": "red",
+            "1000": "orange",
+            "10000": "yellow",
+            "0.1": "gold",
+            "0.01": "silver",
+            "20%": "transparent",
+            "10%": "silver",
+            "5%": "gold",
+            "1%": "brown",
+            "2%": "red"
+        };
+
+        function calcularBobina() {
+            const b1 = document.getElementById('banda1').value;
+            const b2 = document.getElementById('banda2').value;
+            const mult = parseFloat(document.getElementById('multiplicador').value);
+            const tol = document.getElementById('tolerancia').value;
+
+            // Actualizar vista previa de colores
+            document.getElementById('b1-view').style.backgroundColor = colorMap[b1];
+            document.getElementById('b2-view').style.backgroundColor = colorMap[b2];
+            document.getElementById('mult-view').style.backgroundColor = colorMap[mult.toString()];
+            document.getElementById('tol-view').style.backgroundColor = colorMap[tol];
+
+            // Cálculo del valor base en microhenrios (µH)
+            const baseValue = parseInt(b1 + b2) * mult;
+            
+            let valorFormateado = "";
+            if (baseValue >= 1000) {
+                // Si es >= 1000 µH, convertir opcionalmente a mH para mejor lectura
+                valorFormateado = `${baseValue / 1000} mH (${baseValue.toLocaleString()} µH)`;
+            } else {
+                valorFormateado = `${parseFloat(baseValue.toFixed(2))} µH`;
+            }
+
+            document.getElementById('resultado').innerText = `${valorFormateado} ${tol}`;
+        }
+
+        // Ejecutar al cargar la página
+        calcularBobina();
+    </script>
 
 </body>
 </html>
