@@ -72,15 +72,27 @@
             margin-bottom: 15px;
         }
 
-        /* ESTILOS PARA LAS IMÁGENES */
-        .img-contenido {
+        /* ESTILOS PARA LA IMAGEN TRAFO (TAMAÑO COMPLETO EN TARJETA) */
+        .img-trafo {
             width: 100%;
-            max-width: 100%;
             height: auto;
             display: block;
             margin: 20px auto;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ESTILOS PARA LA IMAGEN N.PNG (MÁS PEQUEÑA PARA MANTENER CALIDAD Y NITIDEZ) */
+        .img-formula {
+            max-width: 250px; /* Ancho reducido para evitar deformación o píxeles */
+            width: auto;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #2a2a2a; /* Fondo para resaltar si es transparente */
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         /* BOTÓN INFERIOR IZQUIERDO */
@@ -121,15 +133,17 @@
     <main class="container">
         <h2>4. El transformador</h2>
         
+        <!-- PRIMER TEXTO -->
         <p>Un transformador es una máquina eléctrica estática que funciona por el efecto de inducción magnética. Está formado por dos bobinas, denominadas devanados. Uno es el devanado primario, al que se le aplica tensión de entrada, y por el que circula una corriente que induce un campo magnético en el núcleo. Y otro es el secundario, en el que el campo magnético producido por el primero induce una corriente en la bobina, de forma que en sus bornes se genera una tensión proporcional a la del primario, en función del número de espiras de un devanado respecto al otro.</p>
         
+        <!-- IMAGEN TRAFO DEBAJO DEL PRIMER TEXTO -->
+        <img src="trafo.png" alt="Transformador eléctrico" class="img-trafo">
+
+        <!-- SEGUNDO TEXTO -->
         <p>Así, se denomina relación de transformación N a la razón existente entre el número de espiras del secundario respecto al primario o, también, a la razón entre la tensión, en voltios, del secundario respecto al primario.</p>
 
-        <!-- IMAGEN N.PNG -->
-        <img src="N.png" alt="Fórmula de relación de transformación N" class="img-contenido">
-
-        <!-- IMAGEN TRAFO.PNG AL FINAL -->
-        <img src="trafo.png" alt="Transformador eléctrico" class="img-contenido">
+        <!-- IMAGEN N.PNG MÁS PEQUEÑA -->
+        <img src="N.png" alt="Fórmula de relación de transformación N" class="img-formula">
     </main>
 
     <!-- BOTÓN INFERIOR IZQUIERDO PARA VOLVER -->
