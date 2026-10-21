@@ -168,4 +168,249 @@
             margin-top: 25px;
         }
 
-        /* LISTAS CON VIÑETAS PERSONAL
+        /* LISTAS CON VIÑETAS PERSONALIZADAS */
+        .lista-ejemplos {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .lista-ejemplos li {
+            margin-bottom: 8px;
+        }
+
+        /* BOTÓN DE RETORNO */
+        .btn-volver {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #1e1e1e;
+            border: 2px solid #ffcc00;
+            color: #ffcc00;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            z-index: 9999;
+        }
+
+        .btn-volver:hover {
+            background-color: #ffcc00;
+            color: #000000;
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ENCABEZADO -->
+    <header>
+        <h1>Condensadores (capacitores)</h1>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="container">
+        <h2>Condensadores (capacitores)</h2>
+        <p>También denominados capacitores, son componentes pasivos que tienen la propiedad de almacenar energía. De esta forma, aprovechando su carga y su descarga, es posible utilizarlos en circuitos electrónicos para filtrar señales, acoplar circuitos, construir osciladores, etc.</p>
+        <p>Los condensadores están formados por dos láminas metálicas (armaduras), separadas por un elemento dieléctrico como puede ser el papel, el poliéster, un material cerámico, etc.</p>
+
+        <!-- IMAGEN DE PARTES DEL CONDENSADOR -->
+        <img src="partes%20condensador.png" alt="Partes del condensador" class="imagen-tabla">
+
+        <p>Las principales características eléctricas de los condensadores son su capacidad y su tensión de trabajo.</p>
+
+        <!-- SECCIÓN DE TEXTO DE CAPACIDAD -->
+        <h3>2.1. El valor de los condensadores</h3>
+        <p>La capacidad del condensador se mide en faradios (F), no obstante, al ser una unidad muy grande, el valor de los condensadores siempre se da en submúltiplos del faradio como el microfaradio (μF), el nanofaradio (nF) y el picofaradio (pF). Dicho valor suele estar impreso en el mismo cuerpo de los condensadores, e igual que en las resistencias, puede estar codificado por un código de colores (casi en desuso) o por un código alfanumérico.</p>
+
+        <h4>2.1.1. Identificación por código de colores</h4>
+        <p>Se utilizan en condensadores con cinco bandas de colores. Las tres primeras se aplican de la misma forma que en las resistencias. Los dos primeros colores son los dos primeros dígitos, y el tercer color es el multiplicador. El valor de estos condensadores se obtiene en picofaradios (pF).</p>
+
+        <!-- IMAGEN CÓDIGO CONDENSADOR -->
+        <img src="codigo%20condensador.png" alt="Código de colores en condensadores" class="imagen-tabla">
+
+        <!-- TEXTO AGREGADO DEBAJO DE LA IMAGEN -->
+        <p>La cuarta banda de color corresponde a la tolerancia, y la quinta, y última, a la tensión de trabajo del condensador.</p>
+
+        <!-- CALCULADORA INTERACTIVA COMPLETA (CONDENSADORES - 5 BANDAS) -->
+        <div class="herramienta-interactiva" id="calculadora-colores-condensador">
+            <h4>🎨 Calculadora Interactiva de Código de Colores (5 Bandas)</h4>
+            
+            <!-- Gráfico del condensador con sus 5 bandas -->
+            <div class="condensador-grafico">
+                <div class="banda" id="visual-c1"></div>
+                <div class="banda" id="visual-c2"></div>
+                <div class="banda" id="visual-c3"></div>
+                <div class="banda" id="visual-c4"></div>
+                <div class="banda" id="visual-c5"></div>
+            </div>
+
+            <!-- Menús desplegables de selección -->
+            <div class="controles-flex">
+                <select id="sel-c1" title="1ª Cifra">
+                    <option value="0" data-color="black">Negro (0)</option>
+                    <option value="1" data-color="#8B4513" selected>Marrón (1)</option>
+                    <option value="2" data-color="red">Rojo (2)</option>
+                    <option value="3" data-color="orange">Naranja (3)</option>
+                    <option value="4" data-color="yellow">Amarillo (4)</option>
+                    <option value="5" data-color="green">Verde (5)</option>
+                    <option value="6" data-color="blue">Azul (6)</option>
+                    <option value="7" data-color="violet">Violeta (7)</option>
+                    <option value="8" data-color="gray">Gris (8)</option>
+                    <option value="9" data-color="white">Blanco (9)</option>
+                </select>
+
+                <select id="sel-c2" title="2ª Cifra">
+                    <option value="0" data-color="black" selected>Negro (0)</option>
+                    <option value="1" data-color="#8B4513">Marrón (1)</option>
+                    <option value="2" data-color="red">Rojo (2)</option>
+                    <option value="3" data-color="orange">Naranja (3)</option>
+                    <option value="4" data-color="yellow">Amarillo (4)</option>
+                    <option value="5" data-color="green">Verde (5)</option>
+                    <option value="6" data-color="blue">Azul (6)</option>
+                    <option value="7" data-color="violet">Violeta (7)</option>
+                    <option value="8" data-color="gray">Gris (8)</option>
+                    <option value="9" data-color="white">Blanco (9)</option>
+                </select>
+
+                <select id="sel-c3" title="Multiplicador">
+                    <option value="1" data-color="black">Negro (x1)</option>
+                    <option value="10" data-color="#8B4513">Marrón (x10)</option>
+                    <option value="100" data-color="red" selected>Rojo (x100)</option>
+                    <option value="1000" data-color="orange">Naranja (x1k)</option>
+                    <option value="10000" data-color="yellow">Amarillo (x10k)</option>
+                    <option value="100000" data-color="green">Verde (x100k)</option>
+                    <option value="1000000" data-color="blue">Azul (x1M)</option>
+                </select>
+
+                <select id="sel-c4" title="Tolerancia">
+                    <option value="± 2%" data-color="red">Rojo (±2%)</option>
+                    <option value="± 5%" data-color="#8B4513" selected>Marrón (±5%)</option>
+                    <option value="± 10%" data-color="silver">Plata (±10%)</option>
+                    <option value="± 20%" data-color="black">Negro (±20%)</option>
+                </select>
+
+                <select id="sel-c5" title="Tensión de trabajo">
+                    <option value="100V" data-color="#8B4513">Marrón (100V)</option>
+                    <option value="250V" data-color="red" selected>Rojo (250V)</option>
+                    <option value="400V" data-color="yellow">Amarillo (400V)</option>
+                    <option value="630V" data-color="blue">Azul (630V)</option>
+                </select>
+            </div>
+
+            <!-- Cuadro de resultado -->
+            <div class="resultado-destacado" id="res-condensador">10 nF ± 5% - 250V</div>
+        </div>
+
+        <!-- SECCIÓN DE IDENTIFICACIÓN POR CÓDIGO ALFANUMÉRICO -->
+        <h4>2.1.2. Identificación por código alfanumérico</h4>
+        <p>En este caso, el valor del condensador, expresado en picofaradios, se muestra mediante tres cifras y una letra. Las dos primeras corresponden a las unidades y las decenas, el tercer número indica la cantidad de ceros que hay detrás de las dos primeras unidades, y la letra es la tolerancia. Véanse los siguientes ejemplos:</p>
+        
+        <ul class="lista-ejemplos">
+            <li>■ <strong>473F</strong> = 47 000 pF +/– 1 %</li>
+            <li>■ <strong>101K</strong> = 100 pF +/– 10 %</li>
+            <li>■ <strong>224J</strong> = 220 000 pF +/– 5 %</li>
+            <li>■ <strong>102M</strong> = 1 000 pF +/– 20 %</li>
+        </ul>
+
+        <p>También existen otras formas de expresar el valor de la capacidad del condensador:</p>
+        
+        <p><strong>Ejemplo 1.</strong> En ocasiones no se expresan las unidades, simplemente se muestra un número decimal, cuyo valor viene dado en nanofaradios.</p>
+        <ul class="lista-ejemplos">
+            <li>■ <strong>0,047</strong> = 47 nF &nbsp;&nbsp;&nbsp;&nbsp; ■ <strong>0,68</strong> = 68 nF</li>
+        </ul>
+
+        <p><strong>Ejemplo 2.</strong> Otras veces, el valor viene expresado mediante la letra k (de kilo). En este caso, k equivale a nF (nanofaradios).</p>
+        <ul class="lista-ejemplos">
+            <li>■ <strong>10 k</strong> = 10 nF &nbsp;&nbsp;&nbsp;&nbsp; ■ <strong>22 k</strong> = 22 nF</li>
+        </ul>
+
+        <p><strong>Ejemplo 3.</strong> En otras ocasiones, la letra de las unidades se utiliza como separador de la parte entera y decimal.</p>
+        <ul class="lista-ejemplos">
+            <li>■ <strong>μ1</strong> = 100 nF &nbsp;&nbsp;&nbsp;&nbsp; ■ <strong>4n7</strong> = <strong>4k7</strong> = 4 700 pF</li>
+        </ul>
+
+        <!-- IMAGEN DE TOLERANCIA -->
+        <img src="tolerancia.png" alt="Tabla de tolerancias en condensadores" class="imagen-tabla">
+
+        <!-- TIPOS DE CONDENSADORES -->
+        <h3>2.2. Tipos de condensadores</h3>
+        <p>De igual forma que las resistencias, pueden tener valor fijo o variable. Así, los condensadores de valor fijo más utilizados son los que se enumeran a continuación:</p>
+        <p><strong>De poliéster:</strong> no están polarizados y reciben su nombre por el tipo de material dieléctrico que se encuentra entre sus armaduras. Tienen forma plana o cilíndrica y su valor de capacidad suele ser inferior a 1 μF, aunque en aplicaciones especiales, como en los filtros de altavoces, etc., se pueden encontrar de mayor valor.</p>
+
+        <!-- IMAGEN CONDENSADOR DE POLIÉSTER -->
+        <img src="poliester.png" alt="Condensadores de poliéster" class="imagen-tabla">
+    </main>
+
+    <!-- BOTÓN DE RETORNO -->
+    <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
+
+    <!-- SCRIPT DE CÁLCULO INTERACTIVO -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const selC1 = document.getElementById('sel-c1');
+            const selC2 = document.getElementById('sel-c2');
+            const selC3 = document.getElementById('sel-c3');
+            const selC4 = document.getElementById('sel-c4');
+            const selC5 = document.getElementById('sel-c5');
+
+            const visualC1 = document.getElementById('visual-c1');
+            const visualC2 = document.getElementById('visual-c2');
+            const visualC3 = document.getElementById('visual-c3');
+            const visualC4 = document.getElementById('visual-c4');
+            const visualC5 = document.getElementById('visual-c5');
+
+            const resultado = document.getElementById('res-condensador');
+
+            function formatearCapacidad(pF) {
+                if (pF >= 1000000) {
+                    return (pF / 1000000).toLocaleString() + " µF";
+                } else if (pF >= 1000) {
+                    return (pF / 1000).toLocaleString() + " nF";
+                } else {
+                    return pF.toLocaleString() + " pF";
+                }
+            }
+
+            function calcularCondensador() {
+                // Obtener valores seleccionados
+                const v1 = selC1.value;
+                const v2 = selC2.value;
+                const mult = parseFloat(selC3.value);
+                const tol = selC4.value;
+                const tension = selC5.value;
+
+                // Actualizar colores visuales
+                visualC1.style.backgroundColor = selC1.options[selC1.selectedIndex].getAttribute('data-color');
+                visualC2.style.backgroundColor = selC2.options[selC2.selectedIndex].getAttribute('data-color');
+                visualC3.style.backgroundColor = selC3.options[selC3.selectedIndex].getAttribute('data-color');
+                visualC4.style.backgroundColor = selC4.options[selC4.selectedIndex].getAttribute('data-color');
+                visualC5.style.backgroundColor = selC5.options[selC5.selectedIndex].getAttribute('data-color');
+
+                // Calcular capacidad total en picofaradios (pF)
+                const valorBase = parseInt(v1 + v2, 10);
+                const capacidadPf = valorBase * mult;
+
+                // Formatear unidades y mostrar resultado
+                const capacidadFormateada = formatearCapacidad(capacidadPf);
+                resultado.textContent = `${capacidadFormateada} ${tol} - ${tension}`;
+            }
+
+            // Escuchar cambios en los selectores
+            [selC1, selC2, selC3, selC4, selC5].forEach(select => {
+                select.addEventListener('change', calcularCondensador);
+            });
+
+            // Inicializar al cargar
+            calcularCondensador();
+        });
+    </script>
+</body>
+
+</html>
