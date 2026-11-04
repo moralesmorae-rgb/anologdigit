@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electrónica Analógica - Profesor Eduardo</title>
+    <title>Semiconductores y Diodos</title>
     <style>
         /* --- ESTILOS LIMPIOS Y DIRECTOS --- */
         body {
@@ -46,48 +46,53 @@
         /* CONTENEDOR PRINCIPAL */
         .container {
             width: 90%;
-            max-width: 450px;
+            max-width: 600px;
             background-color: #1e1e1e;
             padding: 40px 30px;
             border-radius: 12px;
             border-top: 5px solid #ffcc00;
-            text-align: center;
+            text-align: left;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-top: 100px;
+            margin-top: 110px;
             margin-bottom: 80px; 
         }
 
         .container h2 {
-            margin-top: 0;
-            color: #ffffff;
-            margin-bottom: 30px;
-        }
-
-        /* BOTONES DE OPCIONES */
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 15px; 
-        }
-
-        .btn {
-            display: block;
-            background-color: transparent;
-            border: 2px solid #ffcc00;
+            margin-top: 30px;
+            margin-bottom: 20px;
             color: #ffcc00;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            text-transform: uppercase;
-            transition: 0.2s ease-in-out;
+            font-size: 1.8rem;
+            text-align: center;
         }
 
-        .btn:hover {
-            background-color: #ffcc00;
-            color: #000000;
-            transform: scale(1.02);
+        .container h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .container h3 {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #ffcc00;
+            font-size: 1.4rem;
+        }
+
+        .container p {
+            color: #dddddd;
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .container ul {
+            color: #dddddd;
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        .container li {
+            margin-bottom: 8px;
         }
 
         /* BOTÓN INFERIOR IZQUIERDO */
@@ -120,21 +125,26 @@
 
     <!-- ENCABEZADO -->
     <header>
-        <h1>Electrónica Analógica</h1>
+        <h1>Semiconductores y Diodos</h1>
         <p>Profesor Eduardo • IPCHILE</p>
     </header>
 
-    <!-- SECCIÓN DE INGRESO (5 OPCIONES) -->
+    <!-- SECCIÓN PRINCIPAL -->
     <main class="container">
-        <h2>Selecciona un componente</h2>
-        
-        <div class="options">
-            <a href="resistencia.html" class="btn">⚡ Resistencia</a>
-            <a href="condensador.html" class="btn">🔋 Condensador</a>
-            <a href="bobina.html" class="btn">🧲 Bobina</a>
-            <a href="semiconductores.html" class="btn">🔌 Semiconductores</a>
-            <a href="otros.html" class="btn">⚙️ Otros</a>
-        </div>
+        <h2>1. Semiconductores</h2>
+        <p>Desde el punto de vista electrónico, se puede decir que los materiales se clasifican en:</p>
+        <ul>
+            <li><strong>Aislantes:</strong> que no permiten el paso de la corriente eléctrica a través de ellos, como pueden ser la madera, el plástico, el papel, etc.</li>
+            <li><strong>Conductores:</strong> que permiten el paso de la corriente eléctrica a través de ellos fácilmente, como pueden ser el cobre, el aluminio, el oro, etc.</li>
+            <li><strong>Semiconductores:</strong> que se pueden comportar como aislantes o como conductores en función de determinadas condiciones físicas o eléctricas que se producen sobre ellos. Los más utilizados son el silicio y el germanio.</li>
+        </ul>
+        <p>El uso de los semiconductores ha permitido desarrollar toda una tecnología de componentes electrónicos, denominados activos, que cambian su comportamiento en el circuito en función de cómo les afectan las condiciones eléctricas o físicas externas. Los componentes activos más conocidos, y que aquí se van a estudiar, son el diodo y transistor, junto con sus variantes.</p>
+
+        <h3>1.1. Unión PN</h3>
+        <p>Para conseguir que un material como el silicio sea eléctricamente activo, es necesario añadirle impurezas (doparlo), de forma que pueda tener exceso o, en su caso, defecto de electrones (huecos). Los materiales dopados con exceso de electrones son los denominados de tipo N, y los que tienen defecto de ellos, son denominados tipo P. Por sí solos, ninguno de ellos tiene aplicaciones eléctricas, pero si se hace una unión entre ambos se consigue un comportamiento electrónico que es la base de los componentes activos.</p>
+
+        <h2>2. El diodo</h2>
+        <p>Es un semiconductor formado por la unión de material P y material N. A la zona P se la denomina ánodo (a) y a la zona N cátodo (k). En el símbolo del diodo el ánodo se representa con una flecha que apunta a una línea vertical que, a su vez, representa el cátodo.</p>
     </main>
 
     <!-- BOTÓN INFERIOR IZQUIERDO PARA VOLVER -->
