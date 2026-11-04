@@ -96,7 +96,7 @@
         }
 
         /* ESTILOS PARA IMÁGENES */
-        .img-simbologia, .img-union, .img-polarizacion, .img-curva, .img-tipo, .img-zener {
+        .img-simbologia, .img-union, .img-polarizacion, .img-curva, .img-tipo, .img-zener, .img-simbologia-led, .img-tipo-led, .img-color-led {
             max-width: 100%;
             width: auto;
             height: auto;
@@ -212,6 +212,26 @@
         <p>Las principales características de un Zener son su tensión nominal en voltios y su potencia de disipación en vatios. Ambas están normalizadas y se comercializan en valores estándar. En el caso de la tensión, se muestra un ejemplo en la tabla 4.3 que aparece en el margen. En el caso de la potencia, los valores comerciales son de 0,5 W, 1 W, 5 W, 10 W y 20 W.</p>
         <p>Un diodo Zener debe ser polarizado mediante una resistencia, como se muestra en el esquema de la figura. Cuando la alimentación del conjunto es menor que la tensión nominal del Zener, este no conduce, y en la salida hay la misma tensión que la de la alimentación. Sin embargo, cuando el circuito es alimentado con una tensión superior a la nominal de la del Zener, este entra en conducción, y en la salida del circuito solamente se obtiene el valor de la tensión del Zener, siendo la resistencia la que absorbe el valor restante.</p>
         <p>Así el proceso de cálculo de un Zener para un valor de carga determinado se muestra a continuación.</p>
+
+        <h3>3.4. Diodos LED</h3>
+        <p>El diodo LED es un componente semiconductor que tiene la propiedad de emitir luz cuando es atravesado por una corriente en polarización directa. De igual forma que otros tipos de diodos, los LEDs tienen dos patillas de conexión (un ánodo y un cátodo). Cuando el diodo es nuevo, el terminal largo es el ánodo (+) y el corto el cátodo (−). También es posible diferenciarlos observando el LED al trasluz. El cátodo es una pieza de mayor tamaño que el ánodo. Además, en los LEDs con el cuerpo redondeado, el lado del cátodo es plano.</p>
+
+        <!-- IMAGEN SIMBOLOGÍA LED -->
+        <img src="simbologia led.png" alt="Simbología del diodo LED" class="img-simbologia-led">
+
+        <p>Los diodos LED se fabrican en diferentes colores, tamaños y formas.</p>
+
+        <!-- IMAGEN TIPO LED -->
+        <img src="tipo led.png" alt="Tipos de diodos LED" class="img-tipo-led">
+
+        <p>Las características eléctricas que hay que tener en cuenta al trabajar con diodos LED son su tensión de umbral y la corriente paso máxima.</p>
+        <ul>
+            <li><strong>La tensión de umbral:</strong> es el número de voltios máximo que el LED es capaz de soportar en sus terminales, sin ponerlo en peligro. Dicha tensión depende del color del LED.</li>
+            <li><strong>Corriente de paso:</strong> de igual forma, la corriente de paso en el LED no debe superar a la recomendada por el fabricante, ya que podría destruirse. Para los LEDs de alta luminosidad, es aconsejable una corriente máxima de 20 mA. Para los demás, una corriente de 10 mA.</li>
+        </ul>
+
+        <!-- IMAGEN COLOR LED -->
+        <img src="color led.png" alt="Colores y características de diodos LED" class="img-color-led">
     </main>
 
     <!-- BOTÓN INFERIOR IZQUIERDO PARA VOLVER -->
