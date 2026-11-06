@@ -5,64 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Transformador y El Relé</title>
     <style>
-        /* --- ESTILOS LIMPIOS Y DIRECTOS --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+        /* --- ESTILOS BASE Y REINICIO --- */
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #050811; /* Respaldo oscuro si el video tarda en cargar */
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* ENCABEZADO */
+        /* --- VIDEO DE FONDO Y OVERLAY --- */
+        .video-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.65) contrast(1.15);
+            pointer-events: none;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(5, 8, 17, 0.45) 0%, rgba(5, 8, 17, 0.88) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- ENCABEZADO --- */
         header {
-            background-color: #000000;
+            background: rgba(5, 8, 17, 0.78);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             width: 100%;
             padding: 20px 0;
             text-align: center;
-            border-bottom: 3px solid #ffcc00;
-            position: absolute;
+            border-bottom: 2px solid #00f3ff;
+            box-shadow: 0 4px 25px rgba(0, 243, 255, 0.25);
+            position: fixed;
             top: 0;
             left: 0;
+            z-index: 1000;
         }
 
         header h1 {
             margin: 0;
-            color: #ffcc00;
+            color: #00f3ff;
             font-size: 1.8rem;
+            text-shadow: 0 0 12px rgba(0, 243, 255, 0.6);
+            letter-spacing: 1px;
         }
 
         header p {
             margin: 5px 0 0 0;
-            color: #aaaaaa;
+            color: #a0aec0;
             font-size: 0.9rem;
+            letter-spacing: 0.5px;
         }
 
-        /* CONTENEDOR PRINCIPAL */
+        /* --- CONTENEDOR PRINCIPAL --- */
         .container {
             width: 90%;
-            max-width: 600px;
-            background-color: #1e1e1e;
+            max-width: 650px;
+            background: rgba(13, 19, 33, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             padding: 40px 30px;
-            border-radius: 12px;
-            border-top: 5px solid #ffcc00;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-top: 4px solid #00f3ff;
             text-align: left;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-top: 110px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 243, 255, 0.15);
+            margin-top: 130px;
             margin-bottom: 80px; 
+            z-index: 10;
         }
 
         .container h2 {
             margin-top: 30px;
             margin-bottom: 20px;
-            color: #ffcc00;
+            color: #00f3ff;
             font-size: 1.8rem;
             text-align: center;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+            padding-bottom: 10px;
         }
 
         .container h2:first-of-type {
@@ -70,14 +117,14 @@
         }
 
         .container p {
-            color: #dddddd;
+            color: #e0e0e0;
             line-height: 1.6;
             font-size: 1rem;
             margin-bottom: 15px;
         }
 
         .container ul {
-            color: #dddddd;
+            color: #e0e0e0;
             line-height: 1.6;
             font-size: 1rem;
             margin-bottom: 15px;
@@ -88,80 +135,99 @@
             margin-bottom: 8px;
         }
 
-        /* ESTILOS PARA LA IMAGEN TRAFO (TAMAÑO COMPLETO EN TARJETA) */
-        .img-trafo {
-            width: 100%;
-            height: auto;
-            display: block;
-            margin: 20px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        .container li strong {
+            color: #00f3ff;
         }
 
-        /* ESTILOS PARA LA IMAGEN N.PNG (MÁS PEQUEÑA PARA MANTENER CALIDAD Y NITIDEZ) */
-        .img-formula {
-            max-width: 250px;
-            width: auto;
-            height: auto;
-            display: block;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #2a2a2a;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        /* ESTILOS PARA LA IMAGEN DE SIMBOLOGÍA */
-        .img-simbologia {
-            max-width: 300px;
-            width: auto;
-            height: auto;
-            display: block;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #2a2a2a;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        /* ESTILOS PARA LAS IMÁGENES EJEMPLO TRAFO, PARTES RELÉ Y EJEMPLO RELÉ */
-        .img-ejemplo, .img-rele, .img-ejemplo-rele {
+        /* ESTILOS DE IMÁGENES */
+        .img-trafo, .img-ejemplo, .img-rele, .img-ejemplo-rele {
             width: 100%;
             max-width: 100%;
             height: auto;
             display: block;
             margin: 20px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            border: 2px solid #00f3ff;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            background-color: #ffffff;
+            padding: 8px;
+            box-sizing: border-box;
         }
 
-        /* BOTÓN INFERIOR IZQUIERDO */
+        .img-formula, .img-simbologia {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            border: 2px solid #00f3ff;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            box-sizing: border-box;
+        }
+
+        .img-formula {
+            max-width: 260px;
+        }
+
+        /* --- BOTÓN DE RETORNO --- */
         .btn-volver {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            display: inline-block;
-            background-color: #1e1e1e;
-            border: 2px solid #ffcc00;
-            color: #ffcc00;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(13, 19, 33, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid #00f3ff;
+            color: #00f3ff;
             padding: 12px 20px;
             border-radius: 8px;
-            font-size: 1.0rem;
+            font-size: 0.95rem;
             font-weight: bold;
             text-decoration: none;
-            transition: 0.2s ease-in-out;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            z-index: 9999; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 243, 255, 0.2);
+            z-index: 9999;
         }
 
         .btn-volver:hover {
-            background-color: #ffcc00;
-            color: #000000;
-            transform: scale(1.05);
+            background-color: #00f3ff;
+            color: #050811;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
+        }
+
+        .btn-volver svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            fill: none;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-volver:hover svg {
+            transform: translateX(-3px);
         }
     </style>
 </head>
 <body>
+
+    <!-- VIDEO DE FONDO -->
+    <video class="video-bg" autoplay loop muted playsinline preload="auto">
+        <source src="fondodepantallaanimadocircuit.mp4" type="video/mp4">
+        Tu navegador no soporta el formato de video.
+    </video>
+    
+    <!-- CAPA OSCURA DE SUPERPOSICIÓN -->
+    <div class="video-overlay"></div>
 
     <!-- ENCABEZADO -->
     <header>
@@ -209,10 +275,10 @@
 
         <p>Los símbolos asociados al relé son:</p>
 
-        <!-- IMAGEN SIMBOLOGÍA RELÉ (AGREGADA) -->
+        <!-- IMAGEN SIMBOLOGÍA RELÉ -->
         <img src="simbologia rele.png" alt="Símbolos asociados al relé" class="img-simbologia">
 
-        <!-- TEXTO PREVIO A EJEMPLO RELÉ (AGREGADO) -->
+        <!-- TEXTO PREVIO A EJEMPLO RELÉ -->
         <p>La siguiente figura muestra un ejemplo de configuración de un relé con doble contacto conmutado:</p>
 
         <!-- IMAGEN EJEMPLO RELÉ -->
@@ -227,7 +293,25 @@
     </main>
 
     <!-- BOTÓN INFERIOR IZQUIERDO PARA VOLVER -->
-    <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
+    <a href="analogica.html" class="btn-volver">
+        <svg viewBox="0 0 24 24">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Volver a Analógica</span>
+    </a>
+
+    <!-- SCRIPT DE AUTO-REPRODUCCIÓN SEGURO -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.querySelector('.video-bg');
+            if (video) {
+                video.play().catch(error => {
+                    console.warn("Autoplay bloqueado por el navegador:", error);
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
