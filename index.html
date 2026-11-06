@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluaciones 2026 - Profesor Eduardo</title>
     <style>
-        /* --- ESTILOS LIMPIOS Y DIRECTOS --- */
+        /* --- CONFIGURACIÓN GENERAL Y ESTILOS BASE --- */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
+            background-color: #050811;
             color: #ffffff;
             margin: 0;
             padding: 0;
@@ -16,80 +20,210 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
         }
 
-        /* ENCABEZADO */
+        /* --- VIDEO DE FONDO Y OVERLAY --- */
+        .video-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.65) contrast(1.15);
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(5, 8, 17, 0.45) 0%, rgba(5, 8, 17, 0.85) 100%);
+            z-index: -1;
+        }
+
+        /* --- ENCABEZADO --- */
         header {
-            background-color: #000000;
+            background: rgba(5, 8, 17, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             width: 100%;
             padding: 20px 0;
             text-align: center;
-            border-bottom: 3px solid #ffcc00;
+            border-bottom: 2px solid #00f3ff;
+            box-shadow: 0 4px 25px rgba(0, 243, 255, 0.25);
             position: absolute;
             top: 0;
+            z-index: 10;
         }
 
         header h1 {
             margin: 0;
-            color: #ffcc00;
-            font-size: 1.8rem;
+            color: #00f3ff;
+            font-size: 1.9rem;
+            text-shadow: 0 0 12px rgba(0, 243, 255, 0.6);
+            letter-spacing: 1px;
         }
 
         header p {
             margin: 5px 0 0 0;
-            color: #aaaaaa;
-            font-size: 0.9rem;
+            color: #a0aec0;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
         }
 
-        /* CONTENEDOR PRINCIPAL */
+        /* --- CONTENEDOR PRINCIPAL --- */
         .container {
             width: 90%;
-            max-width: 450px;
-            background-color: #1e1e1e;
+            max-width: 460px;
+            background: rgba(13, 19, 33, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             padding: 40px 30px;
-            border-radius: 12px;
-            border-top: 5px solid #ffcc00;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-top: 4px solid #00f3ff;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 243, 255, 0.15);
             margin-top: 80px;
+            z-index: 10;
         }
 
         .container h2 {
             margin-top: 0;
             color: #ffffff;
             margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        /* BOTONES DE OPCIONES */
+        /* --- BOTONES DE OPCIONES --- */
         .options {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 22px;
         }
 
         .btn {
-            display: block;
-            background-color: transparent;
-            border: 2px solid #ffcc00;
-            color: #ffcc00;
-            padding: 18px;
-            border-radius: 8px;
-            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            background: rgba(0, 243, 255, 0.05);
+            border: 2px solid #00f3ff;
+            color: #00f3ff;
+            padding: 16px 20px;
+            border-radius: 10px;
+            font-size: 1.15rem;
             font-weight: bold;
             text-decoration: none;
             text-transform: uppercase;
-            transition: 0.2s ease-in-out;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+        }
+
+        .btn-digital {
+            border-color: #00ff88;
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.05);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.1);
         }
 
         .btn:hover {
-            background-color: #ffcc00;
-            color: #000000;
-            transform: scale(1.02);
+            background-color: #00f3ff;
+            color: #050811;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.6);
+        }
+
+        .btn-digital:hover {
+            background-color: #00ff88;
+            color: #050811;
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
+        }
+
+        /* --- ICONOS ANIMADOS (SVG) --- */
+        .circuit-icon {
+            width: 28px;
+            height: 28px;
+            stroke-width: 2.5;
+            fill: none;
+            flex-shrink: 0;
+        }
+
+        /* Icono Analógico: Onda Senoidal Animada */
+        .icon-analog {
+            stroke: #00f3ff;
+            transition: stroke 0.3s ease;
+        }
+
+        .sine-wave {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 0;
+            animation: moveSine 2.5s linear infinite;
+        }
+
+        @keyframes moveSine {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -40; }
+        }
+
+        .btn:hover .icon-analog {
+            stroke: #050811;
+        }
+
+        /* Icono Digital: Pulso de Reloj (Square Wave + Bits) */
+        .icon-digital {
+            stroke: #00ff88;
+            transition: stroke 0.3s ease;
+        }
+
+        .square-wave {
+            stroke-dasharray: 80;
+            stroke-dashoffset: 0;
+            animation: moveSquare 2s linear infinite;
+        }
+
+        .digital-bit {
+            animation: pulseBit 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes moveSquare {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -32; }
+        }
+
+        @keyframes pulseBit {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .btn-digital:hover .icon-digital {
+            stroke: #050811;
+        }
+
+        .btn-digital:hover .digital-bit {
+            fill: #050811;
         }
     </style>
 </head>
 <body>
+
+    <!-- VIDEO DE FONDO -->
+    <video class="video-bg" autoplay loop muted playsinline>
+        <source src="#4k #fondodepantalla #animado #oled #circuit.mp4" type="video/mp4">
+        Tu navegador no soporta videos HTML5.
+    </video>
+    <div class="video-overlay"></div>
 
     <!-- ENCABEZADO -->
     <header>
@@ -102,9 +236,22 @@
         <h2>Selecciona tu módulo</h2>
         
         <div class="options">
-            <!-- AQUÍ ESTÁ EL CÓDIGO EXACTO PARA ABRIR EL ARCHIVO -->
-            <a href="analogica.html" class="btn">⚡ Electrónica Analógica</a>
-            <a href="digital.html" class="btn">💻 Electrónica Digital</a>
+            <!-- BOTÓN ELECTRÓNICA ANALÓGICA -->
+            <a href="analogica.html" class="btn">
+                <svg class="circuit-icon icon-analog" viewBox="0 0 50 50">
+                    <path class="sine-wave" d="M 0 25 Q 6.25 5, 12.5 25 T 25 25 T 37.5 25 T 50 25 T 62.5 25" />
+                </svg>
+                <span>Electrónica Analógica</span>
+            </a>
+
+            <!-- BOTÓN ELECTRÓNICA DIGITAL -->
+            <a href="digital.html" class="btn btn-digital">
+                <svg class="circuit-icon icon-digital" viewBox="0 0 50 50">
+                    <path class="square-wave" d="M 0 35 H 10 V 15 H 25 V 35 H 40 V 15 H 55" />
+                    <circle class="digital-bit" cx="17.5" cy="10" r="3" fill="#00ff88" />
+                </svg>
+                <span>Electrónica Digital</span>
+            </a>
         </div>
     </main>
 
