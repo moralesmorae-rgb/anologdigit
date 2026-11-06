@@ -1,27 +1,66 @@
-<!DOCTYPE html><html lang="es"><head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resistencias - Profesor Eduardo</title>
     <style>
-        /* --- ESTILOS GENERALES --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
+        /* --- ESTILOS BASE Y REINICIO --- */
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #050811; /* Respaldo oscuro si falla el video */
+            color: #e0e0e0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* ENCABEZADO */
+        /* --- VIDEO DE FONDO Y OVERLAY --- */
+        .video-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.65) contrast(1.15);
+            pointer-events: none;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(5, 8, 17, 0.45) 0%, rgba(5, 8, 17, 0.88) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- ENCABEZADO --- */
         header {
-            background-color: #000000;
+            background: rgba(5, 8, 17, 0.78);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             width: 100%;
             padding: 20px 0;
             text-align: center;
-            border-bottom: 3px solid #ffcc00;
+            border-bottom: 2px solid #00f3ff;
+            box-shadow: 0 4px 25px rgba(0, 243, 255, 0.25);
             position: fixed;
             top: 0;
             left: 0;
@@ -30,64 +69,92 @@
 
         header h1 {
             margin: 0;
-            color: #ffcc00;
+            color: #00f3ff;
             font-size: 1.8rem;
+            text-shadow: 0 0 12px rgba(0, 243, 255, 0.6);
+            letter-spacing: 1px;
         }
 
         header p {
             margin: 5px 0 0 0;
-            color: #aaaaaa;
+            color: #a0aec0;
             font-size: 0.9rem;
+            letter-spacing: 0.5px;
         }
 
-        /* CONTENEDOR PRINCIPAL */
+        /* --- CONTENEDOR PRINCIPAL --- */
         .container {
             width: 90%;
             max-width: 800px;
-            background-color: #1e1e1e;
+            background: rgba(13, 19, 33, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             padding: 40px;
-            border-radius: 12px;
-            border-top: 5px solid #ffcc00;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-top: 120px; 
+            border-radius: 16px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-top: 4px solid #00f3ff;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7), 0 0 20px rgba(0, 243, 255, 0.15);
+            margin-top: 130px; 
             margin-bottom: 80px;
             line-height: 1.6;
             text-align: left;
+            z-index: 10;
         }
 
         .container h2, .container h3, .container h4 {
-            color: #ffcc00;
+            color: #00f3ff;
             margin-top: 30px;
+            text-shadow: 0 0 8px rgba(0, 243, 255, 0.4);
         }
 
         .container h2 {
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.3);
             padding-bottom: 10px;
         }
 
         ul { margin-bottom: 20px; padding-left: 20px; }
         li { margin-bottom: 8px; }
 
-        /* ESTILO DE LA IMAGEN INDIVIDUAL */
+        /* --- ESTILO DE LAS IMÁGENES --- */
         .imagen-tabla {
             display: block;
             max-width: 100%;
             height: auto;
             margin: 25px auto;
-            border: 2px solid #ffcc00;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border: 2px solid #00f3ff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
         }
 
-        /* --- ESTILOS DEL INTERACTIVO --- */
-        .herramienta-interactiva {
-            background-color: #2a2a2a;
-            border: 2px dashed #ffcc00;
+        .galeria-duo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .imagen-duo {
+            display: block;
+            max-width: 47%;
+            min-width: 280px;
+            height: auto;
+            border: 2px solid #00f3ff;
             border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+
+        /* --- HERRAMIENTAS INTERACTIVAS Y SIMULADORES --- */
+        .herramienta-interactiva {
+            background: rgba(5, 8, 17, 0.6);
+            border: 2px dashed #00f3ff;
+            border-radius: 12px;
             padding: 25px;
             margin: 25px 0;
             text-align: center;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.6), 0 0 15px rgba(0, 243, 255, 0.1);
         }
 
         .herramienta-interactiva h4 {
@@ -97,7 +164,7 @@
             letter-spacing: 1px;
         }
 
-        /* Gráfico de la Resistencia */
+        /* Gráfico de la Resistencia de 4 Bandas */
         .resistencia-grafico {
             display: flex;
             align-items: center;
@@ -109,6 +176,7 @@
             background-color: #e5c39c; 
             border-radius: 30px;
             border: 2px solid #8c6a45;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
 
         .resistencia-grafico::before, .resistencia-grafico::after {
@@ -116,7 +184,7 @@
             position: absolute;
             width: 60px;
             height: 8px;
-            background-color: #999;
+            background-color: #a0aec0;
             z-index: -1;
         }
         .resistencia-grafico::before { left: -60px; }
@@ -139,17 +207,23 @@
 
         select, input[type="number"] {
             padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ffcc00;
-            background-color: #121212;
-            color: #fff;
+            border-radius: 6px;
+            border: 1px solid #00f3ff;
+            background-color: #050811;
+            color: #00f3ff;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        select:focus, input[type="number"]:focus {
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
         }
 
         input[type="number"] {
-            width: 100px;
+            width: 110px;
             text-align: center;
         }
 
@@ -157,37 +231,31 @@
             font-size: 1.5rem;
             font-weight: bold;
             font-family: monospace;
-            background: #000;
+            background: #050811;
             padding: 10px 20px;
-            border-radius: 5px;
-            color: #00ff00;
-            border: 1px solid #333;
+            border-radius: 8px;
+            color: #00ff88;
+            border: 1px solid #00ff88;
             display: inline-block;
             margin-top: 15px;
+            box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
         }
 
-        /* --- ESTILOS PARA IMÁGENES ALINEADAS EN PAR --- */
-        .galeria-duo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-            width: 100%;
+        .formula-destacada {
+            background-color: rgba(5, 8, 17, 0.7);
+            padding: 15px;
+            border-left: 4px solid #00f3ff;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #00f3ff;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.15);
         }
 
-        .imagen-duo {
-            display: block;
-            max-width: 47%;
-            min-width: 280px;
-            height: auto;
-            border: 2px solid #ffcc00;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-
-        /* --- ESTILOS VISUALIZACIÓN EN SERIE --- */
+        /* --- VISUALIZACIÓN EN SERIE --- */
         .circuito-serie-visual {
             display: flex;
             align-items: center;
@@ -195,16 +263,17 @@
             margin: 30px auto;
             width: 100%;
             max-width: 500px;
-            background: #1a1a1a;
+            background: rgba(5, 8, 17, 0.5);
             padding: 20px;
             border-radius: 8px;
-            border: 1px solid #333;
+            border: 1px solid rgba(0, 243, 255, 0.2);
         }
 
         .cable {
             flex-grow: 1;
             height: 4px;
-            background-color: #666;
+            background-color: #00f3ff;
+            box-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
         }
 
         .resistor-bloque {
@@ -224,55 +293,36 @@
 
         .resistor-bloque .label-id {
             font-size: 0.7rem;
-            color: #555;
+            color: #444;
             margin-bottom: -2px;
         }
 
-        .formula-destacada {
-            background-color: #141414;
-            padding: 15px;
-            border-left: 4px solid #ffcc00;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin: 20px 0;
-            color: #ffcc00;
-            text-align: center;
-        }
-
-        /* --- ESTILOS VISUALIZACIÓN EN PARALELO --- */
+        /* --- VISUALIZACIÓN EN PARALELO --- */
         .circuito-paralelo-visual {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            background: #1a1a1a;
+            background: rgba(5, 8, 17, 0.5);
             padding: 25px;
             border-radius: 8px;
-            border: 1px solid #333;
+            border: 1px solid rgba(0, 243, 255, 0.2);
             max-width: 420px;
             margin: 30px auto;
             position: relative;
         }
 
-        .circuito-paralelo-visual::before {
+        .circuito-paralelo-visual::before, .circuito-paralelo-visual::after {
             content: '';
             position: absolute;
             top: 35px;
             bottom: 35px;
-            left: 50px;
             width: 4px;
-            background-color: #666;
+            background-color: #00f3ff;
+            box-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
         }
 
-        .circuito-paralelo-visual::after {
-            content: '';
-            position: absolute;
-            top: 35px;
-            bottom: 35px;
-            right: 50px;
-            width: 4px;
-            background-color: #666;
-        }
+        .circuito-paralelo-visual::before { left: 50px; }
+        .circuito-paralelo-visual::after { right: 50px; }
 
         .paralelo-rama {
             display: flex;
@@ -283,53 +333,81 @@
             box-sizing: border-box;
         }
 
-        .cable-p-left {
+        .cable-p-left, .cable-p-right {
             flex-grow: 1;
             height: 4px;
-            background-color: #666;
-            margin-right: 10px;
+            background-color: #00f3ff;
+            box-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
         }
 
-        .cable-p-right {
-            flex-grow: 1;
-            height: 4px;
-            background-color: #666;
-            margin-left: 10px;
-        }
+        .cable-p-left { margin-right: 10px; }
+        .cable-p-right { margin-left: 10px; }
 
         .nodo-conexion {
             width: 12px;
             height: 12px;
-            background-color: #ffcc00;
+            background-color: #00f3ff;
             border-radius: 50%;
             z-index: 2;
+            box-shadow: 0 0 8px #00f3ff;
         }
 
-        /* BOTÓN DE RETORNO */
+        /* --- BOTÓN DE VOLVER --- */
         .btn-volver {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            display: inline-block;
-            background-color: #1e1e1e;
-            border: 2px solid #ffcc00;
-            color: #ffcc00;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(13, 19, 33, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid #00f3ff;
+            color: #00f3ff;
             padding: 12px 20px;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: bold;
             text-decoration: none;
-            transition: 0.2s ease-in-out;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            z-index: 9999; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 243, 255, 0.2);
+            z-index: 9999;
         }
 
         .btn-volver:hover {
-            background-color: #ffcc00;
-            color: #000000;
-            transform: scale(1.05);
+            background-color: #00f3ff;
+            color: #050811;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
         }
-    </style></head><body>
+
+        .btn-volver svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            fill: none;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-volver:hover svg {
+            transform: translateX(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- VIDEO DE FONDO -->
+    <video class="video-bg" autoplay loop muted playsinline preload="auto">
+        <source src="fondodepantallaanimadocircuit.mp4" type="video/mp4">
+        Tu navegador no soporta el formato de video.
+    </video>
+    
+    <!-- CAPA OSCURA DE SUPERPOSICIÓN -->
+    <div class="video-overlay"></div>
 
     <!-- ENCABEZADO -->
     <header>
@@ -356,7 +434,7 @@
 
         <!-- CALCULADORA INTERACTIVA COMPLETA -->
         <div class="herramienta-interactiva" id="calculadora-colores">
-            <h4>🎨 Calculadora Interactive de Código de Colores (4 Bandas)</h4>
+            <h4>🎨 Calculadora Interactiva de Código de Colores (4 Bandas)</h4>
             
             <div class="resistencia-grafico">
                 <div class="banda" id="visual-b1"></div>
@@ -502,7 +580,7 @@
 
         <!-- TEXTO SOBRE RESISTENCIAS SMD -->
         <p><strong>Resistencias SMD:</strong> son resistencias miniaturizadas para instalar directamente en la placa de circuito impreso por la técnica de soldadura en superficie. El componente resistivo se consigue por una composición de sustrato de alúmina, y no disponen de patillas de conexión en forma de hilo, ya que la soldadura se realiza directamente sobre los casquillos del cuerpo de la resistencia.</p>
-        <p>Existen todo tipo de componentes, pasivos and activos, con el formato SMD. Esta tecnología ha permitido reducir enormemente todo tipo de dispositivos electrónicos respecto a los que se fabricaban hace décadas.</p>
+        <p>Existen todo tipo de componentes, pasivos y activos, con el formato SMD. Esta tecnología ha permitido reducir enormemente todo tipo de dispositivos electrónicos respecto a los que se fabricaban hace décadas.</p>
 
         <!-- IMAGEN RESISTENCIAS SMD -->
         <img src="SMD.png" alt="Componentes y resistencias con tecnología de montaje superficial (SMD)" class="imagen-tabla">
@@ -546,7 +624,7 @@
         <!-- IMAGEN TERMISTORES -->
         <img src="termistor.png" alt="Resistencias dependientes de la temperatura (Termistores NTC y PTC)" class="imagen-tabla">
 
-        <!-- SÍMBOLS DE RESISTENCIAS VARIABLES -->
+        <!-- SÍMBOLOS DE RESISTENCIAS VARIABLES -->
         <p>Los símbolos de las resistencias variables son:</p>
 
         <!-- IMAGEN DE LA SIMBOLOGÍA DE RESISTENCIA AJUSTABLE -->
@@ -567,7 +645,7 @@
         <!-- INTERACTIVO CIRCUITO EN SERIE -->
         <div class="herramienta-interactiva" id="interactivo-serie">
             <h4>⚡ Simulador de Asociación en Serie</h4>
-            <p style="font-size: 0.9rem; color: #aaa; margin-top: -5px;">Modifica los valores para observar el comportamiento equivalente lineal</p>
+            <p style="font-size: 0.9rem; color: #a0aec0; margin-top: -5px;">Modifica los valores para observar el comportamiento equivalente lineal</p>
             
             <div class="circuito-serie-visual">
                 <div class="cable"></div>
@@ -581,15 +659,15 @@
 
             <div class="controles-flex">
                 <div>
-                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R1 (Ω)</label>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px; color: #a0aec0;">R1 (Ω)</label>
                     <input type="number" id="num-r1" value="100" min="0" max="999999">
                 </div>
                 <div>
-                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R2 (Ω)</label>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px; color: #a0aec0;">R2 (Ω)</label>
                     <input type="number" id="num-r2" value="220" min="0" max="999999">
                 </div>
                 <div>
-                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R3 (Ω)</label>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px; color: #a0aec0;">R3 (Ω)</label>
                     <input type="number" id="num-r3" value="330" min="0" max="999999">
                 </div>
             </div>
@@ -608,7 +686,7 @@
         <!-- INTERACTIVO CIRCUITO EN PARALELO -->
         <div class="herramienta-interactiva" id="interactivo-paralelo">
             <h4>🔌 Simulador de Asociación en Paralelo</h4>
-            <p style="font-size: 0.9rem; color: #aaa; margin-top: -5px;">Modifica los valores de las ramas (ingresa 0 para simular una rama desconectada o circuito abierto)</p>
+            <p style="font-size: 0.9rem; color: #a0aec0; margin-top: -5px;">Modifica los valores de las ramas (ingresa 0 para simular una rama desconectada o circuito abierto)</p>
             
             <div class="circuito-paralelo-visual">
                 <div class="paralelo-rama">
@@ -636,15 +714,15 @@
 
             <div class="controles-flex">
                 <div>
-                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R1 (Ω)</label>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px; color: #a0aec0;">R1 (Ω)</label>
                     <input type="number" id="num-p1" value="100" min="0" max="999999">
                 </div>
                 <div>
-                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R2 (Ω)</label>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px; color: #a0aec0;">R2 (Ω)</label>
                     <input type="number" id="num-p2" value="220" min="0" max="999999">
                 </div>
                 <div>
-                    <label style="display:block; font-size:0.8rem; margin-bottom:4px;">R3 (Ω)</label>
+                    <label style="display:block; font-size:0.8rem; margin-bottom:4px; color: #a0aec0;">R3 (Ω)</label>
                     <input type="number" id="num-p3" value="330" min="0" max="999999">
                 </div>
             </div>
@@ -654,154 +732,130 @@
 
     </main>
 
-    <!-- BOTÓN INFERIOR IZQUIERDO -->
-    <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
+    <!-- BOTÓN INFERIOR IZQUIERDO PARA VOLVER -->
+    <a href="analogica.html" class="btn-volver">
+        <svg viewBox="0 0 24 24">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Volver a Analógica</span>
+    </a>
 
-    <!-- LÓGICA DE PROGRAMACIÓN CALCULADORA -->
+    <!-- LÓGICA DE JAVASCRIPT -->
     <script>
-        // Lógica del Código de Colores
-        (function() {
-            function calcular() {
-                var b1 = document.getElementById('sel-b1');
-                var b2 = document.getElementById('sel-b2');
-                var b3 = document.getElementById('sel-b3');
-                var b4 = document.getElementById('sel-b4');
-                
-                if(!b1 || !b2 || !b3 || !b4) return;
-                
-                document.getElementById('visual-b1').style.backgroundColor = b1.options[b1.selectedIndex].getAttribute('data-color');
-                document.getElementById('visual-b2').style.backgroundColor = b2.options[b2.selectedIndex].getAttribute('data-color');
-                document.getElementById('visual-b3').style.backgroundColor = b3.options[b3.selectedIndex].getAttribute('data-color');
-                document.getElementById('visual-b4').style.backgroundColor = b4.options[b4.selectedIndex].getAttribute('data-color');
-                
-                var v1 = b1.value;
-                var v2 = b2.value;
-                var m = parseFloat(b3.value);
-                var t = b4.value;
-                
-                var total = parseInt(v1 + v2, 10) * m;
-                var texto;
-                
+        document.addEventListener('DOMContentLoaded', () => {
+            // Forzado de auto-reproducción de video
+            const video = document.querySelector('.video-bg');
+            if (video) {
+                video.play().catch(error => {
+                    console.warn("Autoplay bloqueado por el navegador:", error);
+                });
+            }
+
+            // 1. CALCULADORA DE CÓDIGO DE COLORES
+            const sB1 = document.getElementById('sel-b1');
+            const sB2 = document.getElementById('sel-b2');
+            const sB3 = document.getElementById('sel-b3');
+            const sB4 = document.getElementById('sel-b4');
+
+            const vB1 = document.getElementById('visual-b1');
+            const vB2 = document.getElementById('visual-b2');
+            const vB3 = document.getElementById('visual-b3');
+            const vB4 = document.getElementById('visual-b4');
+            const resColores = document.getElementById('res-colores');
+
+            function actualizarColores() {
+                const col1 = sB1.options[sB1.selectedIndex].dataset.color;
+                const col2 = sB2.options[sB2.selectedIndex].dataset.color;
+                const col3 = sB3.options[sB3.selectedIndex].dataset.color;
+                const col4 = sB4.options[sB4.selectedIndex].dataset.color;
+
+                vB1.style.backgroundColor = col1;
+                vB2.style.backgroundColor = col2;
+                vB3.style.backgroundColor = col3;
+                vB4.style.backgroundColor = col4;
+
+                const val1 = parseInt(sB1.value);
+                const val2 = parseInt(sB2.value);
+                const mult = parseFloat(sB3.value);
+                const tol = sB4.value;
+
+                let total = (val1 * 10 + val2) * mult;
+                let textoTotal = "";
+
                 if (total >= 1000000) {
-                    texto = (total / 1000000) + " MΩ";
+                    textoTotal = (total / 1000000).toFixed(2).replace(/\.00$/, '') + " MΩ";
                 } else if (total >= 1000) {
-                    texto = (total / 1000) + " kΩ";
+                    textoTotal = (total / 1000).toFixed(2).replace(/\.00$/, '') + " kΩ";
                 } else {
-                    texto = total.toFixed(total % 1 === 0 ? 0 : 2) + " Ω";
+                    textoTotal = total.toFixed(2).replace(/\.00$/, '') + " Ω";
                 }
-                
-                document.getElementById('res-colores').innerText = texto + " " + t;
+
+                resColores.textContent = `${textoTotal} ${tol}`;
             }
 
-            var calc = document.getElementById('calculadora-colores');
-            if(calc) {
-                calc.addEventListener('change', calcular);
-            }
-            calcular();
-        })();
+            [sB1, sB2, sB3, sB4].forEach(select => select.addEventListener('change', actualizarColores));
+            actualizarColores();
 
-        // Lógica de Asociación en Serie
-        (function() {
-            var r1Input = document.getElementById('num-r1');
-            var r2Input = document.getElementById('num-r2');
-            var r3Input = document.getElementById('num-r3');
-            var resSerie = document.getElementById('res-serie');
-            
-            var vr1 = document.getElementById('v-r1').getElementsByTagName('span')[0];
-            var vr2 = document.getElementById('v-r2').getElementsByTagName('span')[0];
-            var vr3 = document.getElementById('v-r3').getElementsByTagName('span')[0];
+            // 2. SIMULADOR EN SERIE
+            const numR1 = document.getElementById('num-r1');
+            const numR2 = document.getElementById('num-r2');
+            const numR3 = document.getElementById('num-r3');
+            const vpR1 = document.querySelector('#v-r1 span');
+            const vpR2 = document.querySelector('#v-r2 span');
+            const vpR3 = document.querySelector('#v-r3 span');
+            const resSerie = document.getElementById('res-serie');
 
             function calcularSerie() {
-                if(!r1Input || !r2Input || !r3Input || !resSerie) return;
-                
-                var val1 = Math.max(0, parseFloat(r1Input.value) || 0);
-                var val2 = Math.max(0, parseFloat(r2Input.value) || 0);
-                var val3 = Math.max(0, parseFloat(r3Input.value) || 0);
-                
-                // Forzar valores no negativos en la interfaz visual
-                r1Input.value = val1;
-                r2Input.value = val2;
-                r3Input.value = val3;
+                const r1 = parseFloat(numR1.value) || 0;
+                const r2 = parseFloat(numR2.value) || 0;
+                const r3 = parseFloat(numR3.value) || 0;
 
-                // Actualizar etiquetas en el diagrama
-                if(vr1) vr1.innerText = val1 + " Ω";
-                if(vr2) vr2.innerText = val2 + " Ω";
-                if(vr3) vr3.innerText = val3 + " Ω";
-                
-                var total = val1 + val2 + val3;
-                var texto;
-                
-                if (total >= 1000000) {
-                    texto = (total / 1000000).toFixed(2) + " MΩ";
-                } else if (total >= 1000) {
-                    texto = (total / 1000).toFixed(2) + " kΩ";
-                } else {
-                    texto = total.toFixed(0) + " Ω";
-                }
-                
-                resSerie.innerText = "Rt = " + texto;
+                vpR1.textContent = r1 + " Ω";
+                vpR2.textContent = r2 + " Ω";
+                vpR3.textContent = r3 + " Ω";
+
+                const total = r1 + r2 + r3;
+                resSerie.textContent = `Rt = ${total.toFixed(2).replace(/\.00$/, '')} Ω`;
             }
 
-            var container = document.getElementById('interactivo-serie');
-            if(container) {
-                container.addEventListener('input', calcularSerie);
-            }
+            [numR1, numR2, numR3].forEach(input => input.addEventListener('input', calcularSerie));
             calcularSerie();
-        })();
 
-        // Lógica de Asociación en Paralelo
-        (function() {
-            var r1Input = document.getElementById('num-p1');
-            var r2Input = document.getElementById('num-p2');
-            var r3Input = document.getElementById('num-p3');
-            var resParalelo = document.getElementById('res-paralelo');
-            
-            var vr1 = document.getElementById('vp-r1').getElementsByTagName('span')[0];
-            var vr2 = document.getElementById('vp-r2').getElementsByTagName('span')[0];
-            var vr3 = document.getElementById('vp-r3').getElementsByTagName('span')[0];
+            // 3. SIMULADOR EN PARALELO
+            const numP1 = document.getElementById('num-p1');
+            const numP2 = document.getElementById('num-p2');
+            const numP3 = document.getElementById('num-p3');
+            const vppR1 = document.querySelector('#vp-r1 span');
+            const vppR2 = document.querySelector('#vp-r2 span');
+            const vppR3 = document.querySelector('#vp-r3 span');
+            const resParalelo = document.getElementById('res-paralelo');
 
             function calcularParalelo() {
-                if(!r1Input || !r2Input || !r3Input || !resParalelo) return;
-                
-                var val1 = Math.max(0, parseFloat(r1Input.value) || 0);
-                var val2 = Math.max(0, parseFloat(r2Input.value) || 0);
-                var val3 = Math.max(0, parseFloat(r3Input.value) || 0);
-                
-                r1Input.value = val1;
-                r2Input.value = val2;
-                r3Input.value = val3;
+                const p1 = parseFloat(numP1.value) || 0;
+                const p2 = parseFloat(numP2.value) || 0;
+                const p3 = parseFloat(numP3.value) || 0;
 
-                if(vr1) vr1.innerText = val1 > 0 ? val1 + " Ω" : "Abierto";
-                if(vr2) vr2.innerText = val2 > 0 ? val2 + " Ω" : "Abierto";
-                if(vr3) vr3.innerText = val3 > 0 ? val3 + " Ω" : "Abierto";
-                
-                var invSum = 0;
-                if (val1 > 0) invSum += 1 / val1;
-                if (val2 > 0) invSum += 1 / val2;
-                if (val3 > 0) invSum += 1 / val3;
-                
-                var total = invSum > 0 ? (1 / invSum) : 0;
-                var texto;
-                
-                if (invSum === 0) {
-                    texto = "∞ Ω (Abierto)";
-                } else if (total >= 1000000) {
-                    texto = (total / 1000000).toFixed(2) + " MΩ";
-                } else if (total >= 1000) {
-                    texto = (total / 1000).toFixed(2) + " kΩ";
+                vppR1.textContent = p1 + " Ω";
+                vppR2.textContent = p2 + " Ω";
+                vppR3.textContent = p3 + " Ω";
+
+                let sumaInversas = 0;
+                if (p1 > 0) sumaInversas += 1 / p1;
+                if (p2 > 0) sumaInversas += 1 / p2;
+                if (p3 > 0) sumaInversas += 1 / p3;
+
+                if (sumaInversas === 0) {
+                    resParalelo.textContent = "Rt = ∞ Ω (Circuito Abierto)";
                 } else {
-                    texto = total.toFixed(2) + " Ω";
+                    const total = 1 / sumaInversas;
+                    resParalelo.textContent = `Rt = ${total.toFixed(2).replace(/\.00$/, '')} Ω`;
                 }
-                
-                resParalelo.innerText = "Rt = " + texto;
             }
 
-            var container = document.getElementById('interactivo-paralelo');
-            if(container) {
-                container.addEventListener('input', calcularParalelo);
-            }
+            [numP1, numP2, numP3].forEach(input => input.addEventListener('input', calcularParalelo));
             calcularParalelo();
-        })();
+        });
     </script>
 </body>
 </html>
