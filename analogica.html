@@ -5,118 +5,272 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Electrónica Analógica - Profesor Eduardo</title>
     <style>
-        /* --- ESTILOS LIMPIOS Y DIRECTOS --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+        /* --- ESTILOS BASE Y REINICIO --- */
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #050811; /* Respaldo oscuro si el video tarda en cargar */
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* ENCABEZADO */
+        /* --- VIDEO DE FONDO Y OVERLAY --- */
+        .video-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.65) contrast(1.15);
+            pointer-events: none;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(5, 8, 17, 0.4) 0%, rgba(5, 8, 17, 0.85) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- ENCABEZADO --- */
         header {
-            background-color: #000000;
+            background: rgba(5, 8, 17, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             width: 100%;
             padding: 20px 0;
             text-align: center;
-            border-bottom: 3px solid #ffcc00;
+            border-bottom: 2px solid #00f3ff;
+            box-shadow: 0 4px 25px rgba(0, 243, 255, 0.25);
             position: absolute;
             top: 0;
             left: 0;
+            z-index: 10;
         }
 
         header h1 {
             margin: 0;
-            color: #ffcc00;
-            font-size: 1.8rem;
+            color: #00f3ff;
+            font-size: 1.9rem;
+            text-shadow: 0 0 12px rgba(0, 243, 255, 0.6);
+            letter-spacing: 1px;
         }
 
         header p {
             margin: 5px 0 0 0;
-            color: #aaaaaa;
-            font-size: 0.9rem;
+            color: #a0aec0;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
         }
 
-        /* CONTENEDOR PRINCIPAL */
+        /* --- CONTENEDOR PRINCIPAL --- */
         .container {
             width: 90%;
-            max-width: 450px;
-            background-color: #1e1e1e;
-            padding: 40px 30px;
-            border-radius: 12px;
-            border-top: 5px solid #ffcc00;
+            max-width: 480px;
+            background: rgba(13, 19, 33, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 35px 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-top: 4px solid #00f3ff;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 243, 255, 0.15);
             margin-top: 100px;
-            margin-bottom: 80px; 
+            margin-bottom: 80px;
+            z-index: 10;
         }
 
         .container h2 {
             margin-top: 0;
             color: #ffffff;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        /* BOTONES DE OPCIONES */
+        /* --- BOTONES DE OPCIONES --- */
         .options {
             display: flex;
             flex-direction: column;
-            gap: 15px; 
+            gap: 15px;
         }
 
         .btn {
-            display: block;
-            background-color: transparent;
-            border: 2px solid #ffcc00;
-            color: #ffcc00;
-            padding: 15px;
-            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 16px;
+            background: rgba(0, 243, 255, 0.04);
+            border: 2px solid #00f3ff;
+            color: #00f3ff;
+            padding: 14px 20px;
+            border-radius: 10px;
             font-size: 1.1rem;
             font-weight: bold;
             text-decoration: none;
             text-transform: uppercase;
-            transition: 0.2s ease-in-out;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.08);
         }
 
         .btn:hover {
-            background-color: #ffcc00;
-            color: #000000;
-            transform: scale(1.02);
+            background-color: #00f3ff;
+            color: #050811;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.6);
         }
 
-        /* BOTÓN INFERIOR IZQUIERDO */
+        /* --- ICONOS VECTORIALES ANIMADOS (SVG) --- */
+        .icon-svg {
+            width: 32px;
+            height: 32px;
+            stroke: #00f3ff;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            flex-shrink: 0;
+            transition: stroke 0.3s ease;
+        }
+
+        .btn:hover .icon-svg {
+            stroke: #050811;
+        }
+
+        /* 1. Resistencia (Animación de flujo de corriente zigzag) */
+        .resistor-path {
+            stroke-dasharray: 60;
+            stroke-dashoffset: 0;
+            animation: flowCurrent 2s linear infinite;
+        }
+        @keyframes flowCurrent {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -30; }
+        }
+
+        /* 2. Condensador (Efecto de carga/descarga del campo eléctrico) */
+        .capacitor-field {
+            animation: pulseCharge 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes pulseCharge {
+            0% { opacity: 0.3; stroke-width: 1.5; }
+            100% { opacity: 1; stroke-width: 3.5; }
+        }
+
+        /* 3. Bobina / Inductor (Rotación o flujo magnético en espiral) */
+        .coil-path {
+            stroke-dasharray: 80;
+            stroke-dashoffset: 0;
+            animation: moveCoil 2.2s linear infinite;
+        }
+        @keyframes moveCoil {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -40; }
+        }
+
+        /* 4. Diodo / Semiconductor (Pulso de señal en el nodo central) */
+        .diode-pulse {
+            animation: diodeFlash 1.2s infinite alternate;
+        }
+        @keyframes diodeFlash {
+            0% { fill: transparent; }
+            100% { fill: #00f3ff; }
+        }
+        .btn:hover .diode-pulse {
+            animation: diodeFlashHover 1.2s infinite alternate;
+        }
+        @keyframes diodeFlashHover {
+            0% { fill: transparent; }
+            100% { fill: #050811; }
+        }
+
+        /* 5. Otros (Engranaje/Circuito oscilante) */
+        .gear-spin {
+            transform-origin: center;
+            animation: spinGear 6s linear infinite;
+        }
+        @keyframes spinGear {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* --- BOTÓN INFERIOR IZQUIERDO PARA VOLVER --- */
         .btn-volver {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            display: inline-block;
-            background-color: #1e1e1e;
-            border: 2px solid #ffcc00;
-            color: #ffcc00;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(13, 19, 33, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid #00f3ff;
+            color: #00f3ff;
             padding: 12px 20px;
             border-radius: 8px;
-            font-size: 1.0rem;
+            font-size: 0.95rem;
             font-weight: bold;
             text-decoration: none;
-            transition: 0.2s ease-in-out;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            z-index: 9999; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 243, 255, 0.2);
+            z-index: 9999;
         }
 
         .btn-volver:hover {
-            background-color: #ffcc00;
-            color: #000000;
-            transform: scale(1.05);
+            background-color: #00f3ff;
+            color: #050811;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
+        }
+
+        .btn-volver svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            fill: none;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-volver:hover svg {
+            transform: translateX(-3px);
         }
     </style>
 </head>
 <body>
+
+    <!-- VIDEO DE FONDO -->
+    <video class="video-bg" autoplay loop muted playsinline preload="auto">
+        <source src="fondodepantallaanimadocircuit.mp4" type="video/mp4">
+        Tu navegador no soporta el formato de video.
+    </video>
+    
+    <!-- CAPA OSCURA DE SUPERPOSICIÓN -->
+    <div class="video-overlay"></div>
 
     <!-- ENCABEZADO -->
     <header>
@@ -129,16 +283,74 @@
         <h2>Selecciona un componente</h2>
         
         <div class="options">
-            <a href="resistencia.html" class="btn"> Resistencia</a>
-            <a href="condensador.html" class="btn"> Condensador</a>
-            <a href="bobina.html" class="btn"> Bobina</a>
-            <a href="semiconductores.html" class="btn"> Semiconductores</a>
-            <a href="otros.html" class="btn"> Otros</a>
+            <!-- 1. RESISTENCIA -->
+            <a href="resistencia.html" class="btn">
+                <svg class="icon-svg" viewBox="0 0 50 50">
+                    <path class="resistor-path" d="M 2 25 H 10 L 14 15 L 21 35 L 29 15 L 36 35 L 40 25 H 48" />
+                </svg>
+                <span>Resistencia</span>
+            </a>
+
+            <!-- 2. CONDENSADOR -->
+            <a href="condensador.html" class="btn">
+                <svg class="icon-svg" viewBox="0 0 50 50">
+                    <path d="M 2 25 H 20 M 30 25 H 48" />
+                    <line class="capacitor-field" x1="20" y1="10" x2="20" y2="40" />
+                    <line class="capacitor-field" x1="30" y1="10" x2="30" y2="40" />
+                </svg>
+                <span>Condensador</span>
+            </a>
+
+            <!-- 3. BOBINA -->
+            <a href="bobina.html" class="btn">
+                <svg class="icon-svg" viewBox="0 0 50 50">
+                    <path class="coil-path" d="M 2 25 H 8 C 8 12 18 12 18 25 C 18 12 28 12 28 25 C 28 12 38 12 38 25 H 48" />
+                </svg>
+                <span>Bobina</span>
+            </a>
+
+            <!-- 4. SEMICONDUCTORES (DIODO) -->
+            <a href="semiconductores.html" class="btn">
+                <svg class="icon-svg" viewBox="0 0 50 50">
+                    <path d="M 2 25 H 15 M 35 25 H 48" />
+                    <polygon class="diode-pulse" points="15,12 35,25 15,38" />
+                    <line x1="35" y1="12" x2="35" y2="38" />
+                </svg>
+                <span>Semiconductores</span>
+            </a>
+
+            <!-- 5. OTROS -->
+            <a href="otros.html" class="btn">
+                <svg class="icon-svg" viewBox="0 0 50 50">
+                    <g class="gear-spin">
+                        <circle cx="25" cy="25" r="10" stroke-dasharray="4 3" />
+                        <circle cx="25" cy="25" r="4" fill="currentColor" />
+                    </g>
+                </svg>
+                <span>Otros</span>
+            </a>
         </div>
     </main>
 
     <!-- BOTÓN INFERIOR IZQUIERDO PARA VOLVER -->
-    <a href="index.html" class="btn-volver">⬅️ Volver al Inicio</a>
+    <a href="index.html" class="btn-volver">
+        <svg viewBox="0 0 24 24">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Volver al Inicio</span>
+    </a>
 
+    <!-- SCRIPT DE AUTO-REPRODUCCIÓN SEGURO -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.querySelector('.video-bg');
+            if (video) {
+                video.play().catch(error => {
+                    console.warn("Autoplay bloqueado por el navegador:", error);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
