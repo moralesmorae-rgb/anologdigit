@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluaciones 2026 - Profesor Eduardo</title>
     <style>
-        /* --- CONFIGURACIÓN GENERAL Y ESTILOS BASE --- */
+        /* --- ESTILOS BASE Y REINICIO --- */
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #050811;
+            background-color: #050811; /* Color de respaldo si falla el video */
             color: #ffffff;
-            margin: 0;
-            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -25,7 +25,7 @@
             position: relative;
         }
 
-        /* --- VIDEO DE FONDO Y OVERLAY --- */
+        /* --- VIDEO DE FONDO CORREGIDO --- */
         .video-bg {
             position: fixed;
             top: 50%;
@@ -38,16 +38,19 @@
             transform: translate(-50%, -50%);
             object-fit: cover;
             filter: brightness(0.65) contrast(1.15);
+            pointer-events: none; /* Evita cualquier interferencia con los clics */
         }
 
+        /* Capa oscura de contraste sobre el video */
         .video-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(5, 8, 17, 0.45) 0%, rgba(5, 8, 17, 0.85) 100%);
+            background: radial-gradient(circle at center, rgba(5, 8, 17, 0.4) 0%, rgba(5, 8, 17, 0.85) 100%);
             z-index: -1;
+            pointer-events: none;
         }
 
         /* --- ENCABEZADO --- */
@@ -160,7 +163,7 @@
             flex-shrink: 0;
         }
 
-        /* Icono Analógico: Onda Senoidal Animada */
+        /* Icono Analógico: Onda Senoidal */
         .icon-analog {
             stroke: #00f3ff;
             transition: stroke 0.3s ease;
@@ -181,7 +184,7 @@
             stroke: #050811;
         }
 
-        /* Icono Digital: Pulso de Reloj (Square Wave + Bits) */
+        /* Icono Digital: Pulso Cuadrado y Bit */
         .icon-digital {
             stroke: #00ff88;
             transition: stroke 0.3s ease;
@@ -218,11 +221,13 @@
 </head>
 <body>
 
-    <!-- VIDEO DE FONDO -->
-    <video class="video-bg" autoplay loop muted playsinline>
-        <source src="#4k #fondodepantalla #animado #oled #circuit.mp4" type="video/mp4">
-        Tu navegador no soporta videos HTML5.
+    <!-- VIDEO DE FONDO (Actualizado a nombre limpio sin caracteres especiales) -->
+    <video class="video-bg" autoplay loop muted playsinline preload="auto">
+        <source src="fondodepantallaanimadocircuit.mp4" type="video/mp4">
+        Tu navegador no soporta el formato de video.
     </video>
+    
+    <!-- CAPA OSCURA DE SUPERPOSICIÓN -->
     <div class="video-overlay"></div>
 
     <!-- ENCABEZADO -->
@@ -255,5 +260,17 @@
         </div>
     </main>
 
+    <!-- SCRIPT DE AUTO-REPRODUCCIÓN SEGURO -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.querySelector('.video-bg');
+            if (video) {
+                // Forzar reproducción por si el navegador bloqueó el autoplay inicial
+                video.play().catch(error => {
+                    console.warn("Autoplay bloqueado por el navegador:", error);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
