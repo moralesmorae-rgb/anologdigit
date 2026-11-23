@@ -85,7 +85,7 @@
         /* --- CONTENEDOR PRINCIPAL --- */
         .container {
             width: 92%;
-            max-width: 900px;
+            max-width: 960px;
             background: rgba(13, 19, 33, 0.82);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -154,7 +154,7 @@
         /* --- CUADRÍCULA DE VIDEOS --- */
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
 
@@ -186,40 +186,13 @@
             margin-bottom: 15px;
         }
 
-        .video-wrapper iframe,
-        .video-wrapper video {
+        .video-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             border: none;
-            object-fit: cover;
-        }
-
-        /* Placeholder visual para videos por cargar */
-        .video-placeholder {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(255, 0, 127, 0.08) 0%, rgba(5, 8, 17, 0.9) 100%);
-            color: #ff007f;
-            gap: 10px;
-        }
-
-        .video-placeholder svg {
-            width: 44px;
-            height: 44px;
-            stroke: #ff007f;
-            stroke-width: 2;
-            fill: none;
-            filter: drop-shadow(0 0 8px rgba(255, 0, 127, 0.6));
         }
 
         .video-card h3 {
@@ -321,64 +294,49 @@
             </svg>
             <h2>Material Audiovisual CAD</h2>
         </div>
-        <p class="subtitulo">Selecciona una clase o tutorial práctico de diseño técnico y planos eléctricos</p>
+        <p class="subtitulo">Reproduce las clases prácticas de diseño técnico y planos en AutoCAD</p>
         
         <div class="video-grid">
-            <!-- TARJETA VIDEO 1 (Ejemplo con video local MP4) -->
+            <!-- VIDEO 1 -->
             <div class="video-card">
                 <div class="video-wrapper">
-                    <!-- Reemplaza "clase1_autocad.mp4" por el nombre real de tu archivo o usa un <iframe> de YouTube -->
-                    <div class="video-placeholder">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                        </svg>
-                        <span>Clase 01 • Listo para video</span>
-                    </div>
+                    <iframe 
+                        src="https://www.youtube.com/embed/N_nIG4wNF1E" 
+                        title="Clase 1 AutoCAD" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
-                <h3>1. Introducción e Interfaz de AutoCAD</h3>
-                <p>Configuración inicial del espacio de trabajo, unidades de dibujo, comandos básicos de navegación y coordenadas.</p>
+                <h3>Clase 01 • Tutorial AutoCAD</h3>
+                <p>Revisa los fundamentos, configuración inicial y herramientas esenciales de dibujo en AutoCAD.</p>
             </div>
 
-            <!-- TARJETA VIDEO 2 -->
+            <!-- VIDEO 2 -->
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="video-placeholder">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                        </svg>
-                        <span>Clase 02 • Listo para video</span>
-                    </div>
+                    <iframe 
+                        src="https://www.youtube.com/embed/nR4Kaj009KE" 
+                        title="Clase 2 AutoCAD" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
-                <h3>2. Comandos de Dibujo y Modificación</h3>
-                <p>Uso de líneas, polilíneas, círculos, desfases (Offset), recortes (Trim) y referencias a objetos (OSNAP).</p>
+                <h3>Clase 02 • Tutorial AutoCAD</h3>
+                <p>Aplicación práctica de comandos de modificación, precisión y trazado de planos técnicos.</p>
             </div>
 
-            <!-- TARJETA VIDEO 3 -->
+            <!-- VIDEO 3 -->
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="video-placeholder">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                        </svg>
-                        <span>Clase 03 • Listo para video</span>
-                    </div>
+                    <iframe 
+                        src="https://www.youtube.com/embed/AEs0xDFrqjc" 
+                        title="Clase 3 AutoCAD" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
-                <h3>3. Capas y Simbología Eléctrica</h3>
-                <p>Creación de capas normalizadas, grosores de línea y diseño de bloques para esquemas electrónicos y planos.</p>
-            </div>
-
-            <!-- TARJETA VIDEO 4 -->
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="video-placeholder">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                        </svg>
-                        <span>Clase 04 • Listo para video</span>
-                    </div>
-                </div>
-                <h3>4. Acotado, Escalas e Impresión (Layout)</h3>
-                <p>Configuración de estilos de cota, cajetines técnicos, ventanas gráficas y exportación a formato PDF.</p>
+                <h3>Clase 03 • Tutorial AutoCAD</h3>
+                <p>Desarrollo avanzado de esquemas, acotado y presentación final de proyectos CAD.</p>
             </div>
         </div>
     </main>
